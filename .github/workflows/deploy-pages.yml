@@ -23,9 +23,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -40,14 +37,15 @@ jobs:
         run: uv sync --frozen
 
       - name: Build public site
-        run: uv run zensical build -f zensical.public.toml
+        run: uv run zensical build --clean -f zensical.public.toml
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./site-public
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
