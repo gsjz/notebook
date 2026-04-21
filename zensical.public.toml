@@ -1,0 +1,45 @@
+[project]
+site_name = "Notebook"
+site_description = "Public notebook"
+site_author = "Shujie Gao"
+site_url = "https://note.shujie.cc/"
+repo_url = "https://github.com/gsjz/notebook"
+repo_name = "gsjz/notebook"
+docs_dir = "docs"
+site_dir = "site-public"
+extra_javascript = ["javascripts/mathjax.js"]
+nav = [
+    { "首页" = "index.md" },
+    { "CS" = "public/cs"},
+    { "AI" = "public/ai"},
+    { "Math" = "public/math"},
+    { "Eng" = "public/eng"},
+    { "XCPC" = "public/xcpc" },
+]
+
+[project.theme]
+language = "zh"
+
+features = [
+    "content.code.copy",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.top",
+]
+
+[project.theme.icon]
+logo = "lucide/notebook-pen"
+
+[project.theme.font]
+text = "Inter"
+code = "Jetbrains Mono"
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"

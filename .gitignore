@@ -1,0 +1,12 @@
+.venv/
+.cache/
+site/
+site-public/
+docs/private/
+zensical.toml
+Dockerfile
+docker-compose.domain.yml
+.dockerignore
+.env.domain
+.env.domain.example
+Makefile
