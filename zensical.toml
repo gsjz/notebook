@@ -7,7 +7,8 @@ repo_url = "https://github.com/gsjz/notebook"
 repo_name = "gsjz/notebook"
 docs_dir = "docs"
 site_dir = "site-public"
-extra_javascript = ["javascripts/mathjax.js"]
+extra_css = ["stylesheets/no-footer.css"]
+extra_javascript = ["javascripts/katex.js"]
 nav = [
     { "首页" = "index.md" },
     { "CS" = "public/cs"},
@@ -15,10 +16,16 @@ nav = [
     { "Math" = "public/math"},
     { "Eng" = "public/eng"},
     { "XCPC" = "public/xcpc" },
+    { "ZZ" = "public/zz" },
 ]
+
+[project.extra]
+generator = false
 
 [project.theme]
 language = "zh"
+favicon = "assets/images/site-logo.svg"
+logo = "assets/images/site-logo.svg"
 
 features = [
     "content.code.copy",
@@ -26,9 +33,6 @@ features = [
     "navigation.instant",
     "navigation.top",
 ]
-
-[project.theme.icon]
-logo = "lucide/notebook-pen"
 
 [project.theme.font]
 text = "Inter"
