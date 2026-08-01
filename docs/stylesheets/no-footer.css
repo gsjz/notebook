@@ -1,3 +1,10 @@
 .md-footer {
   display: none;
 }
+
+@media screen and (min-width: 76.25em) {
+  .md-header__inner.md-grid,
+  .md-main__inner.md-grid {
+    max-width: 72rem;
+  }
+}

@@ -1,0 +1,51 @@
+.md-content .md-typeset img.image-viewer-target {
+  cursor: zoom-in;
+}
+
+.md-content .md-typeset img.image-viewer-target:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 4px;
+  border-radius: 0.4rem;
+}
+
+.image-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  background: rgba(9, 9, 11, 0.9);
+  transition: opacity 220ms ease, visibility 220ms ease;
+  touch-action: none;
+}
+
+.image-viewer.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-viewer__stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+
+.image-viewer.is-dragging .image-viewer__stage {
+  cursor: grabbing;
+}
+
+.image-viewer__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  max-height: none;
+  user-select: none;
+  transform-origin: 0 0;
+  will-change: transform;
+  border-radius: 0.75rem;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
