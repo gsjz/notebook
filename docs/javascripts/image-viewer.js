@@ -4,6 +4,8 @@
   const IMAGE_SELECTOR =
     ".md-content .md-typeset img:not(.image-viewer__image)";
   const IMAGE_HREF_PATTERN = /\.(avif|gif|jpe?g|png|svg|webp)([?#].*)?$/i;
+  const STORAGE_PREFIX = "notebook:image-viewer-state:v1:";
+  const STORAGE_MAX_AGE = 30 * 60 * 1000;
 
   const state = {
     isOpen: false,
@@ -36,6 +38,72 @@
   let viewer;
   let stage;
   let image;
+  let restoredPageKey = "";
+
+  function getPageKey() {
+    return `${window.location.pathname}${window.location.search}`;
+  }
+
+  function getStorageKey() {
+    return `${STORAGE_PREFIX}${getPageKey()}`;
+  }
+
+  function readStoredViewerState() {
+    try {
+      const raw = window.sessionStorage.getItem(getStorageKey());
+      if (!raw) {
+        return null;
+      }
+
+      const saved = JSON.parse(raw);
+      if (
+        typeof saved !== "object" ||
+        !saved ||
+        Date.now() - Number(saved.updatedAt || 0) > STORAGE_MAX_AGE
+      ) {
+        window.sessionStorage.removeItem(getStorageKey());
+        return null;
+      }
+
+      return saved;
+    } catch {
+      return null;
+    }
+  }
+
+  function clearStoredViewerState() {
+    try {
+      window.sessionStorage.removeItem(getStorageKey());
+    } catch {
+      // State restoration is best-effort only.
+    }
+  }
+
+  function saveViewerState() {
+    if (!state.isOpen || !image?.src) {
+      clearStoredViewerState();
+      return;
+    }
+
+    try {
+      window.sessionStorage.setItem(
+        getStorageKey(),
+        JSON.stringify({
+          isOpen: true,
+          src: image.currentSrc || image.src,
+          alt: image.alt || "",
+          x: state.x,
+          y: state.y,
+          scale: state.scale,
+          viewportWidth: window.innerWidth,
+          viewportHeight: window.innerHeight,
+          updatedAt: Date.now(),
+        })
+      );
+    } catch {
+      // Losing this state is acceptable; the viewer should keep working normally.
+    }
+  }
 
   function shouldEnableImage(img) {
     if (!img.currentSrc && !img.src) {
@@ -170,7 +238,7 @@
     openViewer(src, sourceImage.alt || "");
   }
 
-  function openViewer(src, alt) {
+  function openViewer(src, alt, options = {}) {
     ensureViewer();
     state.isOpen = true;
     state.lastFocusedElement = document.activeElement;
@@ -184,12 +252,22 @@
     viewer.setAttribute("aria-hidden", "false");
     viewer.focus({ preventScroll: true });
 
-    if (image.complete && image.naturalWidth > 0) {
+    const applyInitialLayout = () => {
+      if (options.restore) {
+        restoreTransform(options.restore);
+        return;
+      }
+
       resetToFit();
+    };
+
+    if (image.complete && image.naturalWidth > 0) {
+      applyInitialLayout();
       return;
     }
 
-    image.addEventListener("load", resetToFit, { once: true });
+    image.addEventListener("load", applyInitialLayout, { once: true });
+    saveViewerState();
   }
 
   function closeViewer() {
@@ -204,6 +282,7 @@
     viewer.classList.remove("is-open", "is-dragging");
     viewer.setAttribute("aria-hidden", "true");
     document.documentElement.style.overflow = state.previousOverflow;
+    clearStoredViewerState();
 
     if (
       state.lastFocusedElement &&
@@ -220,7 +299,8 @@
     };
   }
 
-  function resetToFit() {
+  function resetToFit(options = {}) {
+    const shouldPersist = options.persist !== false;
     const viewport = getViewportSize();
     const margin = viewport.width < 720 ? 28 : 64;
     const maxWidth = Math.max(1, viewport.width - margin);
@@ -242,6 +322,38 @@
     image.style.width = `${state.baseWidth}px`;
     image.style.height = `${state.baseHeight}px`;
     renderTransform();
+
+    if (shouldPersist) {
+      saveViewerState();
+    }
+  }
+
+  function restoreTransform(saved) {
+    resetToFit({ persist: false });
+
+    const savedViewportWidth = Number(saved.viewportWidth) || window.innerWidth;
+    const savedViewportHeight = Number(saved.viewportHeight) || window.innerHeight;
+    const offsetX = (window.innerWidth - savedViewportWidth) / 2;
+    const offsetY = (window.innerHeight - savedViewportHeight) / 2;
+    const savedScale = Number(saved.scale);
+    const savedX = Number(saved.x);
+    const savedY = Number(saved.y);
+
+    if (Number.isFinite(savedScale)) {
+      state.scale = clampScale(savedScale);
+    }
+
+    if (Number.isFinite(savedX)) {
+      state.x = savedX + offsetX;
+    }
+
+    if (Number.isFinite(savedY)) {
+      state.y = savedY + offsetY;
+    }
+
+    clampPosition();
+    renderTransform();
+    saveViewerState();
   }
 
   function clampScale(scale) {
@@ -286,6 +398,7 @@
 
     clampPosition();
     renderTransform();
+    saveViewerState();
   }
 
   function getPointerDistance(pointerA, pointerB) {
@@ -361,6 +474,7 @@
       state.y = center.y - state.pinchImageY * state.scale;
       clampPosition();
       renderTransform();
+      saveViewerState();
       return;
     }
 
@@ -376,6 +490,7 @@
       state.y = state.imageStartY + dy;
       clampPosition();
       renderTransform();
+      saveViewerState();
     }
   }
 
@@ -427,21 +542,25 @@
       state.x += 42;
       clampPosition();
       renderTransform();
+      saveViewerState();
     } else if (event.key === "ArrowRight") {
       event.preventDefault();
       state.x -= 42;
       clampPosition();
       renderTransform();
+      saveViewerState();
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       state.y += 42;
       clampPosition();
       renderTransform();
+      saveViewerState();
     } else if (event.key === "ArrowDown") {
       event.preventDefault();
       state.y -= 42;
       clampPosition();
       renderTransform();
+      saveViewerState();
     }
   }
 
@@ -457,9 +576,26 @@
     }
 
     bindImages();
+    restoreViewerForPage();
+  }
+
+  function restoreViewerForPage() {
+    const pageKey = getPageKey();
+    if (restoredPageKey === pageKey || state.isOpen) {
+      return;
+    }
+
+    restoredPageKey = pageKey;
+    const saved = readStoredViewerState();
+    if (!saved?.isOpen || !saved.src) {
+      return;
+    }
+
+    openViewer(saved.src, saved.alt || "", { restore: saved });
   }
 
   document.addEventListener("keydown", handleKeyDown);
+  window.addEventListener("pagehide", saveViewerState);
   window.addEventListener("resize", handleResize);
 
   if (typeof document$ !== "undefined" && document$.subscribe) {
