@@ -214,7 +214,7 @@
 
   <g class="shadow" transform="translate(550 45)">
     <rect class="zone" width="460" height="440" rx="6"/>
-    <line x1="0" y1="90" x2="500" y2="90" stroke="#d6dbe5" stroke-width="1.2"/>
+    <line x1="0" y1="90" x2="460" y2="90" stroke="#d6dbe5" stroke-width="1.2"/>
 
     <g transform="translate(25 18)">
       <rect x="0" y="0" width="52" height="52" rx="4" fill="#edf7ff"/>
