@@ -11,8 +11,17 @@
 
 ## 写作
 
-- [IELTS Academic Writing Task 1: Chart Analysis](/public/eng/ielts-academic-writing-task-1-chart-analysis/)
+- [CET-6 Part I Writing](/public/eng/cet6-writing-part-i/)
+- [IELTS Writing Notes](/public/eng/ielts-writing/)
 - [Literary Analysis Expressions](/public/eng/literary-analysis-expressions/)
+
+## 翻译
+
+- [CET-6 Translation Notes](/public/eng/cet6-translation-note/)
+
+## 文化与历史
+
+- [American Prohibition: A Social Experiment](/public/eng/american-prohibition-history/)
 
 ## 阅读
 

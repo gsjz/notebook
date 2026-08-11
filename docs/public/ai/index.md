@@ -1,10 +1,8 @@
 # Artificial Intelligence
 
-## 大模型
+## 杂谈
 
-- [Codex CLI 使用笔记](/public/ai/codex-cli/)
-- [大模型微调：从通用模型到专用助手](/public/ai/llm-fine-tuning/)
-
-## 机器学习基础
-
-- [特征值在 AI 领域的应用](/public/ai/eigenvalues-in-ai/)
+- [自建 LLM API 个人聚合站](/public/ai/llm-api-gateway/)
+- [FP4 / FP8 低精度编码笔记](/public/ai/fp4-fp8-encoding/)
+- [NVIDIA DGX Spark 使用报告](/public/ai/nvidia-dgx-spark-usage-report/)
+- [KV Cache 笔记](/public/ai/kv-cache/)
