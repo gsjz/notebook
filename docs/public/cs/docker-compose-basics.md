@@ -1,16 +1,6 @@
 # Docker 与 Docker Compose 基础
 
-!!! abstract "本文要点"
-    Docker 用镜像描述运行环境，用容器运行具体进程；Docker Compose 用一个 `compose.yaml` 描述一组服务、网络和卷，适合本地开发、小型服务部署和可复现环境管理。
-
-    本文重点整理：
-
-    - Docker 的镜像、容器、卷、网络和端口映射。
-    - `docker run` 与 Dockerfile 的基本使用。
-    - Compose 文件结构、常用命令、服务互联和数据持久化。
-    - 常见排障思路和容易误解的地方。
-
-## Docker 解决什么问题
+## Docker 的作用
 
 传统部署经常依赖机器上已经安装好的运行时、系统库、配置文件和环境变量。换一台机器后，应用可能因为 Python、Node.js、OpenSSL、系统包版本或启动命令不同而表现异常。
 
@@ -133,7 +123,7 @@ CMD ["python", "app.py"]
 !!! tip "构建上下文"
     `docker build -t demo .` 末尾的 `.` 是构建上下文。Dockerfile 里的 `COPY` 只能复制构建上下文内的文件。应使用 `.dockerignore` 排除 `.git/`、缓存目录、虚拟环境、构建产物和本地密钥。
 
-## Compose 解决什么问题
+## Compose 的作用
 
 单个 `docker run` 适合快速试验。真实应用往往包含 Web 服务、数据库、缓存、反向代理和后台任务，如果全部写成命令，端口、环境变量、卷和网络关系会很难维护。
 

@@ -39,13 +39,15 @@
 
 ## 数据结构
 
+- [树状数组](/public/cs/fenwick-tree/)
+- [最小生成树](/public/cs/minimum-spanning-tree/)
 - [B 树与 B+ 树](/public/cs/b-tree-b-plus-tree/)
 
-## 实用技能
-
-### 容器与服务
+## 容器与虚拟化技术
 
 - [Docker 与 Docker Compose 基础](/public/cs/docker-compose-basics/)
+
+## 实用技能
 
 ### 文本处理
 

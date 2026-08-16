@@ -15,7 +15,6 @@ nav = [
     { "AI" = "public/ai"},
     { "Math" = "public/math"},
     { "Eng" = "public/eng"},
-    { "XCPC" = "public/xcpc" },
     { "ZZ" = "public/zz" },
 ]
 
