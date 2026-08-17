@@ -11,11 +11,11 @@ extra_css = ["stylesheets/no-footer.css", "stylesheets/callouts.css", "styleshee
 extra_javascript = ["javascripts/katex.js", "javascripts/hot-reload-state.js", "javascripts/image-viewer.js"]
 nav = [
     { "首页" = "index.md" },
-    { "CS" = "public/cs"},
-    { "AI" = "public/ai"},
-    { "Math" = "public/math"},
-    { "Eng" = "public/eng"},
-    { "ZZ" = "public/zz" },
+    { "CS" = "public/cs/"},
+    { "AI" = "public/ai/"},
+    { "Math" = "public/math/"},
+    { "Eng" = "public/eng/"},
+    { "ZZ" = "public/zz/" },
 ]
 
 [project.extra]
