@@ -15,6 +15,10 @@
 - [IELTS Writing Notes](/public/eng/ielts-writing/)
 - [Literary Analysis Expressions](/public/eng/literary-analysis-expressions/)
 
+## 杂谈
+
+- [Games and Mood Regulation](/public/eng/game-mood-regulation/)
+
 ## 翻译
 
 - [CET-6 Translation Notes](/public/eng/cet6-translation-note/)
