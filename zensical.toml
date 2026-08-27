@@ -18,6 +18,33 @@ nav = [
     { "ZZ" = "public/zz/" },
 ]
 
+[project.markdown_extensions]
+"notebook_mdx.list_continuation" = {}
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc = { permalink = true }
+
+[project.markdown_extensions.pymdownx]
+arithmatex = { generic = true }
+betterem = {}
+caret = {}
+details = {}
+emoji = { emoji_generator = "zensical.extensions.emoji.to_svg", emoji_index = "zensical.extensions.emoji.twemoji" }
+highlight = { anchor_linenums = true, line_spans = "__span", pygments_lang_class = true }
+inlinehilite = {}
+keys = {}
+magiclink = {}
+mark = {}
+smartsymbols = {}
+superfences = { custom_fences = [{ name = "mermaid", class = "mermaid" }] }
+tabbed = { alternate_style = true, combine_header_slug = true }
+tasklist = { custom_checkbox = true }
+tilde = {}
+
 [project.extra]
 generator = false
 

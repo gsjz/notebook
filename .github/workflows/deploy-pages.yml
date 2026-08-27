@@ -38,7 +38,7 @@ jobs:
 
       - name: Build public site
         run: |
-          uv run zensical build --clean -f zensical.toml
+          PYTHONPATH=. uv run zensical build --clean -f zensical.toml
           uv run python scripts/clean_public_site.py site-public
 
       - name: Upload artifact
