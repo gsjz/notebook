@@ -1,13 +1,12 @@
 # Nginx 基础
 
-!!! note "示例脱敏说明"
-    本文示例使用 `notes.example.com`、`app.example.com` 和 `127.0.0.1:18xxx` 代表真实域名与本机服务端口。实际部署时，应替换为自己的域名、端口、证书路径和访问控制策略。
+示例域名使用 `example.com` 下的保留名称，后端端口仅用于说明配置关系；部署时需替换域名、端口和证书路径。
 
-## 简介
+## 服务模型
 
 Nginx 的名字来自 **engine x**，常见英文读法就是 `engine x`。
 
-Nginx 是一个高性能的网络服务器软件。它最初以 Web 服务器和反向代理闻名，现在也常用于负载均衡、TLS 入口、缓存、压缩、访问日志和四层代理等场景。
+Nginx 常作为静态 Web 服务器、反向代理和 TLS 入口，也可承担负载均衡、缓存及四层代理。它以事件驱动方式让 worker 管理多个连接，网络等待期间可以处理其他就绪事件；这一模型减少了为每个连接配置独占线程的需求，但文件描述符、CPU、内存和后端能力仍会限制吞吐量。
 
 在个人服务器或小型 Web 服务里，Nginx 常站在公网入口处：
 
@@ -74,12 +73,11 @@ server {
 就把请求代理到 http://127.0.0.1:18086。
 ```
 
-!!! tip "为什么应用监听 127.0.0.1"
-    应用只监听 `127.0.0.1` 时，外部用户不能直接访问应用端口，只能通过 Nginx 进入。这样可以把公网入口、HTTPS、日志、压缩、访问控制和转发规则集中放在 Nginx 管理。
+此处假定 Nginx 与应用位于同一网络命名空间。回环监听限制直接连接的来源；若 Nginx 在容器中，`127.0.0.1` 指向代理容器自己，应使用同一容器网络中的服务名或可达的宿主机地址。
 
 ### 基于域名的虚拟主机
 
-多个域名可以解析到同一个公网 IP。Nginx 根据 HTTP 请求中的 `Host` 头，或者 HTTPS 握手中的 SNI，选择不同的 `server` 块。
+多个域名可以解析到同一个公网 IP。Nginx 先按监听地址和端口确定候选配置，TLS 握手阶段可按 SNI 选择证书，HTTP 阶段再按请求主机名选择处理规则。SNI 与 `Host` 出现在不同协议阶段；不能只改 HTTP 请求头就认为 TLS 证书也随之切换。
 
 ```nginx title="multi-sites.conf"
 server {
@@ -101,10 +99,9 @@ server {
 }
 ```
 
-因此，直接访问服务器 IP 时，请求里的 `Host` 往往是 IP 地址，而不是 `notes.example.com`。如果 Nginx 没有配置对应的默认站点，就可能返回默认页、`404`、`403`、`444`，或在 HTTPS 场景中出现证书不匹配。
+直接访问服务器 IP 时，请求主机名通常为 IP 字面量，未匹配时会进入该监听地址的默认 server。返回默认页、业务页或拒绝连接取决于这份配置；HTTPS 还可能因证书未覆盖 IP 地址而验证失败。
 
-!!! warning "DNS 只负责找到入口"
-    DNS 只把域名解析为 IP。至于同一个 IP 上哪个域名对应哪个内部服务，是 Nginx、负载均衡器或应用网关根据请求内容决定的。
+DNS 只把域名解析为 IP。至于同一个 IP 上哪个域名对应哪个内部服务，是 Nginx、负载均衡器或应用网关根据请求内容决定的。
 
 ### HTTPS 入口与 TLS 终止
 
@@ -120,7 +117,8 @@ Browser
 
 ```nginx title="https-proxy.conf"
 server {
-    listen 443 ssl http2;
+    listen 443 ssl;
+    http2 on;
     server_name notes.example.com;
 
     ssl_certificate /etc/letsencrypt/live/notes.example.com/fullchain.pem;
@@ -135,8 +133,7 @@ server {
 }
 ```
 
-!!! note "TLS 终止"
-    “TLS 终止”不是说安全性到这里就消失，而是说客户端到 Nginx 的 HTTPS 连接在 Nginx 处完成解密。若 Nginx 和后端在同一台机器上，后端使用 `127.0.0.1` 明文 HTTP 通常只在本机内部传递；若跨机器转发，则应重新考虑内网加密和访问控制。
+`http2 on;` 自 Nginx 1.25.1 起提供；旧发行版配置可能仍需 `listen 443 ssl http2;`，应根据 `nginx -v` 与已编译模块选择语法。TLS 连接在 Nginx 处解密，后端链路具有独立的安全边界：回环 HTTP 不经过外网，跨主机通信则需按网络信任关系配置加密和身份验证。
 
 ### 负载均衡
 
@@ -158,7 +155,7 @@ server {
 }
 ```
 
-默认情况下，Nginx 会在多个后端之间分发请求。实际生产中还可以配置权重、健康检查、超时、重试和会话保持等策略。
+默认采用加权轮询。开源 Nginx 的上游模块提供基于请求失败的被动故障判断，主动健康检查等能力需区分版本与产品，不能从“支持 upstream”推断已自动探测所有后端。超时和重试还需考虑请求是否可安全重放；后端已经执行写操作但响应丢失时，重试可能重复产生副作用。
 
 ### WebSocket 与长连接代理
 
@@ -186,7 +183,7 @@ server {
 }
 ```
 
-这类配置常见于热重载预览、在线 IDE、日志流、聊天服务等场景。
+`map` 需要放在 `http` 上下文。`proxy_read_timeout` 约束相邻两次从后端读取之间的等待时间，并非整个连接的总寿命；WebSocket 心跳可以避免长期无数据导致断开。日志流或 SSE 使用普通 HTTP 流式响应，不能仅因“长连接”就添加 Upgrade 头，其重点常是响应缓冲与超时。
 
 ### 访问日志、压缩与限流
 
@@ -201,8 +198,7 @@ Nginx 还常用于做入口层的通用能力：
 | 限流 | 限制请求频率，减轻暴力请求或突发流量 |
 | 访问控制 | 按 IP、路径、认证结果控制访问 |
 
-!!! tip "入口层统一处理"
-    把日志、压缩、证书、跳转和基础访问控制放到 Nginx 统一管理，可以减少每个应用重复实现这些能力的成本。
+把日志、压缩、证书、跳转和基础访问控制放到 Nginx 统一管理，可以减少每个应用重复实现这些能力的成本。
 
 ## Nginx 配置文件的通常位置
 
@@ -227,7 +223,7 @@ http {
 }
 ```
 
-也就是说，真正写站点规则的文件经常不在 `nginx.conf` 里，而是在 `sites-available` 和 `sites-enabled` 里。
+`sites-available`/`sites-enabled` 是常见发行版约定，是否生效取决于实际 `include`。容器镜像或其他安装方式可使用不同布局；用 `nginx -T` 确认正在加载的配置。
 
 
 ## Nginx 配置语法
@@ -320,10 +316,9 @@ location /static/ {
 }
 ```
 
-!!! note "URL 和 URI"
-    日常可以说 `location` 按 URL 路径匹配；更精确地说，它匹配的是 URL 里的路径部分。在 Nginx 变量里，`$uri` 表示规范化后的路径，通常不包含查询字符串；`$request_uri` 保留原始请求 URI，通常包含 `?v=1` 这类查询字符串。
+日常可以说 `location` 按 URL 路径匹配；更精确地说，它匹配的是 URL 里的路径部分。在 Nginx 变量里，`$uri` 表示规范化后的路径，通常不包含查询字符串；`$request_uri` 保留原始请求 URI，通常包含 `?v=1` 这类查询字符串。
 
-在普通前缀匹配里，Nginx 会选择更长、更具体的前缀。所以上面这个例子中，请求 `/static/logo.png` 会进入 `location /static/`，而请求 `/about` 会落到 `location /`。
+在没有其他竞争规则时，请求 `/static/logo.png` 进入 `/static/`，而 `/about` 落到 `/`。`root /var/www/app` 将完整 URI 拼到根目录后，因此前者读取 `/var/www/app/static/logo.png`；`alias` 的路径替换语义与此不同。
 
 常见写法：
 
@@ -334,6 +329,9 @@ location /static/ {
 | `location = /health` | 精确匹配 `/health` |
 | `location ~ \.php$` | 正则匹配，区分大小写 |
 | `location ~* \.jpg$` | 正则匹配，不区分大小写 |
+| `location ^~ /assets/` | 该前缀成为最长匹配时，跳过同层正则匹配 |
+
+对同一层的简单规则集，精确匹配优先；否则记住最长前缀，再按配置顺序寻找第一个匹配的正则，除非该最长前缀带 `^~`。嵌套 location 和内部重定向会使路径更复杂，因此“最长前缀总是胜出”只适用于没有相关正则覆盖的情况。
 
 
 ### `proxy_pass`：转发到后端
@@ -355,14 +353,30 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 proxy_set_header X-Forwarded-Proto $scheme;
 ```
 
-这些头部的作用是把原始请求信息传给后端应用：
+这些头部供后端恢复入口信息，但后端必须限定可信代理来源：
 
 | 头部 | 作用 |
 | --- | --- |
 | `Host` | 保留用户访问的域名 |
 | `X-Real-IP` | 传递客户端 IP |
-| `X-Forwarded-For` | 追加代理链路上的客户端 IP |
+| `X-Forwarded-For` | 在已有头部后追加直接对端地址，既有部分可能来自客户端输入 |
 | `X-Forwarded-Proto` | 告诉后端原始请求是 HTTP 还是 HTTPS |
+
+`$proxy_add_x_forwarded_for` 不会自动验证客户端提交的旧头部。应用应只接受可信代理添加的转发信息，并按可信代理链解析地址；把列表第一项直接用作身份或限流依据，会允许伪造。Nginx 前面还有 CDN 或负载均衡时，应明确 `real_ip` 的可信地址范围。
+
+### URI 转发与尾部斜杠
+
+在普通前缀 location 中，`proxy_pass` 是否带 URI 会改变后端看到的路径：
+
+```nginx
+location /api/ {
+    proxy_pass http://127.0.0.1:8000/;
+}
+```
+
+请求 `/api/users?id=7` 通常变为后端的 `/users?id=7`。若改为 `proxy_pass http://127.0.0.1:8000;`，则保留 `/api/users?id=7`。前一种配置用指令中的 `/` 替换匹配到的 `/api/` 前缀。
+
+这条规则以无变量、无额外 rewrite 的普通前缀匹配为前提。正则 location、命名 location、变量形式和内部重写需要按官方规则分别判断。排查前端返回 404 时，应核对后端实际收到的路径，而不只检查端口连通性。
 
 ### 变量
 
@@ -397,7 +411,7 @@ map $http_upgrade $connection_upgrade {
 如果 Upgrade 为空，Connection 使用 close。
 ```
 
-## 一个贴近实践的完整例子
+## 多服务代理配置
 
 假设一台服务器上有四个本机服务：
 
@@ -408,7 +422,7 @@ map $http_upgrade $connection_upgrade {
 笔记服务:   127.0.0.1:18086
 ```
 
-公网只开放 `80/tcp` 和 `443/tcp`，由 Nginx 根据域名转发：
+以下展示其中两个服务的 HTTP 路由，文件应被包含在 `http` 上下文。HTTPS 证书配置与重定向需按前面的 TLS 示例另行补齐：
 
 ```nginx title="apps.example.conf"
 map $http_upgrade $connection_upgrade {  # (1)!
@@ -464,10 +478,9 @@ server {
 5.  `proxy_pass` 指定后端地址，这里把请求转发给本机的 `127.0.0.1:18080`。
 6.  `proxy_set_header` 把原始请求信息传给后端，避免后端只看到 Nginx 自己的信息。
 7.  `Upgrade` 和下面的 `Connection` 用于 WebSocket 或其它需要协议升级的长连接。
-8.  `proxy_read_timeout` 和下面的 `proxy_send_timeout` 拉长代理超时时间，避免长连接过早断开。
+8.  这两项分别限制相邻读取、写入操作间的等待时间；提高它们并不能修复后端停止响应。
 
-!!! note "直接访问 IP 为什么可能打不开"
-    直接访问服务器 IP 时，请求的 `Host` 不是 `notes.example.com`。如果 Nginx 没有匹配到对应 `server_name`，就不会进入这条反向代理规则，而是落到默认站点或返回错误。
+访问 IP 地址且主机名未匹配时，请求落到相应监听地址和端口的默认 server。默认项可以显式指定 `default_server`；没有显式指定时通常为该监听地址的第一个 server，因此也可能碰巧进入某个业务站点。
 
 ## 常用运维命令
 
@@ -484,7 +497,7 @@ sudo systemctl reload nginx
 | --- | --- |
 | `sudo nginx -t` | 测试配置语法和引用文件是否有效 |
 | `sudo nginx -T` | 输出完整合并后的配置，适合排查 include 后的真实配置 |
-| `sudo systemctl reload nginx` | 平滑重载配置，不中断已有连接 |
+| `sudo systemctl reload nginx` | 启动使用新配置的 worker，让旧 worker 尽量完成现有连接后退出 |
 | `sudo systemctl restart nginx` | 重启 Nginx，排障时才优先考虑 |
 | `sudo systemctl status nginx` | 查看服务状态 |
 | `sudo journalctl -u nginx -n 100` | 查看 systemd 日志 |
@@ -505,12 +518,37 @@ sudo systemctl reload nginx
 | HTTPS 证书错误 | 证书是否覆盖当前域名，SNI 是否匹配 |
 | 修改后没效果 | 是否改了启用文件，是否 reload，是否有多个 include |
 
-排查时可以从入口到后端逐层确认：
+排查应把 DNS、TLS、虚拟主机选择和后端响应分别验证。先从 Nginx 所在网络环境访问后端，再使用正确域名经过入口：
 
 ```bash
 dig notes.example.com
-curl -I http://notes.example.com/
-curl -I http://127.0.0.1:18086/
+curl -sv http://127.0.0.1:18086/
+curl -sv -H 'Host: notes.example.com' http://127.0.0.1/
+curl -sv --resolve notes.example.com:443:203.0.113.10 https://notes.example.com/
 sudo nginx -T | grep -n "notes.example.com"
 sudo tail -n 100 /var/log/nginx/error.log
 ```
+
+`--resolve` 让连接走指定 IP，同时保留 URL 中的主机名用于 SNI、证书验证和 HTTP 请求。`-I` 只发送 HEAD，可能与 GET 的应用路径不同；错误页也可能返回 200，因此需要查看实际正文。诊断输出可能包含 Cookie 或认证头，分享前应删去敏感信息。
+
+错误日志中的 `connect() failed` 常指向后端连接失败，`upstream timed out` 指向对应阶段超时，`upstream prematurely closed connection` 表示后端提前关闭连接。结合应用日志和同一时间窗口再定位原因，单凭 502 无法区分配置、崩溃和协议错误。
+
+可在 `http` 上下文增加上游耗时日志：
+
+```nginx
+log_format upstream_timing '$remote_addr $request_method $uri $status '
+                           'rt=$request_time uct=$upstream_connect_time '
+                           'uht=$upstream_header_time urt=$upstream_response_time';
+access_log /var/log/nginx/access.log upstream_timing;
+```
+
+总请求耗时包含客户端交互等阶段，上游连接、响应头和响应耗时用于进一步定位；发生多次上游尝试时变量可能包含多组值。事件驱动架构不能消除慢后端，增加 worker 数也不会直接提高数据库吞吐量。
+
+## 参考
+
+- [Nginx 请求处理与 server 选择](https://nginx.org/en/docs/http/request_processing.html)
+- [HTTP 核心模块：location、root、alias](https://nginx.org/en/docs/http/ngx_http_core_module.html)
+- [代理模块：URI、超时与转发头](https://nginx.org/en/docs/http/ngx_http_proxy_module.html)
+- [HTTP/2 模块](https://nginx.org/en/docs/http/ngx_http_v2_module.html)
+- [WebSocket 代理](https://nginx.org/en/docs/http/websocket.html)
+- [上游模块](https://nginx.org/en/docs/http/ngx_http_upstream_module.html)

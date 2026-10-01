@@ -4,7 +4,7 @@
 
 传统部署经常依赖机器上已经安装好的运行时、系统库、配置文件和环境变量。换一台机器后，应用可能因为 Python、Node.js、OpenSSL、系统包版本或启动命令不同而表现异常。
 
-Docker 的核心做法是把应用运行所需的文件系统、依赖、环境变量和启动命令封装成镜像，再从镜像启动容器。容器本质上仍然是宿主机上的进程，但它运行在相对隔离的文件系统、网络和进程环境中。
+镜像记录应用文件系统与默认运行配置，容器把镜像、运行时参数、挂载和网络配置组合成一次运行实例。密钥和环境专属配置应在运行时提供。Linux 容器的进程由同一个 Linux 内核调度，namespace 提供资源视图隔离，cgroup 提供资源计量与控制；在 Docker Desktop 上，这个内核通常位于其管理的 Linux 虚拟机中。
 
 常见对象可以这样理解：
 
@@ -17,8 +17,7 @@ Docker 的核心做法是把应用运行所需的文件系统、依赖、环境�
 | Volume | Docker 管理的数据卷，常用于持久化数据库数据 |
 | Network | 容器间通信使用的虚拟网络 |
 
-!!! note "镜像与容器的关系"
-    镜像像“模板”，容器像“运行中的实例”。同一个镜像可以启动多个容器；删除容器不等于删除镜像，删除镜像也要求没有容器正在依赖它。
+同一个镜像可以创建多个容器，每个容器有自己的可写层和运行状态。容器停止后仍可存在；删除容器会移除其可写层，但命名卷有独立生命周期。镜像、容器和卷需要分别检查。
 
 ## Docker 常用命令
 
@@ -44,7 +43,7 @@ docker run --rm hello-world
 ```bash
 docker run -d \
   --name demo-nginx \
-  -p 8080:80 \
+  -p 127.0.0.1:8080:80 \
   nginx:alpine
 ```
 
@@ -54,7 +53,7 @@ docker run -d \
 | --- | --- |
 | `-d` | 后台运行容器 |
 | `--name demo-nginx` | 给容器命名 |
-| `-p 8080:80` | 把宿主机 `8080` 端口映射到容器内 `80` 端口 |
+| `-p 127.0.0.1:8080:80` | 将宿主机回环地址的 `8080` 端口发布到容器内 `80` 端口 |
 | `nginx:alpine` | 使用的镜像 |
 
 访问测试：
@@ -73,8 +72,7 @@ docker stop demo-nginx
 docker rm demo-nginx
 ```
 
-!!! warning "端口映射方向"
-    `-p 8080:80` 的左边是宿主机端口，右边是容器内端口。公网服务器上暴露端口前，要确认防火墙、安全组和应用权限，不要把数据库、缓存或管理面板直接暴露到公网。
+端口语法为 `[宿主机地址:]宿主机端口:容器端口`。省略宿主机地址通常意味着发布到所有接口；本地试验显式绑定回环地址更便于控制入口。Docker 的端口发布可能经过其维护的防火墙规则，不能仅凭主机某个前端防火墙的显示状态判断实际可达性。
 
 ### 查看镜像和清理资源
 
@@ -102,7 +100,7 @@ COPY site/ /usr/share/nginx/html/
 
 ```bash
 docker build -t demo-site:local .
-docker run --rm -p 8080:80 demo-site:local
+docker run --rm -p 127.0.0.1:8080:80 demo-site:local
 ```
 
 更常见的应用镜像会包含工作目录、依赖安装、源码复制和启动命令：
@@ -120,8 +118,7 @@ COPY . .
 CMD ["python", "app.py"]
 ```
 
-!!! tip "构建上下文"
-    `docker build -t demo .` 末尾的 `.` 是构建上下文。Dockerfile 里的 `COPY` 只能复制构建上下文内的文件。应使用 `.dockerignore` 排除 `.git/`、缓存目录、虚拟环境、构建产物和本地密钥。
+`docker build -t demo .` 末尾的 `.` 是构建上下文。这里普通 `COPY` 的本地源路径相对于构建上下文；多阶段构建的 `COPY --from` 还可读取指定阶段或镜像。应使用 `.dockerignore` 排除 `.git/`、缓存目录、虚拟环境、构建产物和本地密钥。
 
 ## Compose 的作用
 
@@ -134,7 +131,7 @@ services:
   web:
     image: nginx:alpine
     ports:
-      - "8080:80"
+      - "127.0.0.1:8080:80"
     volumes:
       - ./html:/usr/share/nginx/html:ro
 ```
@@ -149,8 +146,7 @@ docker compose exec web sh
 docker compose down
 ```
 
-!!! note "现代 Compose 命令"
-    现在优先使用 `docker compose`，它是 Docker CLI 的 Compose 子命令。旧教程里的 `docker-compose` 是早期独立命令，很多环境仍可见，但新项目建议按 `docker compose` 书写。
+现在优先使用 `docker compose`，它是 Docker CLI 的 Compose 子命令。旧教程里的 `docker-compose` 是早期独立命令，很多环境仍可见，但新项目建议按 `docker compose` 书写。
 
 ### Compose 文件的基本结构
 
@@ -209,8 +205,7 @@ networks:
 | `depends_on` | 表达服务间的启动依赖 |
 | `healthcheck` | 定义健康检查命令 |
 
-!!! warning "不要把示例密码用于真实环境"
-    `change-me` 只适合示例。真实服务应使用 `.env`、`env_file`、密钥管理工具或部署平台提供的 secret 能力，并避免把生产密码提交到公开仓库。
+`change-me` 仅是示例占位值。`.env` 和 `env_file` 都是明文文件，不提供秘密管理系统的保护；环境变量还可能出现在容器检查结果和进程诊断中。真实凭据应根据部署环境通过权限受控文件、Compose secrets 或平台密钥系统提供，并确认应用支持相应读取方式。
 
 ### `version` 字段
 
@@ -222,8 +217,7 @@ version: "3.8"
 
 现代 Compose 使用 Compose Specification，通常不再需要顶层 `version` 字段。新文件可以直接从 `services:` 开始，让当前 Compose 工具按规范解析。
 
-!!! tip "文件名"
-    推荐使用 `compose.yaml`。`docker-compose.yml` 仍然常见，Compose 也能识别，但新项目用 `compose.yaml` 更贴近当前文档。
+推荐使用 `compose.yaml`。`docker-compose.yml` 仍然常见，Compose 也能识别，但新项目用 `compose.yaml` 更贴近当前文档。
 
 ## Compose 常用命令
 
@@ -246,11 +240,11 @@ docker compose down
 | `up --build` | 启动前重新构建镜像 |
 | `stop` | 停止容器，但保留容器、网络和卷 |
 | `start` | 启动已存在的容器 |
-| `restart` | 重启服务 |
+| `restart` | 重启已有容器，不重新应用 Compose 环境变量、挂载和端口配置 |
 | `down` | 停止并删除当前项目创建的容器和网络 |
 
 !!! danger "`down -v` 会删除命名卷"
-    `docker compose down -v` 会删除 Compose 文件中声明的命名卷和匿名卷。数据库数据通常放在卷里，执行前要确认已经备份，或者数据确实可以丢弃。
+    `docker compose down -v` 会删除该项目中声明的非 external 命名卷以及附属匿名卷；external 卷不会被 Compose 删除。数据库数据通常位于卷中，这项操作需要可恢复的备份或可丢弃的数据前提。
 
 ### 查看状态和日志
 
@@ -277,7 +271,7 @@ docker compose exec db psql -U example -d example
 docker compose run --rm app python manage.py migrate
 ```
 
-`exec` 面向已经运行的服务容器；`run --rm` 会为某个服务临时启动一个一次性容器，适合执行迁移、初始化、测试等任务。
+`exec` 在现有运行容器中执行命令；`run --rm` 按服务配置创建一次性容器，默认不发布该服务的端口。迁移命令会修改数据库，实际执行前仍需确认连接目标、版本兼容与备份。
 
 ### 校验配置
 
@@ -285,7 +279,13 @@ docker compose run --rm app python manage.py migrate
 docker compose config
 ```
 
-`config` 会合并环境变量和多个 Compose 文件，并输出规范化后的配置。改动较多时，先运行它可以发现 YAML 缩进、变量替换和字段拼写问题。
+`config` 会合并配置、执行变量插值并输出规范化结果；只检查是否合法可用 `docker compose config --quiet`。完整输出可能包含展开后的凭据，不宜直接贴入公开日志。
+
+### 变量插值与容器环境
+
+项目目录中的 `.env` 默认用于 Compose 文件的 `${NAME}` 插值，不会自动把每个变量注入容器。`environment` 和服务级 `env_file` 才定义容器收到的环境；两者同时定义同名变量时，`environment` 优先。需要强制提供变量时可写 `${APP_IMAGE:?set APP_IMAGE}`，避免空值静默形成错误配置。
+
+修改 `ports`、`environment`、`command` 或挂载后，执行 `docker compose up -d` 让 Compose 比较配置并按需重建容器。单纯 `restart` 只重新启动原容器进程。绑定挂载的文件内容变化则已反映在容器文件系统中，应用是否重新读取由其自身决定。
 
 ## 网络：服务名就是内部域名
 
@@ -295,10 +295,9 @@ Compose 默认会为项目创建一个网络，同一个网络里的服务可以
 postgresql://example:change-me@db:5432/example
 ```
 
-在容器内部，`localhost` 指的是容器自己，不是宿主机，也不是另一个服务容器。
+在默认隔离网络的容器中，`localhost` 指向该容器网络命名空间的回环接口。使用 host 网络或显式共享网络命名空间时，需要按共享范围重新判断。
 
-!!! warning "容器内的 localhost"
-    如果 `app` 容器连接 `localhost:5432`，它会尝试连接 `app` 容器内部的 `5432` 端口。连接 Compose 里的数据库服务，通常应该使用 `db:5432` 这样的服务名。
+如果 `app` 容器连接 `localhost:5432`，它会尝试连接 `app` 容器内部的 `5432` 端口。连接 Compose 里的数据库服务，通常应该使用 `db:5432` 这样的服务名。
 
 端口发布有几种常见写法：
 
@@ -308,7 +307,7 @@ ports:
   - "127.0.0.1:8080:80"    # 只允许本机访问 8080
 ```
 
-个人服务器上，如果前面还有 Nginx 或 Caddy 反向代理，应用容器常只发布到 `127.0.0.1`，再由反向代理对公网提供 HTTPS。
+若 Nginx 或 Caddy 运行在宿主机，可让应用只发布到 `127.0.0.1`。若代理也在容器里，通常让代理与应用加入同一网络并使用服务名，无须额外发布应用端口。容器内应用一般要监听容器的 `0.0.0.0` 或指定接口；仅监听容器回环地址时，端口发布无法自动让它接受其他接口的连接。
 
 ## 卷：区分命名卷和绑定挂载
 
@@ -317,6 +316,7 @@ Compose 里常见两种挂载方式：
 ```yaml
 services:
   app:
+    image: example/app:1.0.0
     volumes:
       - ./config:/app/config:ro
       - app-cache:/app/cache
@@ -339,7 +339,7 @@ docker volume ls
 docker volume inspect project_db-data
 ```
 
-备份命名卷的一种常见方式是启动临时容器，把卷内容打包到当前目录：
+对已经停止写入的普通数据卷，可用临时容器打包：
 
 ```bash
 docker run --rm \
@@ -348,6 +348,8 @@ docker run --rm \
   alpine \
   tar czf /backup/db-data.tar.gz -C /data .
 ```
+
+这个命令只是文件复制。对正在运行的数据库直接打包数据目录，可能得到不一致且无法恢复的副本；应优先使用数据库的逻辑备份或受支持的物理备份流程。离线复制也需确保服务已正常停止，并验证恢复结果。
 
 ## 启动顺序与健康检查
 
@@ -370,8 +372,7 @@ services:
       retries: 5
 ```
 
-!!! tip "应用也要能重试"
-    健康检查可以减少启动竞态，但应用仍应具备连接失败后重试的能力。数据库重启、网络抖动或镜像更新时，服务依赖关系不会替代应用自身的容错逻辑。
+健康检查可以减少启动竞态，但 `pg_isready` 只说明服务已能响应连接检查，不证明迁移完成、用户权限正确或业务查询可用。启动后依赖失效，Compose 不会据此自动建立完整的故障恢复流程；`unhealthy` 状态本身也不会触发普通重启策略。应用仍需超时、重试退避和重连能力。
 
 ## 开发与部署建议
 
@@ -415,10 +416,10 @@ services:
 
 | 配置 | 建议 |
 | --- | --- |
-| 镜像标签 | 尽量使用明确版本，不要长期依赖 `latest` |
+| 镜像标签 | 用明确版本便于追踪；需要精确复现时固定 digest，版本标签仍可能被更新 |
 | `restart` | 小型服务常用 `unless-stopped` |
 | `ports` | 内部服务优先绑定到 `127.0.0.1` |
-| `.env` | 存放非公开环境变量，并加入 `.gitignore` |
+| `.env` | 用于配置插值；若包含敏感值，控制文件权限并排除提交 |
 | 日志 | 用 `docker compose logs`、日志驱动或宿主机日志系统集中查看 |
 
 ## 常见问题
@@ -438,7 +439,7 @@ docker compose up -d app
 docker compose up --build -d
 ```
 
-如果怀疑缓存层干扰：
+先确认 `COPY` 路径、构建上下文和 `.dockerignore`，再判断是否需要排除缓存：
 
 ```bash
 docker compose build --no-cache app
@@ -463,18 +464,19 @@ docker compose exec app getent hosts db
 docker compose exec app sh
 ```
 
-在容器里确认连接地址是否使用了服务名，例如 `db:5432`，而不是 `localhost:5432`。
+在容器里确认连接地址是否使用了服务名，例如 `db:5432`；同时检查双方是否加入同一网络、数据库是否监听容器接口。
 
 ### 容器反复退出
 
-先看状态和日志：
+检查状态、退出原因和日志：
 
 ```bash
-docker compose ps
+docker compose ps -a
 docker compose logs --tail 200 app
+docker inspect --format '{{json .State}}' <container>
 ```
 
-常见原因包括启动命令错误、环境变量缺失、配置文件挂载路径不对、数据库未初始化、文件权限不匹配等。
+检查退出码、`OOMKilled`、错误消息和退出时间，再与日志对应。常见原因包括启动命令错误、环境变量缺失、配置文件挂载路径不对、数据库未初始化、文件权限不匹配等。
 
 ### 数据库初始化脚本没有再次执行
 
@@ -482,6 +484,30 @@ docker compose logs --tail 200 app
 
 !!! danger "重建数据库前先备份"
     删除数据库卷会删除其中所有数据。测试环境可以用 `docker compose down -v` 重建；真实环境应先备份，再按数据库迁移流程处理。
+
+## 资源限制与运行证据
+
+容器隔离进程视图，不会自动为每个应用提供独占 CPU 或内存。可按工作负载设置限制：
+
+```yaml
+services:
+  app:
+    image: example/app:1.0.0
+    cpus: "1.0"
+    mem_limit: 512m
+    pids_limit: 256
+    init: true
+```
+
+CPU 限额约束一定时间窗口内的配额，并非把应用固定到某个核心。内存限额包含受控制组计量的内存，触及上限可能导致回收或 OOM；`init: true` 增加轻量 init 来辅助信号转发和子进程回收，不会把容器变成完整虚拟机。
+
+```bash
+docker stats --no-stream
+docker inspect --format '{{json .State}}' <container>
+docker compose logs --since 10m app
+```
+
+持续重启可能掩盖首次失败。应先确定进程退出、健康检查失败还是业务请求失败，再检查对应证据。宿主机还有空闲内存而单个容器 OOM，是控制组限额与全机内存总量不同的常见表现。
 
 ## 常用排障命令清单
 
@@ -507,3 +533,7 @@ docker system df
 - [Compose volumes](https://docs.docker.com/reference/compose-file/volumes/)
 - [docker compose CLI](https://docs.docker.com/reference/cli/docker/compose/)
 - [Control startup and shutdown order in Compose](https://docs.docker.com/compose/how-tos/startup-order/)
+- [Compose 环境变量插值](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/)
+- [Compose restart 的配置边界](https://docs.docker.com/reference/cli/docker/compose/restart/)
+- [Docker 资源约束](https://docs.docker.com/engine/containers/resource_constraints/)
+- [Docker 卷与备份](https://docs.docker.com/engine/storage/volumes/)
