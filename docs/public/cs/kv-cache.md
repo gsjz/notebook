@@ -8,7 +8,7 @@ KV Cache 的作用，就是让 decode 阶段复用前面已经算过的 $K,V$，
 
 ## 记号
 
-见 [Transformer 笔记的 attention 小节](/public/ai/transformer/#attention)。
+见 [Transformer 笔记的 attention 小节](/public/cs/transformer/#attention)。
 
 ## 工作方式
 

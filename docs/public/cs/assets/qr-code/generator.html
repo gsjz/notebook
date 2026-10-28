@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>二维码生成器</title>
+  <link rel="stylesheet" href="generator.css">
+  <script src="qrcodegen.js" defer></script>
+  <script src="generator.js" defer></script>
+</head>
+<body>
+  <main class="qr-generator">
+    <header>
+      <h1>二维码生成器</h1>
+      <p>在浏览器内编码，输入内容不会上传。</p>
+    </header>
+    <form id="qr-form">
+      <label for="qr-text">文本或网址</label>
+      <textarea id="qr-text" rows="3" spellcheck="false" aria-describedby="qr-bytes">https://example.com/</textarea>
+      <p id="qr-bytes" class="hint">UTF-8：0 字节</p>
+      <div class="correction-control">
+        <label for="qr-correction">纠错等级</label>
+        <select id="qr-correction">
+          <option value="L">L · 约 7%</option>
+          <option value="M" selected>M · 约 15%</option>
+          <option value="Q">Q · 约 25%</option>
+          <option value="H">H · 约 30%</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button type="submit" class="primary">生成二维码</button>
+        <button type="button" id="qr-download" disabled>下载 SVG</button>
+      </div>
+    </form>
+    <p id="qr-status" class="status" role="status" aria-live="polite"></p>
+    <div id="qr-output" class="qr-output" aria-label="二维码预览"></div>
+    <dl id="qr-details" class="details" hidden>
+      <div><dt>版本</dt><dd id="qr-version"></dd></div>
+      <div><dt>模块尺寸</dt><dd id="qr-size"></dd></div>
+      <div><dt>纠错等级</dt><dd id="qr-level"></dd></div>
+      <div><dt>掩码编号</dt><dd id="qr-mask"></dd></div>
+    </dl>
+    <noscript>请启用 JavaScript 后使用生成器。</noscript>
+  </main>
+</body>
+</html>

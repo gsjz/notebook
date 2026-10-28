@@ -1,6 +1,6 @@
-# Computer Science
+# CS & AI
 
-这些笔记围绕计算机组成、操作系统、网络和数据结构展开。基础部分侧重定义、模型条件与可推演的计算过程；工程部分讨论真实系统的实现差异，以及能够验证判断的实验和诊断方法。
+这些笔记围绕计算机系统、算法、模型与推理展开。基础部分侧重定义、模型条件与可推演的计算过程；工程部分讨论真实系统的实现差异，以及能够验证判断的实验和诊断方法。
 
 ## 组成原理
 
@@ -40,6 +40,7 @@
 - [电子邮件](/public/cs/network-email/)
 - [SSH、HTTPS 与加密连接](/public/cs/ssh-overview/)
 - [Nginx 基础](/public/cs/nginx-basics/)
+- [自建 LLM API 个人聚合站](/public/cs/llm-api-gateway/)
 
 ## 数据结构
 
@@ -52,9 +53,21 @@
 - [组合博弈](/public/cs/combinatorial-game-theory/)
 - [凸优化](/public/cs/convex-optimization/)
 
-## 容器与虚拟化技术
+## 编码与信息表示
+
+- [精度编码基础](/public/cs/precision-encoding/)
+- [QR Code：二维码原理与浏览器生成](/public/cs/qr-code/)
+
+## 模型与推理 { #model-inference }
+
+- [Transformer 笔记](/public/cs/transformer/)
+- [RoPE 旋转位置编码笔记](/public/cs/rope/)
+- [KV Cache 笔记](/public/cs/kv-cache/)
+
+## 部署与运行环境
 
 - [Docker 与 Docker Compose 基础](/public/cs/docker-compose-basics/)
+- [NVIDIA DGX Spark 使用报告](/public/cs/nvidia-dgx-spark-usage-report/)
 
 ## 高性能计算
 
@@ -101,6 +114,26 @@
 - NVMe 与 SSD I/O 路径
 - io_uring 与异步 I/O
 - 页缓存、直接 I/O 与存储性能测试
+
+### 计算图优化
+
+- 算子融合
+- layout transform
+- graph partition
+
+### ARM 矢量算子优化
+
+- NEON
+- SVE / SME
+- 低精度 kernel
+- cache blocking
+
+### 多架构后端适配
+
+- TensorRT
+- QNN
+- OpenVINO
+- ONNX Runtime Execution Provider
 
 ## 实用技能
 

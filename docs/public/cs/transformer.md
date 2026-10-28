@@ -285,5 +285,5 @@ KV Cache 没有改变 Transformer 的数学定义，它只是避免重复计算�
 ### 辅助阅读与站内笔记
 
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
-- [KV Cache 笔记](/public/ai/kv-cache/)
-- [RoPE 旋转位置编码笔记](/public/ai/rope/)
+- [KV Cache 笔记](/public/cs/kv-cache/)
+- [RoPE 旋转位置编码笔记](/public/cs/rope/)

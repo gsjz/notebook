@@ -136,7 +136,7 @@ RoPE 会影响 KV Cache，因为缓存里的 `Key` 通常已经是旋转之后�
 
 这意味着 cache 和 position id 绑定得很紧。如果后续 decode 使用的位置编号错了，或者中途换了 RoPE scaling 方案，旧 cache 里的 $K$ 和新 token 的 $Q$ 就不在同一套坐标系里。这个时候不能安全混用旧 cache。
 
-在普通左到右生成里，RoPE 和 [KV Cache](/public/ai/kv-cache/) 是相容的；RoPE 只改变 $QK^\top$ 的几何结构，不改变“历史 $K$、$V$ 可复用”的基本前提。
+在普通左到右生成里，RoPE 和 [KV Cache](/public/cs/kv-cache/) 是相容的；RoPE 只改变 $QK^\top$ 的几何结构，不改变“历史 $K$、$V$ 可复用”的基本前提。
 
 ## 长上下文扩展
 
