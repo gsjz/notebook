@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>随机 key 与循环状态</title>
+<link rel="stylesheet" href="../inference/interactive.css">
+<style>
+.flow{display:grid;grid-template-columns:1fr 24px 1fr;align-items:center;gap:12px;margin:20px 0}.arrow{text-align:center;color:var(--muted)}.key{display:block;color:var(--accent);font-size:25px;font-weight:600;font-variant-numeric:tabular-nums}.branch+.branch{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}.branch{font-size:12px;color:var(--muted)}.branch strong{font-size:17px;font-weight:600;color:var(--ink);display:block}.history{display:grid;gap:6px;margin-top:16px}.row{display:grid;grid-template-columns:46px 1fr 1fr;gap:8px;padding:8px 10px;border-radius:8px;background:var(--paper);font-size:12px;font-variant-numeric:tabular-nums}.row.latest{background:var(--soft)}.row span:last-child{text-align:right}.caption{min-height:64px}.controls label{margin-left:auto}.panel>small{color:var(--muted)}@media(max-width:500px){.flow{grid-template-columns:1fr 16px 1.2fr;gap:6px}.panel{padding:12px}.controls label{margin-left:0}.row{font-size:11px;grid-template-columns:38px 1fr 1fr}}
+</style>
+</head>
+<body><main class="demo">
+<div class="header"><h1>随机 key 随状态前进</h1><span id="counter" class="hint">准备</span></div>
+<p class="subtitle">同一个 key 的相同采样调用会重现结果；每轮应保存新的 key。</p>
+<div class="controls"><button class="primary" id="next">执行一轮</button><label for="mode">更新方式<select id="mode"><option value="advance">传递新 key</option><option value="reuse">误用旧 key</option></select></label></div>
+<div class="flow"><div class="panel"><small>进入本轮的 carry.rng</small><strong class="key" id="input-key">K₀</strong></div><div class="arrow" aria-hidden="true">→</div><div class="panel"><div class="branch">split → 下一轮候选<strong id="next-key">K₁</strong></div><div class="branch">split → 本轮采样<strong id="sample-key">S₀</strong></div></div></div>
+<p class="caption" id="caption" aria-live="polite"></p>
+<div class="history" id="history" aria-label="最近四轮的符号记录"></div>
+<p class="note">符号教学：K / S 表示 key 身份，draw 表示同一随机操作；不执行 JAX，也不生成随机数。新 key 不保证抽到不同 token。</p>
+</main><script>
+(() => {
+  'use strict';
+  const byId = identifier => document.getElementById(identifier);
+  const subscripts = ['₀', '₁', '₂', '₃', '₄'];
+  let round = 0;
+  let carryIndex = 0;
+  let records = [];
+  function render() {
+    const current = records.at(-1);
+    const inputIndex = current ? current.inputIndex : 0;
+    const advancing = byId('mode').value === 'advance';
+    byId('counter').textContent = round ? `${round} / 4 轮` : '准备';
+    byId('input-key').textContent = `K${subscripts[inputIndex]}`;
+    byId('next-key').textContent = `K${subscripts[inputIndex + 1]}`;
+    byId('sample-key').textContent = `S${subscripts[inputIndex]}`;
+    byId('next').textContent = round === 4 ? '从头开始' : '执行一轮';
+    byId('caption').textContent = round === 0
+      ? '每轮 split 得到本轮采样 key 和下一轮候选 key；点击后观察实际保存的状态。'
+      : advancing
+        ? `第 ${round} 轮使用 S${subscripts[inputIndex]} 采样，将 K${subscripts[carryIndex]} 写回 carry.rng。`
+        : `第 ${round} 轮仍使用 S₀；候选 K₁ 被丢弃，carry.rng 留在 K₀。后续重复同一采样调用。`;
+    byId('history').replaceChildren();
+    records.forEach((record, index) => {
+      const row = document.createElement('div');
+      row.className = 'row' + (index === records.length - 1 ? ' latest' : '');
+      const cells = [`第 ${index + 1} 轮`, `draw(S${subscripts[record.inputIndex]})`, `保存 K${subscripts[record.savedIndex]}`];
+      cells.forEach(value => {
+        const cell = document.createElement('span');
+        cell.textContent = value;
+        row.append(cell);
+      });
+      byId('history').append(row);
+    });
+    Object.assign(document.body.dataset, {round: String(round), carry: String(carryIndex), mode: byId('mode').value, draws: JSON.stringify(records.map(record => record.inputIndex))});
+  }
+  function reset() {
+    round = 0;
+    carryIndex = 0;
+    records = [];
+    render();
+  }
+  byId('next').addEventListener('click', () => {
+    if (round === 4) {
+      reset();
+      return;
+    }
+    const inputIndex = carryIndex;
+    if (byId('mode').value === 'advance') carryIndex += 1;
+    records.push({inputIndex, savedIndex: carryIndex});
+    round += 1;
+    render();
+  });
+  byId('mode').addEventListener('change', reset);
+  render();
+})();
+</script><script src="../inference/frame.js"></script></body>
+</html>

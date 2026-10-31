@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MoE 分发与回排</title>
+<link rel="stylesheet" href="interactive.css">
+<style>
+.demo{max-width:1000px}.setting{margin-left:auto}.steps{display:flex;list-style:none;padding:0;margin:20px 0 12px;gap:6px}.steps li{flex:1;text-align:center;font-size:12px;padding:7px 2px;border-bottom:2px solid var(--line);color:var(--muted)}.steps li[aria-current=step]{color:var(--accent);border-color:var(--accent);font-weight:600}.board{position:relative;height:226px;margin-top:12px}.column-label{position:absolute;top:0;width:calc(25% - 8px);text-align:center;color:var(--muted);font-size:12px}.pair{position:absolute;width:calc(25% - 8px);height:76px;padding:9px 4px;text-align:center;border:1px solid var(--line);border-radius:10px;background:var(--paper);transition:left .25s,top .25s,background .25s,border-color .25s}.pair strong{display:block;color:var(--accent);font-size:15px;font-weight:600}.pair small{display:block;font-size:11px;color:var(--muted)}.pair.computing{background:var(--soft);border-color:#cfc5df}.pair.restored{border-color:#cfc5df}.counts{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted);flex-wrap:wrap}.counts strong{color:var(--ink);font-weight:500}.caption{min-height:64px}.mapping{display:grid;grid-template-columns:auto 1fr;gap:7px 12px;margin-top:12px;font-size:12px}.mapping dt{color:var(--muted)}.mapping dd{margin:0;font-family:ui-monospace,monospace;overflow-wrap:anywhere}.outputs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:5px}.outputs div{text-align:center;color:var(--accent);font-size:11px;padding:6px 2px;background:var(--soft);border-radius:6px}.outputs[hidden]{display:none}@media(max-width:520px){.setting{margin-left:0}.pair strong{font-size:13px}.pair small{font-size:10px}.board{height:218px}.steps{gap:3px}.steps li{font-size:11px}.mapping{grid-template-columns:1fr;gap:3px}.mapping dd{margin-bottom:5px}.outputs div{font-size:10px}}
+</style>
+</head>
+<body>
+<main class="demo" id="demo">
+<h1>同一份 token，送入它选中的专家</h1>
+<p class="subtitle">4 个 token × top-2 → 8 份分配。卡片保留原 token、槽位和目标专家。</p>
+<div class="controls">
+<button id="play" class="primary" aria-pressed="false">播放</button>
+<button id="next">下一步</button>
+<label class="setting" for="scenario">路由<select id="scenario"><option value="original">原路由</option><option value="swapped">同计数·换路由</option></select></label>
+</div>
+<ol class="steps" aria-label="分发步骤"><li>路由</li><li>展平</li><li>分组</li><li>FFN</li><li>回排</li></ol>
+<div class="board" id="board" aria-label="token 与专家分配卡片"></div>
+<div class="outputs" id="outputs" hidden></div>
+<div class="counts"><span>各专家行数 <strong id="counts"></strong></span><span>边界 offsets <strong id="offsets"></strong></span></div>
+<p class="caption" id="status" aria-live="polite"></p>
+<details><summary>查看映射与复用条件</summary><dl class="mapping"><dt>原路由 perm</dt><dd id="original-perm"></dd><dt>当前 perm</dt><dd id="current-perm"></dd><dt>当前 inverse</dt><dd id="inverse-perm"></dd></dl><p>两组路由的 counts / offsets 一致，但 permutation 不同。复用完整映射还要求 token / slot → expert 关系、shape、布局、专家放置与 padding 策略兼容；当前 hidden states 和路由权重仍需更新。</p></details>
+<p class="note">编号从 0 开始；演示按专家、原分配位置排序。FFN 与加权仅作结构示意，未模拟数值、线程调度或耗时，也不表示各专家同时执行。</p>
+</main>
+<script>
+(() => {
+  'use strict';
+  const byId = identifier => document.getElementById(identifier);
+  const routes = {
+    original: [[0, 1], [1, 2], [2, 3], [3, 0]],
+    swapped: [[2, 3], [3, 0], [0, 1], [1, 2]]
+  };
+  const captions = [
+    '每个 token 选择两个专家；同一个 token 因而有两个槽位。',
+    '按 token、槽位展平。p = token × 2 + slot，p 记录原始分配位置。',
+    '按专家分组后，同一专家的输入连续排列；perm 保存每一行原来的 p。',
+    '每个专家对分到的行执行 gate/up → 激活 → down。各组行数决定矩阵形状。',
+    '用 inverse 恢复原 token 和槽位；各槽位乘本轮路由权重后相加，得到每个 token 的输出。'
+  ];
+  let stage = 0;
+  let playing = false;
+  let timer = null;
+  const labels = Array.from({length: 4}, (_, column) => {
+    const label = document.createElement('span');
+    label.className = 'column-label';
+    label.style.left = `calc(${column * 25}% + 4px)`;
+    byId('board').append(label);
+    return label;
+  });
+  const cards = Array.from({length: 8}, (_, position) => {
+    const card = document.createElement('div');
+    card.className = 'pair';
+    card.dataset.position = String(position);
+    byId('board').append(card);
+    return card;
+  });
+  function metadata(route) {
+    const pairs = route.flatMap((experts, token) => experts.map((expert, slot) => ({token, slot, expert, position: token * 2 + slot})));
+    const ordered = [...pairs].sort((left, right) => left.expert - right.expert || left.position - right.position);
+    const permutation = ordered.map(pair => pair.position);
+    const inverse = Array(8);
+    permutation.forEach((position, groupedRow) => {inverse[position] = groupedRow;});
+    const counts = [0, 0, 0, 0];
+    pairs.forEach(pair => {counts[pair.expert] += 1;});
+    const offsets = [0];
+    counts.forEach(count => {offsets.push(offsets[offsets.length - 1] + count);});
+    return {pairs, permutation, inverse, counts, offsets};
+  }
+  const originalPermutation = metadata(routes.original).permutation;
+  function pause() {
+    clearTimeout(timer);
+    timer = null;
+    playing = false;
+  }
+  function render() {
+    const scenario = byId('scenario').value;
+    const current = metadata(routes[scenario]);
+    const grouped = stage === 2 || stage === 3;
+    labels.forEach((label, column) => {
+      label.textContent = grouped ? `专家 E${column}` : stage === 1 ? `列 ${column}` : `Token ${column}`;
+    });
+    current.pairs.forEach(pair => {
+      const card = cards[pair.position];
+      const groupedRow = current.inverse[pair.position];
+      const column = grouped ? pair.expert : stage === 1 ? pair.position % 4 : pair.token;
+      const row = grouped ? groupedRow - current.offsets[pair.expert] : stage === 1 ? Math.floor(pair.position / 4) : pair.slot;
+      card.style.left = `calc(${column * 25}% + 4px)`;
+      card.style.top = `${32 + row * 90}px`;
+      card.classList.toggle('computing', stage === 3);
+      card.classList.toggle('restored', stage === 4);
+      card.innerHTML = `<strong>T${pair.token} → E${pair.expert}</strong><small>槽 ${pair.slot} · p${pair.position}</small><small>${stage === 3 ? 'FFN 计算' : stage === 4 ? '乘本轮权重' : grouped ? `分组行 ${groupedRow}` : '输入 hidden state'}</small>`;
+      card.setAttribute('aria-label', `Token ${pair.token} 槽位 ${pair.slot}，专家 ${pair.expert}，原始位置 ${pair.position}${grouped ? `，分组行 ${groupedRow}` : ''}`);
+      card.dataset.expert = String(pair.expert);
+      card.dataset.column = String(column);
+      card.dataset.row = String(row);
+    });
+    document.querySelectorAll('.steps li').forEach((item, index) => {
+      if (index === stage) item.setAttribute('aria-current', 'step');
+      else item.removeAttribute('aria-current');
+    });
+    byId('outputs').hidden = stage !== 4;
+    byId('outputs').innerHTML = routes[scenario].map((_, token) => `<div>T${token}：两槽求和</div>`).join('');
+    byId('counts').textContent = current.counts.join(' · ');
+    byId('offsets').textContent = current.offsets.join(' · ');
+    byId('status').textContent = captions[stage] + (scenario === 'swapped' && stage === 2 ? ' 计数没有改变，但现在各专家收到不同 token，旧 perm 已失效。' : '');
+    byId('play').textContent = playing ? '暂停' : stage === 4 ? '重播' : '播放';
+    byId('play').setAttribute('aria-pressed', String(playing));
+    byId('next').textContent = stage === 4 ? '从头' : '下一步';
+    byId('original-perm').textContent = `[${originalPermutation.join(', ')}]`;
+    byId('current-perm').textContent = `[${current.permutation.join(', ')}]`;
+    byId('inverse-perm').textContent = `[${current.inverse.join(', ')}]`;
+    Object.assign(document.body.dataset, {stage: String(stage), scenario, counts: JSON.stringify(current.counts), offsets: JSON.stringify(current.offsets), permutation: JSON.stringify(current.permutation), inverse: JSON.stringify(current.inverse)});
+  }
+  function schedule() {
+    timer = setTimeout(() => {
+      if (!playing) return;
+      stage += 1;
+      if (stage === 4) pause();
+      render();
+      if (playing) schedule();
+    }, 1800);
+  }
+  byId('play').addEventListener('click', () => {
+    if (playing) pause();
+    else {
+      if (stage === 4) stage = 0;
+      playing = true;
+      schedule();
+    }
+    render();
+  });
+  byId('next').addEventListener('click', () => {
+    pause();
+    stage = stage === 4 ? 0 : stage + 1;
+    render();
+  });
+  byId('scenario').addEventListener('change', () => {pause(); stage = 0; render();});
+  document.addEventListener('visibilitychange', () => {if (document.hidden) {pause(); render();}});
+  render();
+})();
+</script>
+<script src="frame.js"></script>
+</body>
+</html>

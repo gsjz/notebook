@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JAX 计时边界</title>
+  <link rel="stylesheet" href="../inference/interactive.css">
+  <style>
+    .demo{max-width:1000px}.timeline{margin:24px 0}.lane{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:center;margin:14px 0;font-size:12px}.track{position:relative;height:32px;background:var(--paper);border-radius:7px}.segment{position:absolute;top:0;height:100%;border-radius:5px;transition:left .25s,width .25s}.compile{background:#e0e2e8}.submit{background:#a99cc3;min-width:3px}.execute{background:var(--accent)}.window{background:var(--soft);border-bottom:2px solid var(--accent);border-radius:5px 5px 0 0}.cursor{position:absolute;top:-4px;bottom:-4px;width:2px;background:#374151;left:var(--finish);opacity:.65}.playing .cursor{animation:progress 2.4s linear}.axis{display:flex;justify-content:space-between;margin-left:60px;color:var(--muted);font-size:11px}.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:6px}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px}.metrics{gap:28px}.metric strong{display:block}.metric small{margin-left:0}.observation{min-height:68px}select{max-width:210px}@keyframes progress{from{left:0}to{left:var(--finish)}}@media(max-width:480px){.lane{grid-template-columns:40px minmax(0,1fr);gap:8px}.axis{margin-left:48px}.metrics{gap:20px}.observation{min-height:88px}}
+  </style>
+</head>
+<body>
+  <main class="demo" id="demo">
+    <h1>提交时间与完成时间</h1>
+    <p class="subtitle">同一计算：提交 2 ms、设备执行 18 ms；首次另需编译 40 ms。</p>
+    <div class="controls">
+      <label for="mode">计时边界
+        <select id="mode">
+          <option value="dispatch">只计函数提交</option>
+          <option value="ready" selected>等待全部输出</option>
+          <option value="first">首次调用并等待</option>
+        </select>
+      </label>
+      <button id="replay" type="button">播放时间线</button>
+    </div>
+    <div class="timeline" id="timeline" style="--finish:33.3333%">
+      <div class="lane"><span>CPU</span><div class="track"><span class="segment compile" id="compile" title="首次编译"></span><span class="segment submit" id="submit" title="提交"></span><span class="cursor" aria-hidden="true"></span></div></div>
+      <div class="lane"><span>设备</span><div class="track"><span class="segment execute" id="execute" title="设备计算"></span><span class="cursor" aria-hidden="true"></span></div></div>
+      <div class="lane"><span>计时</span><div class="track"><span class="segment window" id="window" title="被计入的时间"></span><span class="cursor" aria-hidden="true"></span></div></div>
+      <div class="axis" aria-hidden="true"><span>0</span><span>20</span><span>40</span><span>60 ms</span></div>
+    </div>
+    <div class="legend"><span><i class="compile"></i>编译</span><span><i class="submit"></i>提交</span><span><i class="execute"></i>设备计算</span></div>
+    <div class="metrics" aria-live="polite">
+      <div class="metric"><strong id="measured">20 ms</strong><small>计时结果</small></div>
+      <div class="metric"><strong id="completed">20 ms</strong><small>输出真正完成</small></div>
+    </div>
+    <p class="observation" id="observation" aria-live="polite"></p>
+    <p class="note">合成的串行时间线，省略传输与重叠；不代表任何设备或模型的实测。编译不计入稳态延迟，设备等待计入调用完成时间。</p>
+  </main>
+  <script src="../inference/frame.js"></script>
+  <script>
+    (() => {
+      'use strict';
+      const element = name => document.getElementById(name);
+      const timeline = element('timeline');
+      function position(name, start, duration) {
+        element(name).style.left = `${start / 60 * 100}%`;
+        element(name).style.width = `${duration / 60 * 100}%`;
+      }
+      function render() {
+        timeline.classList.remove('playing');
+        const mode = element('mode').value;
+        const compile = mode === 'first' ? 40 : 0;
+        const completed = compile + 20;
+        const measured = mode === 'dispatch' ? 2 : completed;
+        position('compile', 0, compile);
+        position('submit', compile, 2);
+        position('execute', compile + 2, 18);
+        position('window', 0, measured);
+        timeline.style.setProperty('--finish', `${completed / 60 * 100}%`);
+        element('measured').textContent = `${measured} ms`;
+        element('completed').textContent = `${completed} ms`;
+        element('observation').textContent = {
+          dispatch: '计时在获得结果句柄时结束，后续 18 ms 设备计算未计入。这个数描述提交开销。',
+          ready: '等待所需输出后停止计时，20 ms 覆盖提交和设备执行；这是此合成例子的稳态完成时间。',
+          first: '60 ms 同时包含首次编译与执行。缓存命中后的调用不再承担这份编译时间。'
+        }[mode];
+        Object.assign(document.body.dataset, {mode, measuredMs: String(measured), completedMs: String(completed)});
+      }
+      element('mode').addEventListener('change', render);
+      element('replay').addEventListener('click', () => {
+        timeline.classList.remove('playing');
+        void timeline.offsetWidth;
+        timeline.classList.add('playing');
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>

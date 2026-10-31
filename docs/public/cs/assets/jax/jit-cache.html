@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JIT 缓存与特化</title>
+<link rel="stylesheet" href="../inference/interactive.css">
+<style>
+.demo{max-width:950px}.controls{justify-content:space-between}.signature{display:flex;flex-wrap:wrap;gap:8px 20px;padding:14px;background:var(--paper);border-radius:10px;color:var(--muted);font-size:12px}.signature strong{color:var(--ink);font-weight:500}.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}.phase{padding:15px 8px;border:1px solid var(--line);border-radius:10px;text-align:center;transition:background .25s,border-color .25s,opacity .25s}.phase strong{display:block;font-size:13px;font-weight:500}.phase small{font-size:11px;color:var(--muted)}.phase.active{background:var(--soft);border-color:#cfc5df}.phase.skipped{opacity:.42}.counts{display:flex;gap:28px;margin:16px 0}.counts strong{font-size:24px;color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}.counts span{font-size:12px;margin-left:6px;color:var(--muted)}.caption{min-height:64px}.cache-list{margin-top:14px;font-size:12px;color:var(--muted);overflow-wrap:anywhere}.cache-list code{color:var(--ink)}@media(max-width:520px){.pipeline{grid-template-columns:repeat(2,1fr);gap:8px}.controls{justify-content:flex-start}.signature{gap:5px 14px}.counts{gap:18px}.counts strong{font-size:22px}}
+</style>
+</head>
+<body>
+<main class="demo" id="demo">
+<h1>换数据，还是换一份程序</h1>
+<p class="subtitle">固定函数、dtype 与设备环境，仅模拟 shape 和静态 mode 的特化。</p>
+<div class="controls"><label for="scenario">调用场景<select id="scenario"><option value="values">同 shape 改值</option><option value="shape">改 shape</option><option value="static">改 static mode</option></select></label><button class="primary" id="run">执行一次</button></div>
+<div class="signature"><span>shape <strong id="shape">[4]</strong></span><span>dtype <strong>float32</strong></span><span>mode <strong id="mode">sum</strong></span><span>values <strong id="values">[0, 1, 2, 3]</strong></span></div>
+<div class="pipeline" aria-label="模拟编译与执行过程"><div class="phase" id="trace"><strong>Tracing</strong><small>Python → jaxpr</small></div><div class="phase" id="lower"><strong>Lowering</strong><small>→ StableHLO</small></div><div class="phase" id="compile"><strong>Compilation</strong><small>→ 可执行程序</small></div><div class="phase" id="execute"><strong>Execution</strong><small>传入本次数据</small></div></div>
+<div class="counts"><div><strong id="versions">0</strong><span>模拟版本</span></div><div><strong id="executions">0</strong><span>模拟执行</span></div></div>
+<p class="caption" id="status" aria-live="polite">缓存为空。执行一次，建立当前签名的模拟版本。</p>
+<div class="cache-list">已存签名：<code id="cache">空</code></div>
+<p class="note">教学模型：未运行 JAX，过程时长不代表性能。真实缓存还受函数身份、PyTree、weak type、sharding、编译配置等影响；不同缓存层也不一定同时命中。</p>
+</main>
+<script>
+(() => {
+  'use strict';
+  const byId = identifier => document.getElementById(identifier);
+  const phases = ['trace', 'lower', 'compile', 'execute'];
+  const cache = new Map();
+  let executions = 0;
+  let valueOffset = 0;
+  let busy = false;
+  function input() {
+    const scenario = byId('scenario').value;
+    const size = scenario === 'shape' ? 8 : 4;
+    const mode = scenario === 'static' ? 'mean' : 'sum';
+    const values = Array.from({length: size}, (_, index) => index + (scenario === 'values' ? valueOffset : 0));
+    return {size, mode, values, key: `${size}:float32:${mode}`};
+  }
+  function displayInput(current) {
+    byId('shape').textContent = `[${current.size}]`;
+    byId('mode').textContent = current.mode;
+    byId('values').textContent = `[${current.values.join(', ')}]`;
+  }
+  function markPhase(currentPhase, hit) {
+    phases.forEach(phase => {
+      byId(phase).classList.toggle('active', phase === currentPhase);
+      byId(phase).classList.toggle('skipped', hit && phase !== 'execute');
+    });
+    document.body.dataset.phase = currentPhase;
+  }
+  function setBusy(active) {
+    busy = active;
+    byId('run').disabled = active;
+    byId('scenario').disabled = active;
+    byId('run').textContent = active ? '执行中' : '执行一次';
+  }
+  function finish(current, hit) {
+    cache.set(current.key, `[${current.size}] · float32 · ${current.mode}`);
+    executions += 1;
+    const total = current.values.reduce((sum, value) => sum + value, 0);
+    const result = current.mode === 'mean' ? total / current.size : total;
+    byId('versions').textContent = String(cache.size);
+    byId('executions').textContent = String(executions);
+    byId('cache').textContent = Array.from(cache.values()).join('；');
+    byId('status').textContent = hit ? `命中已有签名，直接执行；本次结果 ${result}。新数据仍参与计算。` : `未命中：完成 tracing、lowering 和模拟编译，再执行；本次结果 ${result}。`;
+    if (byId('scenario').value === 'values') valueOffset += 1;
+    Object.assign(document.body.dataset, {hit: String(hit), versions: String(cache.size), executions: String(executions), result: String(result), signature: current.key});
+    setBusy(false);
+  }
+  byId('run').addEventListener('click', () => {
+    if (busy) return;
+    const current = input();
+    const hit = cache.has(current.key);
+    displayInput(current);
+    setBusy(true);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      markPhase('execute', hit);
+      finish(current, hit);
+      return;
+    }
+    const sequence = hit ? ['execute'] : phases;
+    let position = 0;
+    function advance() {
+      markPhase(sequence[position], hit);
+      byId('status').textContent = hit ? '命中已有模拟版本，使用本次输入执行。' : `未命中：${['记录操作', '降低为 StableHLO', '生成模拟版本', '传入本次数据'][position]}。`;
+      position += 1;
+      setTimeout(() => {
+        if (position < sequence.length) advance();
+        else finish(current, hit);
+      }, 250);
+    }
+    advance();
+  });
+  byId('scenario').addEventListener('change', () => {
+    displayInput(input());
+    markPhase('', false);
+    byId('status').textContent = '已切换输入配置。执行一次，检查是否存在兼容的模拟版本。';
+  });
+  displayInput(input());
+  Object.assign(document.body.dataset, {versions: '0', executions: '0'});
+})();
+</script>
+<script src="../inference/frame.js"></script>
+</body>
+</html>

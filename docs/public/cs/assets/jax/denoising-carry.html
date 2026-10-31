@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>去噪循环的 carry</title>
+  <link rel="stylesheet" href="../inference/interactive.css">
+  <style>
+    .context{display:flex;gap:14px;align-items:center;margin:18px 0;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+    .context strong{font-size:13px;font-weight:600}.context span{font-size:12px;color:var(--muted)}
+    .forward{padding:12px;text-align:center;border-radius:10px;background:var(--soft);color:var(--accent);font-size:14px}
+    .sample{display:grid;grid-template-columns:80px 1fr 110px;align-items:center;gap:16px;margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:12px;transition:background .25s}
+    .sample.frozen{background:var(--paper)}.sample h2{font:600 14px system-ui,sans-serif}.sample small{display:block;font-size:11px;color:var(--muted)}
+    .tokens{display:flex;gap:7px}.token{flex:1;min-width:0;max-width:78px;text-align:center;padding:10px;background:var(--soft);border-radius:8px;font:500 20px ui-monospace,monospace;transition:background .25s,color .25s}
+    .frozen .token{background:#ebecef;color:#6b7280}.state{font-size:12px;color:var(--accent)}.state small{margin-top:3px}
+    .carry{display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px 14px;margin:17px 0 0;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+    .progress{display:flex;gap:5px;margin-top:12px}.tick{height:4px;flex:1;background:var(--line);border-radius:3px}.tick.complete{background:var(--accent)}
+    @media(max-width:510px){.context{display:block}.context span{display:block;margin-top:3px}.sample{grid-template-columns:1fr 104px;gap:10px;padding:12px}.sample h2{grid-column:1 / -1}.sample h2 small{display:inline;margin-left:8px}.token{padding:8px 4px}.forward{font-size:12px}.state{font-size:11px}}
+  </style>
+</head>
+<body>
+<main class="demo">
+  <div class="header"><h1>冻结画布，继续整批计算</h1><span class="hint" id="counter">尚未 forward</span></div>
+  <p class="subtitle">样本 A 在第 2 轮完成，样本 B 在第 4 轮完成。</p>
+  <div class="controls"><button class="primary" id="play" aria-pressed="false">播放</button><button id="next">下一轮</button></div>
+  <div class="context"><strong>prefix KV cache</strong><span id="prefix">已就绪 · 去噪循环内保持只读</span></div>
+  <div class="forward" id="forward">整批 Attention → FFN → 采样</div>
+  <section class="sample" id="sample-a" aria-label="样本 A 的 carry">
+    <h2>样本 A<small>第 2 轮完成</small></h2>
+    <div class="tokens" id="canvas-a" aria-label="样本 A 的 canvas"></div>
+    <div class="state"><span id="done-a">done = False</span><small id="sc-a">SC：零初始化</small></div>
+  </section>
+  <section class="sample" id="sample-b" aria-label="样本 B 的 carry">
+    <h2>样本 B<small>第 4 轮完成</small></h2>
+    <div class="tokens" id="canvas-b" aria-label="样本 B 的 canvas"></div>
+    <div class="state"><span id="done-b">done = False</span><small id="sc-b">SC：零初始化</small></div>
+  </section>
+  <div class="carry"><span id="step">carry.step = 0 / 6</span><span id="rng">RNG：key₀</span><span id="rows">每个样本均已计算 0 轮</span></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <p class="caption" id="caption" aria-live="polite"></p>
+  <p class="note">数字为教学 canvas；SC 与 key 标签只表示状态版本，不是实际向量或随机 key。完整 canvas 提交后才追加 prefix cache。</p>
+</main>
+<script>
+(() => {
+  'use strict';
+  const elements = Object.fromEntries([...document.querySelectorAll('[id]')].map(element => [element.id, element]));
+  const captions = [
+    '两行尚未完成。carry 的结构、shape 与 dtype 在所有轮次保持一致。',
+    '两行接收新 canvas；RNG 拆出本轮采样 key，SC 保存本轮预测。',
+    'A 本轮首次完成：旧 done 仍为 False，因此接收 canvas = 2。',
+    'A 的旧 done 已为 True，canvas 留在 2；整批 forward 与两行 SC 更新仍继续。',
+    'B 接收 canvas = 4，两行 done 均为 True。循环在第 4 轮结束，无需耗尽 6 轮预算。'
+  ];
+  let step = 0;
+  let playing = false;
+  let timer;
+
+  function stop() {
+    playing = false;
+    clearTimeout(timer);
+  }
+
+  function renderSample(name, finishRound) {
+    const frozen = step > finishRound;
+    const completed = step >= finishRound;
+    elements[`sample-${name}`].classList.toggle('frozen', frozen);
+    elements[`canvas-${name}`].replaceChildren(...Array.from({ length: 3 }, () => {
+      const token = document.createElement('span');
+      token.className = 'token';
+      token.textContent = String(Math.min(step, finishRound));
+      return token;
+    }));
+    elements[`done-${name}`].textContent = completed ? 'done = True' : 'done = False';
+    elements[`sc-${name}`].textContent = step === 0 ? 'SC：零初始化' : `SC：第 ${step} 轮更新${frozen ? ' · 画布冻结' : ''}`;
+  }
+
+  function render() {
+    elements.play.textContent = playing ? '暂停' : step === 4 ? '重播' : '播放';
+    elements.play.setAttribute('aria-pressed', String(playing));
+    elements.next.textContent = step === 4 ? '重置' : '下一轮';
+    elements.counter.textContent = step === 0 ? '尚未 forward' : `整批 forward × ${step}`;
+    elements.step.textContent = `carry.step = ${step} / 6`;
+    elements.rng.textContent = `RNG：key${['₀', '₁', '₂', '₃', '₄'][step]}`;
+    elements.rows.textContent = `每个样本均已计算 ${step} 轮`;
+    elements.caption.textContent = captions[step];
+    elements.forward.textContent = step === 4 ? '整批循环结束 · 最后一轮已完成 Attention → FFN → 采样' : '整批 Attention → FFN → 采样';
+    renderSample('a', 2);
+    renderSample('b', 4);
+    elements.progress.replaceChildren(...Array.from({ length: 6 }, (_, index) => {
+      const tick = document.createElement('span');
+      tick.className = `tick${index < step ? ' complete' : ''}`;
+      return tick;
+    }));
+  }
+
+  function schedule() {
+    timer = setTimeout(() => {
+      step += 1;
+      if (step === 4) stop();
+      render();
+      if (playing) schedule();
+    }, 2200);
+  }
+
+  elements.play.addEventListener('click', () => {
+    if (playing) {
+      stop();
+    } else {
+      if (step === 4) step = 0;
+      playing = true;
+      schedule();
+    }
+    render();
+  });
+  elements.next.addEventListener('click', () => {
+    stop();
+    step = (step + 1) % 5;
+    render();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stop();
+      render();
+    }
+  });
+  render();
+})();
+</script>
+<script src="../inference/frame.js"></script>
+</body>
+</html>
