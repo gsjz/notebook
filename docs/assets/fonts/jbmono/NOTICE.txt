@@ -1,0 +1,6 @@
+JetBrains Mono, version 2.304 (WOFF2 files, unmodified).
+Copyright 2020 The JetBrains Mono Project Authors
+(https://github.com/JetBrains/JetBrainsMono)
+
+Distributed under the SIL Open Font License, Version 1.1; see OFL.txt.
+Resource source: https://cdn.shujie.cc/jbmono/setting.css

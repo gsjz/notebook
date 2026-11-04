@@ -74,7 +74,43 @@ $$
     P(X=k)=\binom{n}{k}p^k(1-p)^{n-k},\qquad k=0,1,\dots,n
     $$
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="binomial"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-binomial-static" data-initial-distribution="binomial"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-binomial-static">
+<summary>静态图：二项分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="二项分布的固定参数概率图：n = 10，p = 0.5" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">二项分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">n = 10，p = 0.5</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.0726</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.145</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.218</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.29</text>
+<path d="M152.17 340V339.28" stroke="#424953" stroke-width="4" fill="none"/><circle cx="152.17" cy="339.28" r="4.5" fill="#424953"/>
+<path d="M221.74 340V332.77" stroke="#424953" stroke-width="4" fill="none"/><circle cx="221.74" cy="332.77" r="4.5" fill="#424953"/>
+<path d="M291.30 340V307.46" stroke="#424953" stroke-width="4" fill="none"/><circle cx="291.30" cy="307.46" r="4.5" fill="#424953"/>
+<path d="M360.87 340V253.24" stroke="#424953" stroke-width="4" fill="none"/><circle cx="360.87" cy="253.24" r="4.5" fill="#424953"/>
+<path d="M430.43 340V188.16" stroke="#424953" stroke-width="4" fill="none"/><circle cx="430.43" cy="188.16" r="4.5" fill="#424953"/>
+<path d="M500.00 340V157.80" stroke="#424953" stroke-width="4" fill="none"/><circle cx="500.00" cy="157.80" r="4.5" fill="#424953"/>
+<path d="M569.57 340V188.16" stroke="#424953" stroke-width="4" fill="none"/><circle cx="569.57" cy="188.16" r="4.5" fill="#424953"/>
+<path d="M639.13 340V253.24" stroke="#424953" stroke-width="4" fill="none"/><circle cx="639.13" cy="253.24" r="4.5" fill="#424953"/>
+<path d="M708.70 340V307.46" stroke="#424953" stroke-width="4" fill="none"/><circle cx="708.70" cy="307.46" r="4.5" fill="#424953"/>
+<path d="M778.26 340V332.77" stroke="#424953" stroke-width="4" fill="none"/><circle cx="778.26" cy="332.77" r="4.5" fill="#424953"/>
+<path d="M847.83 340V339.28" stroke="#424953" stroke-width="4" fill="none"/><circle cx="847.83" cy="339.28" r="4.5" fill="#424953"/>
+<path d="M152.17 340v7" stroke="#777"/><text x="152.17" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M291.30 340v7" stroke="#777"/><text x="291.30" y="374" text-anchor="middle" font-size="20">2</text>
+<path d="M430.43 340v7" stroke="#777"/><text x="430.43" y="374" text-anchor="middle" font-size="20">4</text>
+<path d="M569.57 340v7" stroke="#777"/><text x="569.57" y="374" text-anchor="middle" font-size="20">6</text>
+<path d="M708.70 340v7" stroke="#777"/><text x="708.70" y="374" text-anchor="middle" font-size="20">8</text>
+<path d="M847.83 340v7" stroke="#777"/><text x="847.83" y="374" text-anchor="middle" font-size="20">10</text>
+<path d="M500.00 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">P(X = k)</text>
+<text x="925" y="373" font-size="21">k</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 5；D(X) = 2.5；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 其期望与方差为：
 
@@ -116,7 +152,52 @@ $$
         1.
         $$
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="geometric"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-geometric-static" data-initial-distribution="geometric"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-geometric-static">
+<summary>静态图：几何分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="几何分布的固定参数概率图：p = 0.35；首次成功所需试验次数" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">几何分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">p = 0.35；首次成功所需试验次数</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.103</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.206</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.31</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.413</text>
+<path d="M134.29 340V157.80" stroke="#424953" stroke-width="4" fill="none"/><circle cx="134.29" cy="157.80" r="4.5" fill="#424953"/>
+<path d="M180.00 340V221.57" stroke="#424953" stroke-width="4" fill="none"/><circle cx="180.00" cy="221.57" r="4.5" fill="#424953"/>
+<path d="M225.71 340V263.02" stroke="#424953" stroke-width="4" fill="none"/><circle cx="225.71" cy="263.02" r="4.5" fill="#424953"/>
+<path d="M271.43 340V289.96" stroke="#424953" stroke-width="4" fill="none"/><circle cx="271.43" cy="289.96" r="4.5" fill="#424953"/>
+<path d="M317.14 340V307.48" stroke="#424953" stroke-width="4" fill="none"/><circle cx="317.14" cy="307.48" r="4.5" fill="#424953"/>
+<path d="M362.86 340V318.86" stroke="#424953" stroke-width="4" fill="none"/><circle cx="362.86" cy="318.86" r="4.5" fill="#424953"/>
+<path d="M408.57 340V326.26" stroke="#424953" stroke-width="4" fill="none"/><circle cx="408.57" cy="326.26" r="4.5" fill="#424953"/>
+<path d="M454.29 340V331.07" stroke="#424953" stroke-width="4" fill="none"/><circle cx="454.29" cy="331.07" r="4.5" fill="#424953"/>
+<path d="M500.00 340V334.19" stroke="#424953" stroke-width="4" fill="none"/><circle cx="500.00" cy="334.19" r="4.5" fill="#424953"/>
+<path d="M545.71 340V336.23" stroke="#424953" stroke-width="4" fill="none"/><circle cx="545.71" cy="336.23" r="4.5" fill="#424953"/>
+<path d="M591.43 340V337.55" stroke="#424953" stroke-width="4" fill="none"/><circle cx="591.43" cy="337.55" r="4.5" fill="#424953"/>
+<path d="M637.14 340V338.41" stroke="#424953" stroke-width="4" fill="none"/><circle cx="637.14" cy="338.41" r="4.5" fill="#424953"/>
+<path d="M682.86 340V338.96" stroke="#424953" stroke-width="4" fill="none"/><circle cx="682.86" cy="338.96" r="4.5" fill="#424953"/>
+<path d="M728.57 340V339.33" stroke="#424953" stroke-width="4" fill="none"/><circle cx="728.57" cy="339.33" r="4.5" fill="#424953"/>
+<path d="M774.29 340V339.56" stroke="#424953" stroke-width="4" fill="none"/><circle cx="774.29" cy="339.56" r="4.5" fill="#424953"/>
+<path d="M820.00 340V339.72" stroke="#424953" stroke-width="4" fill="none"/><circle cx="820.00" cy="339.72" r="4.5" fill="#424953"/>
+<path d="M865.71 340V339.82" stroke="#424953" stroke-width="4" fill="none"/><circle cx="865.71" cy="339.82" r="4.5" fill="#424953"/>
+<path d="M134.29 340v7" stroke="#777"/><text x="134.29" y="374" text-anchor="middle" font-size="20">1</text>
+<path d="M225.71 340v7" stroke="#777"/><text x="225.71" y="374" text-anchor="middle" font-size="20">3</text>
+<path d="M317.14 340v7" stroke="#777"/><text x="317.14" y="374" text-anchor="middle" font-size="20">5</text>
+<path d="M408.57 340v7" stroke="#777"/><text x="408.57" y="374" text-anchor="middle" font-size="20">7</text>
+<path d="M500.00 340v7" stroke="#777"/><text x="500.00" y="374" text-anchor="middle" font-size="20">9</text>
+<path d="M591.43 340v7" stroke="#777"/><text x="591.43" y="374" text-anchor="middle" font-size="20">11</text>
+<path d="M682.86 340v7" stroke="#777"/><text x="682.86" y="374" text-anchor="middle" font-size="20">13</text>
+<path d="M774.29 340v7" stroke="#777"/><text x="774.29" y="374" text-anchor="middle" font-size="20">15</text>
+<path d="M865.71 340v7" stroke="#777"/><text x="865.71" y="374" text-anchor="middle" font-size="20">17</text>
+<path d="M219.18 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">P(X = k)</text>
+<text x="925" y="373" font-size="21">k</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 2.86；D(X) = 5.31；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 其期望与方差为：
 
@@ -177,7 +258,43 @@ $$
 
         因此这个名称重点在概率项背后的级数结构：它属于超几何型项。
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="hypergeometric"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-hypergeometric-static" data-initial-distribution="hypergeometric"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-hypergeometric-static">
+<summary>静态图：超几何分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="超几何分布的固定参数概率图：N = 40，M = 16，n = 10" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">超几何分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">N = 40，M = 16，n = 10</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.0853</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.171</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.256</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.341</text>
+<path d="M152.17 340V338.54" stroke="#424953" stroke-width="4" fill="none"/><circle cx="152.17" cy="338.54" r="4.5" fill="#424953"/>
+<path d="M221.74 340V324.44" stroke="#424953" stroke-width="4" fill="none"/><circle cx="221.74" cy="324.44" r="4.5" fill="#424953"/>
+<path d="M291.30 340V274.36" stroke="#424953" stroke-width="4" fill="none"/><circle cx="291.30" cy="274.36" r="4.5" fill="#424953"/>
+<path d="M360.87 340V195.84" stroke="#424953" stroke-width="4" fill="none"/><circle cx="360.87" cy="195.84" r="4.5" fill="#424953"/>
+<path d="M430.43 340V157.80" stroke="#424953" stroke-width="4" fill="none"/><circle cx="430.43" cy="157.80" r="4.5" fill="#424953"/>
+<path d="M500.00 340V201.91" stroke="#424953" stroke-width="4" fill="none"/><circle cx="500.00" cy="201.91" r="4.5" fill="#424953"/>
+<path d="M569.57 340V276.71" stroke="#424953" stroke-width="4" fill="none"/><circle cx="569.57" cy="276.71" r="4.5" fill="#424953"/>
+<path d="M639.13 340V322.78" stroke="#424953" stroke-width="4" fill="none"/><circle cx="639.13" cy="322.78" r="4.5" fill="#424953"/>
+<path d="M708.70 340V337.36" stroke="#424953" stroke-width="4" fill="none"/><circle cx="708.70" cy="337.36" r="4.5" fill="#424953"/>
+<path d="M778.26 340V339.80" stroke="#424953" stroke-width="4" fill="none"/><circle cx="778.26" cy="339.80" r="4.5" fill="#424953"/>
+<path d="M847.83 340V339.99" stroke="#424953" stroke-width="4" fill="none"/><circle cx="847.83" cy="339.99" r="4.5" fill="#424953"/>
+<path d="M152.17 340v7" stroke="#777"/><text x="152.17" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M291.30 340v7" stroke="#777"/><text x="291.30" y="374" text-anchor="middle" font-size="20">2</text>
+<path d="M430.43 340v7" stroke="#777"/><text x="430.43" y="374" text-anchor="middle" font-size="20">4</text>
+<path d="M569.57 340v7" stroke="#777"/><text x="569.57" y="374" text-anchor="middle" font-size="20">6</text>
+<path d="M708.70 340v7" stroke="#777"/><text x="708.70" y="374" text-anchor="middle" font-size="20">8</text>
+<path d="M847.83 340v7" stroke="#777"/><text x="847.83" y="374" text-anchor="middle" font-size="20">10</text>
+<path d="M430.43 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">P(X = k)</text>
+<text x="925" y="373" font-size="21">k</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 4；D(X) = 1.85；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 其期望与方差为：
 
@@ -318,7 +435,52 @@ $$
     X \sim P(\lambda)
     $$
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="poisson"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-poisson-static" data-initial-distribution="poisson"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-poisson-static">
+<summary>静态图：泊松分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="泊松分布的固定参数概率图：λ = 4" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">泊松分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">λ = 4</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.0576</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.115</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.173</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.231</text>
+<path d="M130.77 340V322.92" stroke="#424953" stroke-width="4" fill="none"/><circle cx="130.77" cy="322.92" r="4.5" fill="#424953"/>
+<path d="M171.79 340V271.67" stroke="#424953" stroke-width="4" fill="none"/><circle cx="171.79" cy="271.67" r="4.5" fill="#424953"/>
+<path d="M212.82 340V203.35" stroke="#424953" stroke-width="4" fill="none"/><circle cx="212.82" cy="203.35" r="4.5" fill="#424953"/>
+<path d="M253.85 340V157.80" stroke="#424953" stroke-width="4" fill="none"/><circle cx="253.85" cy="157.80" r="4.5" fill="#424953"/>
+<path d="M294.87 340V157.80" stroke="#424953" stroke-width="4" fill="none"/><circle cx="294.87" cy="157.80" r="4.5" fill="#424953"/>
+<path d="M335.90 340V194.24" stroke="#424953" stroke-width="4" fill="none"/><circle cx="335.90" cy="194.24" r="4.5" fill="#424953"/>
+<path d="M376.92 340V242.82" stroke="#424953" stroke-width="4" fill="none"/><circle cx="376.92" cy="242.82" r="4.5" fill="#424953"/>
+<path d="M417.95 340V284.47" stroke="#424953" stroke-width="4" fill="none"/><circle cx="417.95" cy="284.47" r="4.5" fill="#424953"/>
+<path d="M458.97 340V312.24" stroke="#424953" stroke-width="4" fill="none"/><circle cx="458.97" cy="312.24" r="4.5" fill="#424953"/>
+<path d="M500.00 340V327.66" stroke="#424953" stroke-width="4" fill="none"/><circle cx="500.00" cy="327.66" r="4.5" fill="#424953"/>
+<path d="M541.03 340V335.06" stroke="#424953" stroke-width="4" fill="none"/><circle cx="541.03" cy="335.06" r="4.5" fill="#424953"/>
+<path d="M582.05 340V338.21" stroke="#424953" stroke-width="4" fill="none"/><circle cx="582.05" cy="338.21" r="4.5" fill="#424953"/>
+<path d="M623.08 340V339.40" stroke="#424953" stroke-width="4" fill="none"/><circle cx="623.08" cy="339.40" r="4.5" fill="#424953"/>
+<path d="M664.10 340V339.82" stroke="#424953" stroke-width="4" fill="none"/><circle cx="664.10" cy="339.82" r="4.5" fill="#424953"/>
+<path d="M705.13 340V339.95" stroke="#424953" stroke-width="4" fill="none"/><circle cx="705.13" cy="339.95" r="4.5" fill="#424953"/>
+<path d="M746.15 340V339.99" stroke="#424953" stroke-width="4" fill="none"/><circle cx="746.15" cy="339.99" r="4.5" fill="#424953"/>
+<path d="M787.18 340V340.00" stroke="#424953" stroke-width="4" fill="none"/><circle cx="787.18" cy="340.00" r="4.5" fill="#424953"/>
+<path d="M828.21 340V340.00" stroke="#424953" stroke-width="4" fill="none"/><circle cx="828.21" cy="340.00" r="4.5" fill="#424953"/>
+<path d="M869.23 340V340.00" stroke="#424953" stroke-width="4" fill="none"/><circle cx="869.23" cy="340.00" r="4.5" fill="#424953"/>
+<path d="M130.77 340v7" stroke="#777"/><text x="130.77" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M253.85 340v7" stroke="#777"/><text x="253.85" y="374" text-anchor="middle" font-size="20">3</text>
+<path d="M376.92 340v7" stroke="#777"/><text x="376.92" y="374" text-anchor="middle" font-size="20">6</text>
+<path d="M500.00 340v7" stroke="#777"/><text x="500.00" y="374" text-anchor="middle" font-size="20">9</text>
+<path d="M623.08 340v7" stroke="#777"/><text x="623.08" y="374" text-anchor="middle" font-size="20">12</text>
+<path d="M746.15 340v7" stroke="#777"/><text x="746.15" y="374" text-anchor="middle" font-size="20">15</text>
+<path d="M869.23 340v7" stroke="#777"/><text x="869.23" y="374" text-anchor="middle" font-size="20">18</text>
+<path d="M294.87 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">P(X = k)</text>
+<text x="925" y="373" font-size="21">k</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 4；D(X) = 4；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 它常用于描述单位时间或单位区域内稀有事件的发生次数，其期望与方差为：
 
@@ -410,7 +572,34 @@ $$
     X\sim E(\lambda).
     $$
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="exponential"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-exponential-static" data-initial-distribution="exponential"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-exponential-static">
+<summary>静态图：指数分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="指数分布的固定参数概率图：λ = 1" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">指数分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">λ = 1</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.295</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.59</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.885</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">1.18</text>
+<path d="M100.00 157.80 L103.33 162.30 L106.67 166.68 L110.00 170.96 L113.33 175.14 L116.67 179.21 L120.00 183.18 L123.33 187.05 L126.67 190.82 L130.00 194.51 L133.33 198.10 L136.67 201.60 L140.00 205.02 L143.33 208.35 L146.67 211.60 L150.00 214.77 L153.33 217.87 L156.67 220.88 L160.00 223.82 L163.33 226.69 L166.67 229.49 L170.00 232.22 L173.33 234.88 L176.67 237.47 L180.00 240.00 L183.33 242.47 L186.67 244.88 L190.00 247.23 L193.33 249.52 L196.67 251.75 L200.00 253.93 L203.33 256.06 L206.67 258.13 L210.00 260.15 L213.33 262.12 L216.67 264.05 L220.00 265.92 L223.33 267.75 L226.67 269.53 L230.00 271.27 L233.33 272.97 L236.67 274.63 L240.00 276.24 L243.33 277.81 L246.67 279.35 L250.00 280.85 L253.33 282.31 L256.67 283.73 L260.00 285.12 L263.33 286.48 L266.67 287.80 L270.00 289.09 L273.33 290.34 L276.67 291.57 L280.00 292.77 L283.33 293.93 L286.67 295.07 L290.00 296.18 L293.33 297.26 L296.67 298.32 L300.00 299.34 L303.33 300.35 L306.67 301.33 L310.00 302.28 L313.33 303.21 L316.67 304.12 L320.00 305.01 L323.33 305.87 L326.67 306.71 L330.00 307.54 L333.33 308.34 L336.67 309.12 L340.00 309.88 L343.33 310.63 L346.67 311.35 L350.00 312.06 L353.33 312.75 L356.67 313.42 L360.00 314.08 L363.33 314.72 L366.67 315.34 L370.00 315.95 L373.33 316.54 L376.67 317.12 L380.00 317.69 L383.33 318.24 L386.67 318.78 L390.00 319.30 L393.33 319.81 L396.67 320.31 L400.00 320.80 L403.33 321.27 L406.67 321.73 L410.00 322.18 L413.33 322.62 L416.67 323.05 L420.00 323.47 L423.33 323.88 L426.67 324.28 L430.00 324.67 L433.33 325.04 L436.67 325.41 L440.00 325.77 L443.33 326.12 L446.67 326.47 L450.00 326.80 L453.33 327.13 L456.67 327.44 L460.00 327.75 L463.33 328.06 L466.67 328.35 L470.00 328.64 L473.33 328.92 L476.67 329.19 L480.00 329.46 L483.33 329.72 L486.67 329.97 L490.00 330.22 L493.33 330.46 L496.67 330.70 L500.00 330.93 L503.33 331.15 L506.67 331.37 L510.00 331.58 L513.33 331.79 L516.67 331.99 L520.00 332.19 L523.33 332.38 L526.67 332.57 L530.00 332.76 L533.33 332.94 L536.67 333.11 L540.00 333.28 L543.33 333.45 L546.67 333.61 L550.00 333.77 L553.33 333.92 L556.67 334.07 L560.00 334.22 L563.33 334.36 L566.67 334.50 L570.00 334.63 L573.33 334.77 L576.67 334.90 L580.00 335.02 L583.33 335.14 L586.67 335.26 L590.00 335.38 L593.33 335.50 L596.67 335.61 L600.00 335.71 L603.33 335.82 L606.67 335.92 L610.00 336.02 L613.33 336.12 L616.67 336.22 L620.00 336.31 L623.33 336.40 L626.67 336.49 L630.00 336.58 L633.33 336.66 L636.67 336.75 L640.00 336.83 L643.33 336.90 L646.67 336.98 L650.00 337.05 L653.33 337.13 L656.67 337.20 L660.00 337.27 L663.33 337.34 L666.67 337.40 L670.00 337.47 L673.33 337.53 L676.67 337.59 L680.00 337.65 L683.33 337.71 L686.67 337.76 L690.00 337.82 L693.33 337.87 L696.67 337.92 L700.00 337.98 L703.33 338.03 L706.67 338.07 L710.00 338.12 L713.33 338.17 L716.67 338.21 L720.00 338.26 L723.33 338.30 L726.67 338.34 L730.00 338.38 L733.33 338.42 L736.67 338.46 L740.00 338.50 L743.33 338.54 L746.67 338.57 L750.00 338.61 L753.33 338.64 L756.67 338.68 L760.00 338.71 L763.33 338.74 L766.67 338.77 L770.00 338.80 L773.33 338.83 L776.67 338.86 L780.00 338.89 L783.33 338.92 L786.67 338.94 L790.00 338.97 L793.33 338.99 L796.67 339.02 L800.00 339.04 L803.33 339.07 L806.67 339.09 L810.00 339.11 L813.33 339.13 L816.67 339.16 L820.00 339.18 L823.33 339.20 L826.67 339.22 L830.00 339.24 L833.33 339.26 L836.67 339.27 L840.00 339.29 L843.33 339.31 L846.67 339.33 L850.00 339.34 L853.33 339.36 L856.67 339.37 L860.00 339.39 L863.33 339.41 L866.67 339.42 L870.00 339.43 L873.33 339.45 L876.67 339.46 L880.00 339.48 L883.33 339.49 L886.67 339.50 L890.00 339.51 L893.33 339.53 L896.67 339.54 L900.00 339.55" stroke="#424953" stroke-width="3" fill="none"/>
+<path d="M100.00 340v7" stroke="#777"/><text x="100.00" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M233.33 340v7" stroke="#777"/><text x="233.33" y="374" text-anchor="middle" font-size="20">1</text>
+<path d="M366.67 340v7" stroke="#777"/><text x="366.67" y="374" text-anchor="middle" font-size="20">2</text>
+<path d="M500.00 340v7" stroke="#777"/><text x="500.00" y="374" text-anchor="middle" font-size="20">3</text>
+<path d="M633.33 340v7" stroke="#777"/><text x="633.33" y="374" text-anchor="middle" font-size="20">4</text>
+<path d="M766.67 340v7" stroke="#777"/><text x="766.67" y="374" text-anchor="middle" font-size="20">5</text>
+<path d="M900.00 340v7" stroke="#777"/><text x="900.00" y="374" text-anchor="middle" font-size="20">6</text>
+<path d="M233.33 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">f(x) · 概率密度</text>
+<text x="925" y="373" font-size="21">x</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 1；D(X) = 1；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 其期望与方差为：
 
@@ -855,7 +1044,34 @@ $$
     X \sim N(\mu,\sigma^2)
     $$
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="normal"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-normal-static" data-initial-distribution="normal"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-normal-static">
+<summary>静态图：正态分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="正态分布的固定参数概率图：μ = 0，σ = 1" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">正态分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">μ = 0，σ = 1</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.118</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.235</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.353</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.471</text>
+<path d="M100.00 339.94 L103.33 339.93 L106.67 339.92 L110.00 339.91 L113.33 339.90 L116.67 339.88 L120.00 339.87 L123.33 339.85 L126.67 339.83 L130.00 339.81 L133.33 339.78 L136.67 339.75 L140.00 339.72 L143.33 339.69 L146.67 339.65 L150.00 339.60 L153.33 339.55 L156.67 339.50 L160.00 339.44 L163.33 339.37 L166.67 339.30 L170.00 339.21 L173.33 339.12 L176.67 339.02 L180.00 338.91 L183.33 338.79 L186.67 338.66 L190.00 338.51 L193.33 338.35 L196.67 338.17 L200.00 337.98 L203.33 337.76 L206.67 337.53 L210.00 337.28 L213.33 337.01 L216.67 336.71 L220.00 336.38 L223.33 336.03 L226.67 335.65 L230.00 335.24 L233.33 334.80 L236.67 334.31 L240.00 333.80 L243.33 333.24 L246.67 332.64 L250.00 331.99 L253.33 331.30 L256.67 330.56 L260.00 329.77 L263.33 328.93 L266.67 328.02 L270.00 327.06 L273.33 326.04 L276.67 324.95 L280.00 323.80 L283.33 322.57 L286.67 321.28 L290.00 319.91 L293.33 318.47 L296.67 316.94 L300.00 315.34 L303.33 313.66 L306.67 311.89 L310.00 310.03 L313.33 308.09 L316.67 306.06 L320.00 303.94 L323.33 301.73 L326.67 299.43 L330.00 297.04 L333.33 294.57 L336.67 292.00 L340.00 289.34 L343.33 286.59 L346.67 283.76 L350.00 280.85 L353.33 277.85 L356.67 274.77 L360.00 271.62 L363.33 268.39 L366.67 265.09 L370.00 261.73 L373.33 258.31 L376.67 254.83 L380.00 251.31 L383.33 247.74 L386.67 244.14 L390.00 240.50 L393.33 236.84 L396.67 233.17 L400.00 229.48 L403.33 225.80 L406.67 222.13 L410.00 218.47 L413.33 214.84 L416.67 211.24 L420.00 207.69 L423.33 204.19 L426.67 200.75 L430.00 197.38 L433.33 194.10 L436.67 190.90 L440.00 187.81 L443.33 184.82 L446.67 181.95 L450.00 179.20 L453.33 176.59 L456.67 174.12 L460.00 171.80 L463.33 169.64 L466.67 167.64 L470.00 165.81 L473.33 164.16 L476.67 162.68 L480.00 161.40 L483.33 160.30 L486.67 159.40 L490.00 158.70 L493.33 158.20 L496.67 157.89 L500.00 157.79 L503.33 157.89 L506.67 158.20 L510.00 158.70 L513.33 159.40 L516.67 160.30 L520.00 161.40 L523.33 162.68 L526.67 164.16 L530.00 165.81 L533.33 167.64 L536.67 169.64 L540.00 171.80 L543.33 174.12 L546.67 176.59 L550.00 179.20 L553.33 181.95 L556.67 184.82 L560.00 187.81 L563.33 190.90 L566.67 194.10 L570.00 197.38 L573.33 200.75 L576.67 204.19 L580.00 207.69 L583.33 211.24 L586.67 214.84 L590.00 218.47 L593.33 222.13 L596.67 225.80 L600.00 229.48 L603.33 233.17 L606.67 236.84 L610.00 240.50 L613.33 244.14 L616.67 247.74 L620.00 251.31 L623.33 254.83 L626.67 258.31 L630.00 261.73 L633.33 265.09 L636.67 268.39 L640.00 271.62 L643.33 274.77 L646.67 277.85 L650.00 280.85 L653.33 283.76 L656.67 286.59 L660.00 289.34 L663.33 292.00 L666.67 294.57 L670.00 297.04 L673.33 299.43 L676.67 301.73 L680.00 303.94 L683.33 306.06 L686.67 308.09 L690.00 310.03 L693.33 311.89 L696.67 313.66 L700.00 315.34 L703.33 316.94 L706.67 318.47 L710.00 319.91 L713.33 321.28 L716.67 322.57 L720.00 323.80 L723.33 324.95 L726.67 326.04 L730.00 327.06 L733.33 328.02 L736.67 328.93 L740.00 329.77 L743.33 330.56 L746.67 331.30 L750.00 331.99 L753.33 332.64 L756.67 333.24 L760.00 333.80 L763.33 334.31 L766.67 334.80 L770.00 335.24 L773.33 335.65 L776.67 336.03 L780.00 336.38 L783.33 336.71 L786.67 337.01 L790.00 337.28 L793.33 337.53 L796.67 337.76 L800.00 337.98 L803.33 338.17 L806.67 338.35 L810.00 338.51 L813.33 338.66 L816.67 338.79 L820.00 338.91 L823.33 339.02 L826.67 339.12 L830.00 339.21 L833.33 339.30 L836.67 339.37 L840.00 339.44 L843.33 339.50 L846.67 339.55 L850.00 339.60 L853.33 339.65 L856.67 339.69 L860.00 339.72 L863.33 339.75 L866.67 339.78 L870.00 339.81 L873.33 339.83 L876.67 339.85 L880.00 339.87 L883.33 339.88 L886.67 339.90 L890.00 339.91 L893.33 339.92 L896.67 339.93 L900.00 339.94" stroke="#424953" stroke-width="3" fill="none"/>
+<path d="M100.00 340v7" stroke="#777"/><text x="100.00" y="374" text-anchor="middle" font-size="20">-4</text>
+<path d="M233.33 340v7" stroke="#777"/><text x="233.33" y="374" text-anchor="middle" font-size="20">-2.67</text>
+<path d="M366.67 340v7" stroke="#777"/><text x="366.67" y="374" text-anchor="middle" font-size="20">-1.33</text>
+<path d="M500.00 340v7" stroke="#777"/><text x="500.00" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M633.33 340v7" stroke="#777"/><text x="633.33" y="374" text-anchor="middle" font-size="20">1.33</text>
+<path d="M766.67 340v7" stroke="#777"/><text x="766.67" y="374" text-anchor="middle" font-size="20">2.67</text>
+<path d="M900.00 340v7" stroke="#777"/><text x="900.00" y="374" text-anchor="middle" font-size="20">4</text>
+<path d="M500.00 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">f(x) · 概率密度</text>
+<text x="925" y="373" font-size="21">x</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 0；D(X) = 1；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 这是最重要的连续型分布之一，很多自然现象和误差模型都与它有关。
 
@@ -1115,7 +1331,34 @@ $$
 
     $\chi^2$ 分布本质上是若干个独立标准正态变量平方和的分布。它只能取非负值，曲线通常右偏；自由度越大，形状越接近正态。
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="chi2"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-chi2-static" data-initial-distribution="chi2"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-chi2-static">
+<summary>静态图：χ²分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="卡方分布的固定参数概率图：自由度 n = 5" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">卡方分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">自由度 n = 5</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.0455</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.091</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.136</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.182</text>
+<path d="M100.19 339.94 L103.52 335.83 L106.86 329.17 L110.19 321.21 L113.52 312.50 L116.85 303.36 L120.19 294.00 L123.52 284.61 L126.85 275.30 L130.18 266.16 L133.52 257.26 L136.85 248.67 L140.18 240.41 L143.52 232.53 L146.85 225.04 L150.18 217.97 L153.51 211.31 L156.85 205.08 L160.18 199.28 L163.51 193.90 L166.84 188.95 L170.18 184.40 L173.51 180.27 L176.84 176.52 L180.17 173.16 L183.51 170.18 L186.84 167.55 L190.17 165.27 L193.50 163.32 L196.84 161.69 L200.17 160.37 L203.50 159.33 L206.83 158.57 L210.17 158.08 L213.50 157.83 L216.83 157.82 L220.16 158.03 L223.50 158.45 L226.83 159.07 L230.16 159.87 L233.49 160.84 L236.83 161.98 L240.16 163.26 L243.49 164.69 L246.82 166.25 L250.16 167.92 L253.49 169.70 L256.82 171.59 L260.15 173.56 L263.49 175.62 L266.82 177.76 L270.15 179.96 L273.48 182.23 L276.82 184.55 L280.15 186.91 L283.48 189.32 L286.81 191.76 L290.15 194.24 L293.48 196.73 L296.81 199.25 L300.14 201.79 L303.48 204.33 L306.81 206.88 L310.14 209.43 L313.47 211.99 L316.81 214.53 L320.14 217.08 L323.47 219.61 L326.80 222.13 L330.14 224.63 L333.47 227.12 L336.80 229.58 L340.13 232.03 L343.47 234.45 L346.80 236.84 L350.13 239.21 L353.46 241.55 L356.80 243.86 L360.13 246.14 L363.46 248.39 L366.79 250.61 L370.13 252.79 L373.46 254.94 L376.79 257.05 L380.12 259.13 L383.46 261.18 L386.79 263.19 L390.12 265.16 L393.46 267.10 L396.79 269.00 L400.12 270.86 L403.45 272.69 L406.79 274.48 L410.12 276.23 L413.45 277.95 L416.78 279.63 L420.12 281.28 L423.45 282.89 L426.78 284.47 L430.11 286.01 L433.45 287.51 L436.78 288.98 L440.11 290.42 L443.44 291.82 L446.78 293.19 L450.11 294.53 L453.44 295.84 L456.77 297.11 L460.11 298.35 L463.44 299.57 L466.77 300.75 L470.10 301.90 L473.44 303.02 L476.77 304.11 L480.10 305.18 L483.43 306.22 L486.77 307.23 L490.10 308.21 L493.43 309.17 L496.76 310.10 L500.10 311.01 L503.43 311.89 L506.76 312.75 L510.09 313.58 L513.43 314.40 L516.76 315.18 L520.09 315.95 L523.42 316.70 L526.76 317.42 L530.09 318.13 L533.42 318.81 L536.75 319.47 L540.09 320.12 L543.42 320.75 L546.75 321.35 L550.08 321.95 L553.42 322.52 L556.75 323.08 L560.08 323.62 L563.41 324.14 L566.75 324.65 L570.08 325.14 L573.41 325.62 L576.74 326.09 L580.08 326.54 L583.41 326.97 L586.74 327.40 L590.07 327.81 L593.41 328.20 L596.74 328.59 L600.07 328.96 L603.40 329.33 L606.74 329.68 L610.07 330.02 L613.40 330.35 L616.73 330.67 L620.07 330.98 L623.40 331.28 L626.73 331.57 L630.06 331.85 L633.40 332.12 L636.73 332.38 L640.06 332.64 L643.39 332.88 L646.73 333.12 L650.06 333.35 L653.39 333.58 L656.73 333.80 L660.06 334.01 L663.39 334.21 L666.72 334.40 L670.06 334.59 L673.39 334.78 L676.72 334.96 L680.05 335.13 L683.39 335.29 L686.72 335.46 L690.05 335.61 L693.38 335.76 L696.72 335.91 L700.05 336.05 L703.38 336.18 L706.71 336.32 L710.05 336.44 L713.38 336.57 L716.71 336.68 L720.04 336.80 L723.38 336.91 L726.71 337.02 L730.04 337.12 L733.37 337.22 L736.71 337.32 L740.04 337.41 L743.37 337.50 L746.70 337.59 L750.04 337.67 L753.37 337.76 L756.70 337.83 L760.03 337.91 L763.37 337.98 L766.70 338.06 L770.03 338.12 L773.36 338.19 L776.70 338.25 L780.03 338.32 L783.36 338.37 L786.69 338.43 L790.03 338.49 L793.36 338.54 L796.69 338.59 L800.02 338.64 L803.36 338.69 L806.69 338.74 L810.02 338.78 L813.35 338.83 L816.69 338.87 L820.02 338.91 L823.35 338.95 L826.68 338.99 L830.02 339.02 L833.35 339.06 L836.68 339.09 L840.01 339.12 L843.35 339.16 L846.68 339.19 L850.01 339.21 L853.34 339.24 L856.68 339.27 L860.01 339.30 L863.34 339.32 L866.67 339.35 L870.01 339.37 L873.34 339.39 L876.67 339.42 L880.00 339.44 L883.34 339.46 L886.67 339.48 L890.00 339.50 L893.33 339.51 L896.67 339.53 L900.00 339.55" stroke="#424953" stroke-width="3" fill="none"/>
+<path d="M100.00 340v7" stroke="#777"/><text x="100.00" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M233.33 340v7" stroke="#777"/><text x="233.33" y="374" text-anchor="middle" font-size="20">3.47</text>
+<path d="M366.67 340v7" stroke="#777"/><text x="366.67" y="374" text-anchor="middle" font-size="20">6.94</text>
+<path d="M500.00 340v7" stroke="#777"/><text x="500.00" y="374" text-anchor="middle" font-size="20">10.4</text>
+<path d="M633.33 340v7" stroke="#777"/><text x="633.33" y="374" text-anchor="middle" font-size="20">13.9</text>
+<path d="M766.67 340v7" stroke="#777"/><text x="766.67" y="374" text-anchor="middle" font-size="20">17.3</text>
+<path d="M900.00 340v7" stroke="#777"/><text x="900.00" y="374" text-anchor="middle" font-size="20">20.8</text>
+<path d="M292.20 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">f(x) · 概率密度</text>
+<text x="925" y="373" font-size="21">x</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 5；D(X) = 10；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 若
 
@@ -1156,7 +1399,34 @@ $$
     T\sim t(n)
     $$
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="t"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-t-static" data-initial-distribution="t"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-t-static">
+<summary>静态图：t分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="t分布的固定参数概率图：自由度 n = 5" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">t分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">自由度 n = 5</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.112</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.224</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.336</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.448</text>
+<path d="M100.00 339.67 L103.33 339.65 L106.67 339.64 L110.00 339.62 L113.33 339.61 L116.67 339.59 L120.00 339.57 L123.33 339.55 L126.67 339.53 L130.00 339.50 L133.33 339.48 L136.67 339.45 L140.00 339.43 L143.33 339.40 L146.67 339.37 L150.00 339.34 L153.33 339.31 L156.67 339.27 L160.00 339.24 L163.33 339.20 L166.67 339.16 L170.00 339.11 L173.33 339.07 L176.67 339.02 L180.00 338.97 L183.33 338.91 L186.67 338.85 L190.00 338.79 L193.33 338.73 L196.67 338.66 L200.00 338.59 L203.33 338.51 L206.67 338.42 L210.00 338.34 L213.33 338.24 L216.67 338.14 L220.00 338.04 L223.33 337.92 L226.67 337.80 L230.00 337.68 L233.33 337.54 L236.67 337.40 L240.00 337.24 L243.33 337.08 L246.67 336.90 L250.00 336.71 L253.33 336.51 L256.67 336.30 L260.00 336.07 L263.33 335.82 L266.67 335.56 L270.00 335.28 L273.33 334.98 L276.67 334.66 L280.00 334.32 L283.33 333.96 L286.67 333.57 L290.00 333.15 L293.33 332.70 L296.67 332.21 L300.00 331.70 L303.33 331.15 L306.67 330.55 L310.00 329.92 L313.33 329.24 L316.67 328.51 L320.00 327.73 L323.33 326.89 L326.67 326.00 L330.00 325.03 L333.33 324.00 L336.67 322.90 L340.00 321.72 L343.33 320.45 L346.67 319.09 L350.00 317.64 L353.33 316.09 L356.67 314.44 L360.00 312.66 L363.33 310.77 L366.67 308.76 L370.00 306.60 L373.33 304.31 L376.67 301.88 L380.00 299.29 L383.33 296.54 L386.67 293.63 L390.00 290.54 L393.33 287.28 L396.67 283.85 L400.00 280.23 L403.33 276.43 L406.67 272.44 L410.00 268.27 L413.33 263.93 L416.67 259.41 L420.00 254.72 L423.33 249.88 L426.67 244.89 L430.00 239.77 L433.33 234.55 L436.67 229.24 L440.00 223.86 L443.33 218.45 L446.67 213.04 L450.00 207.66 L453.33 202.35 L456.67 197.14 L460.00 192.09 L463.33 187.22 L466.67 182.59 L470.00 178.24 L473.33 174.21 L476.67 170.54 L480.00 167.28 L483.33 164.45 L486.67 162.09 L490.00 160.22 L493.33 158.87 L496.67 158.06 L500.00 157.78 L503.33 158.06 L506.67 158.87 L510.00 160.22 L513.33 162.09 L516.67 164.45 L520.00 167.28 L523.33 170.54 L526.67 174.21 L530.00 178.24 L533.33 182.59 L536.67 187.22 L540.00 192.09 L543.33 197.14 L546.67 202.35 L550.00 207.66 L553.33 213.04 L556.67 218.45 L560.00 223.86 L563.33 229.24 L566.67 234.55 L570.00 239.77 L573.33 244.89 L576.67 249.88 L580.00 254.72 L583.33 259.41 L586.67 263.93 L590.00 268.27 L593.33 272.44 L596.67 276.43 L600.00 280.23 L603.33 283.85 L606.67 287.28 L610.00 290.54 L613.33 293.63 L616.67 296.54 L620.00 299.29 L623.33 301.88 L626.67 304.31 L630.00 306.60 L633.33 308.76 L636.67 310.77 L640.00 312.66 L643.33 314.44 L646.67 316.09 L650.00 317.64 L653.33 319.09 L656.67 320.45 L660.00 321.72 L663.33 322.90 L666.67 324.00 L670.00 325.03 L673.33 326.00 L676.67 326.89 L680.00 327.73 L683.33 328.51 L686.67 329.24 L690.00 329.92 L693.33 330.55 L696.67 331.15 L700.00 331.70 L703.33 332.21 L706.67 332.70 L710.00 333.15 L713.33 333.57 L716.67 333.96 L720.00 334.32 L723.33 334.66 L726.67 334.98 L730.00 335.28 L733.33 335.56 L736.67 335.82 L740.00 336.07 L743.33 336.30 L746.67 336.51 L750.00 336.71 L753.33 336.90 L756.67 337.08 L760.00 337.24 L763.33 337.40 L766.67 337.54 L770.00 337.68 L773.33 337.80 L776.67 337.92 L780.00 338.04 L783.33 338.14 L786.67 338.24 L790.00 338.34 L793.33 338.42 L796.67 338.51 L800.00 338.59 L803.33 338.66 L806.67 338.73 L810.00 338.79 L813.33 338.85 L816.67 338.91 L820.00 338.97 L823.33 339.02 L826.67 339.07 L830.00 339.11 L833.33 339.16 L836.67 339.20 L840.00 339.24 L843.33 339.27 L846.67 339.31 L850.00 339.34 L853.33 339.37 L856.67 339.40 L860.00 339.43 L863.33 339.45 L866.67 339.48 L870.00 339.50 L873.33 339.53 L876.67 339.55 L880.00 339.57 L883.33 339.59 L886.67 339.61 L890.00 339.62 L893.33 339.64 L896.67 339.65 L900.00 339.67" stroke="#424953" stroke-width="3" fill="none"/>
+<path d="M100.00 340v7" stroke="#777"/><text x="100.00" y="374" text-anchor="middle" font-size="20">-6</text>
+<path d="M233.33 340v7" stroke="#777"/><text x="233.33" y="374" text-anchor="middle" font-size="20">-4</text>
+<path d="M366.67 340v7" stroke="#777"/><text x="366.67" y="374" text-anchor="middle" font-size="20">-2</text>
+<path d="M500.00 340v7" stroke="#777"/><text x="500.00" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M633.33 340v7" stroke="#777"/><text x="633.33" y="374" text-anchor="middle" font-size="20">2</text>
+<path d="M766.67 340v7" stroke="#777"/><text x="766.67" y="374" text-anchor="middle" font-size="20">4</text>
+<path d="M900.00 340v7" stroke="#777"/><text x="900.00" y="374" text-anchor="middle" font-size="20">6</text>
+<path d="M500.00 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">f(x) · 概率密度</text>
+<text x="925" y="373" font-size="21">t</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 0；D(X) = 1.67；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 $t$ 分布关于 $0$ 对称，形状类似标准正态分布，但尾部更厚。自由度越大，$t(n)$ 越接近 $N(0,1)$。
 
@@ -1206,7 +1476,34 @@ $$
 
     $F$ 分布本质上是两个独立卡方变量分别除以自由度后的比值。它只能取正值，常用于比较两个总体方差。
 
-<div class="distribution-explorer" data-distribution-explorer data-initial-distribution="f"></div>
+<div class="distribution-explorer" data-distribution-explorer data-print-fallback="distribution-f-static" data-initial-distribution="f"></div>
+
+<details class="notebook-interactive-fallback" id="distribution-f-static">
+<summary>静态图：F分布的固定参数示例</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-label="F分布的固定参数概率图：第一自由度 m = 5，第二自由度 n = 10" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif CJK SC,serif" fill="#30343b">
+<text x="480" y="34" text-anchor="middle" font-size="24" font-weight="700">F分布 · 固定参数示例</text>
+<text x="480" y="70" text-anchor="middle" font-size="21">第一自由度 m = 5，第二自由度 n = 10</text>
+<path d="M100 340.00H900" stroke="#ddd" fill="none"/><text x="85" y="347.00" text-anchor="end" font-size="20">0</text>
+<path d="M100 286.25H900" stroke="#ddd" fill="none"/><text x="85" y="293.25" text-anchor="end" font-size="20">0.203</text>
+<path d="M100 232.50H900" stroke="#ddd" fill="none"/><text x="85" y="239.50" text-anchor="end" font-size="20">0.406</text>
+<path d="M100 178.75H900" stroke="#ddd" fill="none"/><text x="85" y="185.75" text-anchor="end" font-size="20">0.608</text>
+<path d="M100 125.00H900" stroke="#ddd" fill="none"/><text x="85" y="132.00" text-anchor="end" font-size="20">0.811</text>
+<path d="M100.68 339.05 L104.01 327.48 L107.34 311.65 L110.67 294.55 L114.00 277.45 L117.33 261.04 L120.66 245.70 L123.99 231.64 L127.32 218.95 L130.65 207.64 L133.98 197.71 L137.31 189.10 L140.64 181.73 L143.97 175.54 L147.30 170.42 L150.64 166.31 L153.97 163.10 L157.30 160.73 L160.63 159.10 L163.96 158.14 L167.29 157.79 L170.62 157.98 L173.95 158.64 L177.28 159.72 L180.61 161.17 L183.94 162.95 L187.27 165.01 L190.60 167.31 L193.93 169.81 L197.26 172.49 L200.59 175.32 L203.92 178.27 L207.25 181.32 L210.58 184.44 L213.91 187.62 L217.25 190.85 L220.58 194.10 L223.91 197.37 L227.24 200.64 L230.57 203.91 L233.90 207.16 L237.23 210.38 L240.56 213.58 L243.89 216.74 L247.22 219.86 L250.55 222.94 L253.88 225.97 L257.21 228.94 L260.54 231.87 L263.87 234.73 L267.20 237.54 L270.53 240.29 L273.86 242.98 L277.19 245.61 L280.53 248.18 L283.86 250.69 L287.19 253.14 L290.52 255.52 L293.85 257.85 L297.18 260.12 L300.51 262.33 L303.84 264.48 L307.17 266.57 L310.50 268.61 L313.83 270.59 L317.16 272.52 L320.49 274.39 L323.82 276.22 L327.15 277.99 L330.48 279.71 L333.81 281.38 L337.14 283.01 L340.47 284.58 L343.80 286.12 L347.14 287.61 L350.47 289.05 L353.80 290.45 L357.13 291.82 L360.46 293.14 L363.79 294.43 L367.12 295.67 L370.45 296.88 L373.78 298.06 L377.11 299.20 L380.44 300.31 L383.77 301.38 L387.10 302.42 L390.43 303.44 L393.76 304.42 L397.09 305.38 L400.42 306.30 L403.75 307.20 L407.08 308.07 L410.41 308.92 L413.75 309.74 L417.08 310.54 L420.41 311.32 L423.74 312.07 L427.07 312.80 L430.40 313.51 L433.73 314.20 L437.06 314.87 L440.39 315.52 L443.72 316.15 L447.05 316.77 L450.38 317.36 L453.71 317.94 L457.04 318.50 L460.37 319.05 L463.70 319.58 L467.03 320.10 L470.36 320.60 L473.69 321.09 L477.03 321.56 L480.36 322.02 L483.69 322.47 L487.02 322.90 L490.35 323.32 L493.68 323.73 L497.01 324.13 L500.34 324.52 L503.67 324.90 L507.00 325.27 L510.33 325.62 L513.66 325.97 L516.99 326.31 L520.32 326.64 L523.65 326.96 L526.98 327.27 L530.31 327.57 L533.64 327.86 L536.97 328.15 L540.30 328.43 L543.64 328.70 L546.97 328.96 L550.30 329.22 L553.63 329.47 L556.96 329.72 L560.29 329.95 L563.62 330.18 L566.95 330.41 L570.28 330.63 L573.61 330.84 L576.94 331.05 L580.27 331.25 L583.60 331.45 L586.93 331.64 L590.26 331.83 L593.59 332.01 L596.92 332.19 L600.25 332.36 L603.58 332.53 L606.92 332.70 L610.25 332.86 L613.58 333.01 L616.91 333.17 L620.24 333.31 L623.57 333.46 L626.90 333.60 L630.23 333.74 L633.56 333.87 L636.89 334.00 L640.22 334.13 L643.55 334.26 L646.88 334.38 L650.21 334.50 L653.54 334.61 L656.87 334.73 L660.20 334.84 L663.53 334.95 L666.86 335.05 L670.19 335.15 L673.53 335.25 L676.86 335.35 L680.19 335.45 L683.52 335.54 L686.85 335.63 L690.18 335.72 L693.51 335.81 L696.84 335.89 L700.17 335.97 L703.50 336.06 L706.83 336.13 L710.16 336.21 L713.49 336.29 L716.82 336.36 L720.15 336.43 L723.48 336.50 L726.81 336.57 L730.14 336.64 L733.47 336.71 L736.80 336.77 L740.14 336.83 L743.47 336.89 L746.80 336.95 L750.13 337.01 L753.46 337.07 L756.79 337.13 L760.12 337.18 L763.45 337.24 L766.78 337.29 L770.11 337.34 L773.44 337.39 L776.77 337.44 L780.10 337.49 L783.43 337.53 L786.76 337.58 L790.09 337.62 L793.42 337.67 L796.75 337.71 L800.08 337.75 L803.42 337.80 L806.75 337.84 L810.08 337.88 L813.41 337.91 L816.74 337.95 L820.07 337.99 L823.40 338.03 L826.73 338.06 L830.06 338.10 L833.39 338.13 L836.72 338.16 L840.05 338.20 L843.38 338.23 L846.71 338.26 L850.04 338.29 L853.37 338.32 L856.70 338.35 L860.03 338.38 L863.36 338.41 L866.69 338.43 L870.03 338.46 L873.36 338.49 L876.69 338.51 L880.02 338.54 L883.35 338.57 L886.68 338.59 L890.01 338.61 L893.34 338.64 L896.67 338.66 L900.00 338.68" stroke="#424953" stroke-width="3" fill="none"/>
+<path d="M100.00 340v7" stroke="#777"/><text x="100.00" y="374" text-anchor="middle" font-size="20">0</text>
+<path d="M233.33 340v7" stroke="#777"/><text x="233.33" y="374" text-anchor="middle" font-size="20">0.984</text>
+<path d="M366.67 340v7" stroke="#777"/><text x="366.67" y="374" text-anchor="middle" font-size="20">1.97</text>
+<path d="M500.00 340v7" stroke="#777"/><text x="500.00" y="374" text-anchor="middle" font-size="20">2.95</text>
+<path d="M633.33 340v7" stroke="#777"/><text x="633.33" y="374" text-anchor="middle" font-size="20">3.94</text>
+<path d="M766.67 340v7" stroke="#777"/><text x="766.67" y="374" text-anchor="middle" font-size="20">4.92</text>
+<path d="M900.00 340v7" stroke="#777"/><text x="900.00" y="374" text-anchor="middle" font-size="20">5.9</text>
+<path d="M269.36 125V340" stroke="#777" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M100 125V340H900" stroke="#777" fill="none"/>
+<text x="100" y="111" font-size="20">f(x) · 概率密度</text>
+<text x="925" y="373" font-size="21">F</text>
+<text x="480" y="410" text-anchor="middle" font-size="21">E(X) = 1.25；D(X) = 1.35；虚线表示均值</text>
+<text x="480" y="444" text-anchor="middle" font-size="19">固定教学示例，不随交互参数改变；图示范围外的尾部未绘出。</text>
+</svg>
+</details>
 
 若
 

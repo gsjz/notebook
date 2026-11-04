@@ -50,7 +50,95 @@ $$
 
 下面用小矩阵观察一个 CTA 的 $K$ 循环。切换 tile 大小会改变输出 tile 数、每步输入量和累加器大小；界面中的数值都是计数示意。
 
-<iframe src="../assets/inference/gemm-tiles.html" title="GEMM 分块与 K 维累加动画" loading="lazy" style="display:block;width:100%;height:620px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="gemm-tiles-static" src="../assets/inference/gemm-tiles.html" title="GEMM 分块与 K 维累加动画" loading="lazy" style="display:block;width:100%;height:620px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="gemm-tiles-static">
+<summary>静态图：GEMM 沿 K 维分块累加</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 478" role="img" aria-label="一个 CTA 沿三个 K 分块读取 A 和 B 并累加同一输出 tile" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+<text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="600">12 × 12 矩阵；CTA 输出 tile 为 4 × 4</text>
+  <text x="24" y="73" font-size="20" text-anchor="start" fill="#6b7280">沿 K 维处理 3 块，始终累加同一块 C。</text>
+  <text x="160" y="118" font-size="21" text-anchor="middle" fill="#374151" font-weight="600">K 分块 1 / 3</text>
+  <text x="88" y="151" font-size="20" text-anchor="middle" fill="#374151">A</text>
+  <rect x="30" y="166" width="36" height="36" fill="#f0eef8" stroke="#62578a"/>
+  <rect x="68" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="106" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="30" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="68" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="106" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="30" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="68" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="106" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="86" y="310" font-size="18" text-anchor="middle" fill="#6b7280">4 × 4 输入</text>
+  <text x="242" y="151" font-size="20" text-anchor="middle" fill="#374151">B</text>
+  <rect x="184" y="166" width="36" height="36" fill="#f0eef8" stroke="#62578a"/>
+  <rect x="222" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="260" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="184" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="222" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="260" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="184" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="222" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="260" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="240" y="310" font-size="18" text-anchor="middle" fill="#6b7280">4 × 4 输入</text>
+  <text x="162" y="234" font-size="24" text-anchor="middle" fill="#374151">×</text>
+  <text x="320" y="225" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="162" y="354" font-size="22" text-anchor="middle" fill="#374151" font-weight="600">C += A0 × B0</text>
+  <text x="470" y="118" font-size="21" text-anchor="middle" fill="#374151" font-weight="600">K 分块 2 / 3</text>
+  <text x="398" y="151" font-size="20" text-anchor="middle" fill="#374151">A</text>
+  <rect x="340" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="378" y="166" width="36" height="36" fill="#f0eef8" stroke="#62578a"/>
+  <rect x="416" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="340" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="378" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="416" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="340" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="378" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="416" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="396" y="310" font-size="18" text-anchor="middle" fill="#6b7280">4 × 4 输入</text>
+  <text x="552" y="151" font-size="20" text-anchor="middle" fill="#374151">B</text>
+  <rect x="494" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="532" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="570" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="494" y="204" width="36" height="36" fill="#f0eef8" stroke="#62578a"/>
+  <rect x="532" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="570" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="494" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="532" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="570" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="550" y="310" font-size="18" text-anchor="middle" fill="#6b7280">4 × 4 输入</text>
+  <text x="472" y="234" font-size="24" text-anchor="middle" fill="#374151">×</text>
+  <text x="630" y="225" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="472" y="354" font-size="22" text-anchor="middle" fill="#374151" font-weight="600">C += A1 × B1</text>
+  <text x="780" y="118" font-size="21" text-anchor="middle" fill="#374151" font-weight="600">K 分块 3 / 3</text>
+  <text x="708" y="151" font-size="20" text-anchor="middle" fill="#374151">A</text>
+  <rect x="650" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="688" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="726" y="166" width="36" height="36" fill="#f0eef8" stroke="#62578a"/>
+  <rect x="650" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="688" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="726" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="650" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="688" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="726" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="706" y="310" font-size="18" text-anchor="middle" fill="#6b7280">4 × 4 输入</text>
+  <text x="862" y="151" font-size="20" text-anchor="middle" fill="#374151">B</text>
+  <rect x="804" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="842" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="880" y="166" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="804" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="842" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="880" y="204" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="804" y="242" width="36" height="36" fill="#f0eef8" stroke="#62578a"/>
+  <rect x="842" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <rect x="880" y="242" width="36" height="36" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="860" y="310" font-size="18" text-anchor="middle" fill="#6b7280">4 × 4 输入</text>
+  <text x="782" y="234" font-size="24" text-anchor="middle" fill="#374151">×</text>
+  <text x="782" y="354" font-size="22" text-anchor="middle" fill="#374151" font-weight="600">C += A2 × B2</text>
+  <line x1="24" y1="380" x2="936" y2="380" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="24" y="418" font-size="20" text-anchor="start" fill="#374151">每步读入 32 个元素；保留 16 个累加值；全 C 由 9 个 CTA 覆盖。</text>
+  <text x="24" y="454" font-size="19" text-anchor="start" fill="#6b7280">图示只表示元素计数，未模拟缓存、线程布局、边界或真实性能。</text>
+</svg>
+</details>
 
 [单独打开分块动画](assets/inference/gemm-tiles.html)
 

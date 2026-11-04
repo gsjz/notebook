@@ -40,7 +40,41 @@ DiffusionGemma 单请求完整 canvas 取 $T=256,k=8,E=128$，每层共有 $R=20
 
 下面用 4 个 token、每个选 2 个专家演示。切换“同计数·换路由”时，各专家计数保持相同，但分组里的 token 发生变化。
 
-<iframe src="../assets/inference/moe-dispatch.html" title="MoE token 分组与元数据复用动画" loading="lazy" style="display:block;width:100%;height:620px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="moe-dispatch-static" src="../assets/inference/moe-dispatch.html" title="MoE token 分组与元数据复用动画" loading="lazy" style="display:block;width:100%;height:620px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="moe-dispatch-static">
+<summary>静态图：MoE 同计数路由与分组映射</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 414" role="img" aria-label="两套路由具有相同的专家计数和边界，但 token 分组与 permutation 不同" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+<text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="600">相同计数，可能对应不同的 token 分组</text>
+  <text x="110" y="79" font-size="20" text-anchor="middle" fill="#374151" font-weight="600">路由方案</text>
+  <text x="340" y="79" font-size="20" text-anchor="middle" fill="#374151" font-weight="600">E0</text>
+  <text x="510" y="79" font-size="20" text-anchor="middle" fill="#374151" font-weight="600">E1</text>
+  <text x="680" y="79" font-size="20" text-anchor="middle" fill="#374151" font-weight="600">E2</text>
+  <text x="850" y="79" font-size="20" text-anchor="middle" fill="#374151" font-weight="600">E3</text>
+  <text x="110" y="130" font-size="20" text-anchor="middle" fill="#374151">原路由</text>
+  <rect x="266" y="98" width="148" height="47" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="340.0" y="128.5" font-size="20" text-anchor="middle" fill="#374151">T0 · T3</text>
+  <rect x="436" y="98" width="148" height="47" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="510.0" y="128.5" font-size="20" text-anchor="middle" fill="#374151">T0 · T1</text>
+  <rect x="606" y="98" width="148" height="47" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="680.0" y="128.5" font-size="20" text-anchor="middle" fill="#374151">T1 · T2</text>
+  <rect x="776" y="98" width="148" height="47" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="850.0" y="128.5" font-size="20" text-anchor="middle" fill="#374151">T2 · T3</text>
+  <text x="110" y="198" font-size="20" text-anchor="middle" fill="#374151">换路由</text>
+  <rect x="266" y="166" width="148" height="47" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="340.0" y="196.5" font-size="20" text-anchor="middle" fill="#374151">T1 · T2</text>
+  <rect x="436" y="166" width="148" height="47" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="510.0" y="196.5" font-size="20" text-anchor="middle" fill="#374151">T2 · T3</text>
+  <rect x="606" y="166" width="148" height="47" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="680.0" y="196.5" font-size="20" text-anchor="middle" fill="#374151">T0 · T3</text>
+  <rect x="776" y="166" width="148" height="47" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="850.0" y="196.5" font-size="20" text-anchor="middle" fill="#374151">T0 · T1</text>
+  <text x="26" y="269" font-size="20" text-anchor="start" fill="#374151">计数：两组均为 (2, 2, 2, 2)；边界均为 (0, 2, 4, 6, 8)</text>
+  <text x="26" y="307" font-size="20" text-anchor="start" fill="#374151">原 perm：[0, 7, 1, 2, 3, 4, 5, 6]     新 perm：[3, 4, 5, 6, 0, 7, 1, 2]</text>
+  <text x="26" y="349" font-size="21" text-anchor="start" fill="#374151" font-weight="600">分组 → 专家 FFN → 按本轮映射回排 → 按本轮权重聚合</text>
+  <text x="26" y="387" font-size="20" text-anchor="start" fill="#6b7280">只复用 counts / offsets，不能证明旧 permutation 仍然有效。</text>
+</svg>
+</details>
 
 [单独打开分发动画](assets/inference/moe-dispatch.html)
 

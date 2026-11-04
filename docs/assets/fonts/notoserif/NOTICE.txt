@@ -1,0 +1,6 @@
+Noto Serif SC, version 2.003-H1 (WOFF2 files, unmodified).
+(c) 2017-2024 Adobe (http://www.adobe.com/).
+
+Distributed under the SIL Open Font License, Version 1.1; see OFL.txt.
+Font project: https://github.com/notofonts/noto-cjk
+Resource source: https://cdn.shujie.cc/notoserif/setting.css

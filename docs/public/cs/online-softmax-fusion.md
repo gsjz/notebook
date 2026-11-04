@@ -66,7 +66,44 @@ $$
 
 下面用 8 个词表项、2 维 embedding 演示。改变 tile 大小后，计算轨迹会变化，最终结果应与完整 softmax 的参考值一致；示例计算使用浏览器双精度，不代表 GPU 混合精度误差。
 
-<iframe src="../assets/inference/softmax-tiles.html" title="在线 softmax 加权归约动画" loading="lazy" style="display:block;width:100%;height:620px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="softmax-tiles-static" src="../assets/inference/softmax-tiles.html" title="在线 softmax 加权归约动画" loading="lazy" style="display:block;width:100%;height:620px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="softmax-tiles-static">
+<summary>静态图：在线 softmax 的分块状态</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 474" role="img" aria-label="四个词表分块依次更新最大值、归一化分母和加权分子，最终等于完整 softmax 加权和" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+<text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="600">8 个词表项，2 维 embedding，每块读入 2 项</text>
+  <text x="24" y="74" font-size="20" text-anchor="start" fill="#6b7280">logits = [−2, 0, 1, −1, 6, 2, 0, 3]</text>
+  <text x="25" y="120" font-size="20" text-anchor="start" fill="#374151" font-weight="600">已处理词项</text>
+  <text x="220" y="120" font-size="20" text-anchor="start" fill="#374151" font-weight="600">最大值 m</text>
+  <text x="360" y="120" font-size="20" text-anchor="start" fill="#374151" font-weight="600">分母 ℓ</text>
+  <text x="520" y="120" font-size="20" text-anchor="start" fill="#374151" font-weight="600">分子 a</text>
+  <text x="760" y="120" font-size="20" text-anchor="start" fill="#374151" font-weight="600">当前 a / ℓ</text>
+  <text x="25" y="169" font-size="20" text-anchor="start" fill="#374151">1～2</text>
+  <text x="220" y="169" font-size="20" text-anchor="start" fill="#374151">0</text>
+  <text x="360" y="169" font-size="20" text-anchor="start" fill="#374151">1.1353</text>
+  <text x="520" y="169" font-size="20" text-anchor="start" fill="#374151">[0.135, 1.000]</text>
+  <text x="760" y="169" font-size="20" text-anchor="start" fill="#374151">[0.119, 0.881]</text>
+  <text x="25" y="224" font-size="20" text-anchor="start" fill="#374151">1～4</text>
+  <text x="220" y="224" font-size="20" text-anchor="start" fill="#374151">1</text>
+  <text x="360" y="224" font-size="20" text-anchor="start" fill="#374151">1.5530</text>
+  <text x="520" y="224" font-size="20" text-anchor="start" fill="#374151">[0.914, 1.639]</text>
+  <text x="760" y="224" font-size="20" text-anchor="start" fill="#374151">[0.589, 1.055]</text>
+  <rect x="15" y="250" width="930" height="47" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="25" y="279" font-size="20" text-anchor="start" fill="#374151">1～6</text>
+  <text x="220" y="279" font-size="20" text-anchor="start" fill="#374151">6</text>
+  <text x="360" y="279" font-size="20" text-anchor="start" fill="#374151">1.0288</text>
+  <text x="520" y="279" font-size="20" text-anchor="start" fill="#374151">[2.024, -0.952]</text>
+  <text x="760" y="279" font-size="20" text-anchor="start" fill="#374151">[1.968, -0.926]</text>
+  <text x="25" y="334" font-size="20" text-anchor="start" fill="#374151">1～8</text>
+  <text x="220" y="334" font-size="20" text-anchor="start" fill="#374151">6</text>
+  <text x="360" y="334" font-size="20" text-anchor="start" fill="#374151">1.0810</text>
+  <text x="520" y="334" font-size="20" text-anchor="start" fill="#374151">[2.020, -0.803]</text>
+  <text x="760" y="334" font-size="20" text-anchor="start" fill="#374151">[1.868, -0.743]</text>
+  <line x1="24" y1="366" x2="936" y2="366" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="24" y="405" font-size="20" text-anchor="start" fill="#374151">第 3 块令 m 从 1 升至 6：旧 ℓ 和 a 同乘 exp(1 − 6)，再加新项。</text>
+  <text x="24" y="446" font-size="19" text-anchor="start" fill="#6b7280">处理完全部词项后，a / ℓ 与完整 softmax 加权和一致（浮点舍入范围内）。</text>
+</svg>
+</details>
 
 [单独打开在线归约动画](assets/inference/softmax-tiles.html)
 

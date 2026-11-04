@@ -84,7 +84,33 @@ print("queued calls / s:", repeats / window_seconds)
 
 每次等待的循环测串行调用完成延迟，包含 Python 提交与同步成本。批量提交后统一等待，测这批独立调用的完成速率，不能把窗口均摊时间当成每个请求的响应延迟。批量保留输出会占用内存；上述小例子限制为 20 次。真实去噪迭代有前后状态依赖，不能用独立投影的排队吞吐代替整条生成链。
 
-<iframe src="../assets/jax/async-timing.html" title="JAX 提交、执行和首次编译的计时边界" loading="lazy" style="display:block;width:100%;height:520px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="jax-async-timing-static" src="../assets/jax/async-timing.html" title="JAX 提交、执行和首次编译的计时边界" loading="lazy" style="display:block;width:100%;height:520px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="jax-async-timing-static">
+<summary>静态图：提交返回与同步计时边界</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 484" role="img" aria-label="JAX 异步调用：结果句柄先返回，计时须等待所需输出" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+  <text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="700">异步返回结果句柄，不能作为设备完成边界</text>
+  <text x="24" y="77" font-size="20" text-anchor="start" fill="#374151">固定教学时间线；长度仅用于区分边界，不代表真实耗时。</text>
+  <text x="24" y="131" font-size="21" text-anchor="start" fill="#374151">Host</text>
+  <text x="24" y="218" font-size="21" text-anchor="start" fill="#374151">设备</text>
+  <path d="M140 250H920" fill="none" stroke="#9ca3af" stroke-width="2"/>
+  <text x="920" y="278" font-size="19" text-anchor="end" fill="#374151">时间 →</text>
+  <rect x="145" y="101" width="145" height="48" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="217.5" y="132" font-size="20" text-anchor="middle" fill="#374151">调用 / 提交</text>
+  <rect x="340" y="101" width="500" height="48" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="590" y="132" font-size="20" text-anchor="middle" fill="#374151">Host 可继续执行其他工作</text>
+  <rect x="275" y="185" width="565" height="48" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="557.5" y="216" font-size="21" text-anchor="middle" fill="#374151">设备执行本次计算</text>
+  <path d="M290 152V250" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M840 152V250" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="290" y="278" font-size="19" text-anchor="middle" fill="#374151">返回数组句柄</text>
+  <text x="840" y="312" font-size="19" text-anchor="middle" fill="#374151">所需输出就绪</text>
+  <path d="M145 331V344H840V331" fill="none" stroke="#9ca3af" stroke-width="2"/>
+  <text x="492.5" y="375" font-size="21" text-anchor="middle" fill="#374151">同步计时：开始 → 调用 → 等待完整所需输出 → 结束</text>
+  <text x="24" y="420" font-size="21" text-anchor="start" fill="#374151">首次调用还可能包含 tracing、lowering、编译；稳态测量应先预热。</text>
+  <text x="24" y="460" font-size="19" text-anchor="start" fill="#374151">等待多个独立请求时，等待所有 pending 输出；单个叶子不能代表整个输出树。</text>
+</svg>
+</details>
 
 [单独打开计时示意](assets/jax/async-timing.html)
 

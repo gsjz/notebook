@@ -10,7 +10,25 @@ QR Code 把文本或字节编码为黑白方格。每个小方格称为**模块*
 
 输入文本或网址后点击生成，可以切换纠错等级，观察版本、矩阵尺寸和掩模编号，并下载 SVG。内容在浏览器内处理，生成过程不调用远程二维码接口；编码库随本站一起提供。
 
-<iframe src="../assets/qr-code/generator.html" title="浏览器内二维码生成器" loading="lazy" style="width: 100%; height: 820px; border: 0; border-radius: 16px; display: block;"></iframe>
+<iframe data-print-fallback="qr-generator-static" src="../assets/qr-code/generator.html" title="浏览器内二维码生成器" loading="lazy" style="width: 100%; height: 820px; border: 0; border-radius: 16px; display: block;"></iframe>
+
+<details class="notebook-interactive-fallback" id="qr-generator-static">
+<summary>静态示例：文本 A 的编码结果</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 370" role="img" aria-label="二维码固定示例：文本 A，UTF-8 ECI，M 级纠错" data-print-monochrome style="display:block;width:100%;height:auto;background:#fff" font-family="Noto Serif SC, Noto Serif CJK SC, serif" fill="#30343b">
+  <svg x="26" y="28" width="300" height="300" viewBox="0 0 29 29" shape-rendering="crispEdges">
+    <rect width="29" height="29" fill="#fff"/>
+    <path d="M4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM7,4h1v1h-1zM8,4h1v1h-1zM9,4h1v1h-1zM10,4h1v1h-1zM13,4h1v1h-1zM14,4h1v1h-1zM16,4h1v1h-1zM18,4h1v1h-1zM19,4h1v1h-1zM20,4h1v1h-1zM21,4h1v1h-1zM22,4h1v1h-1zM23,4h1v1h-1zM24,4h1v1h-1zM4,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM18,5h1v1h-1zM24,5h1v1h-1zM4,6h1v1h-1zM6,6h1v1h-1zM7,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM13,6h1v1h-1zM14,6h1v1h-1zM18,6h1v1h-1zM20,6h1v1h-1zM21,6h1v1h-1zM22,6h1v1h-1zM24,6h1v1h-1zM4,7h1v1h-1zM6,7h1v1h-1zM7,7h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM12,7h1v1h-1zM13,7h1v1h-1zM16,7h1v1h-1zM18,7h1v1h-1zM20,7h1v1h-1zM21,7h1v1h-1zM22,7h1v1h-1zM24,7h1v1h-1zM4,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM13,8h1v1h-1zM16,8h1v1h-1zM18,8h1v1h-1zM20,8h1v1h-1zM21,8h1v1h-1zM22,8h1v1h-1zM24,8h1v1h-1zM4,9h1v1h-1zM10,9h1v1h-1zM12,9h1v1h-1zM15,9h1v1h-1zM18,9h1v1h-1zM24,9h1v1h-1zM4,10h1v1h-1zM5,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM12,10h1v1h-1zM14,10h1v1h-1zM16,10h1v1h-1zM18,10h1v1h-1zM19,10h1v1h-1zM20,10h1v1h-1zM21,10h1v1h-1zM22,10h1v1h-1zM23,10h1v1h-1zM24,10h1v1h-1zM12,11h1v1h-1zM4,12h1v1h-1zM6,12h1v1h-1zM7,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM10,12h1v1h-1zM13,12h1v1h-1zM15,12h1v1h-1zM18,12h1v1h-1zM19,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM22,12h1v1h-1zM4,13h1v1h-1zM7,13h1v1h-1zM11,13h1v1h-1zM13,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM16,13h1v1h-1zM17,13h1v1h-1zM18,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM4,14h1v1h-1zM5,14h1v1h-1zM6,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM12,14h1v1h-1zM13,14h1v1h-1zM14,14h1v1h-1zM16,14h1v1h-1zM18,14h1v1h-1zM19,14h1v1h-1zM22,14h1v1h-1zM4,15h1v1h-1zM5,15h1v1h-1zM7,15h1v1h-1zM8,15h1v1h-1zM9,15h1v1h-1zM11,15h1v1h-1zM13,15h1v1h-1zM14,15h1v1h-1zM15,15h1v1h-1zM16,15h1v1h-1zM17,15h1v1h-1zM18,15h1v1h-1zM22,15h1v1h-1zM5,16h1v1h-1zM8,16h1v1h-1zM10,16h1v1h-1zM11,16h1v1h-1zM12,16h1v1h-1zM14,16h1v1h-1zM16,16h1v1h-1zM19,16h1v1h-1zM21,16h1v1h-1zM22,16h1v1h-1zM12,17h1v1h-1zM13,17h1v1h-1zM14,17h1v1h-1zM16,17h1v1h-1zM19,17h1v1h-1zM22,17h1v1h-1zM4,18h1v1h-1zM5,18h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM9,18h1v1h-1zM10,18h1v1h-1zM13,18h1v1h-1zM15,18h1v1h-1zM17,18h1v1h-1zM20,18h1v1h-1zM22,18h1v1h-1zM23,18h1v1h-1zM4,19h1v1h-1zM10,19h1v1h-1zM12,19h1v1h-1zM14,19h1v1h-1zM19,19h1v1h-1zM20,19h1v1h-1zM22,19h1v1h-1zM24,19h1v1h-1zM4,20h1v1h-1zM6,20h1v1h-1zM7,20h1v1h-1zM8,20h1v1h-1zM10,20h1v1h-1zM12,20h1v1h-1zM13,20h1v1h-1zM15,20h1v1h-1zM17,20h1v1h-1zM20,20h1v1h-1zM22,20h1v1h-1zM24,20h1v1h-1zM4,21h1v1h-1zM6,21h1v1h-1zM7,21h1v1h-1zM8,21h1v1h-1zM10,21h1v1h-1zM12,21h1v1h-1zM15,21h1v1h-1zM16,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM21,21h1v1h-1zM23,21h1v1h-1zM4,22h1v1h-1zM6,22h1v1h-1zM7,22h1v1h-1zM8,22h1v1h-1zM10,22h1v1h-1zM12,22h1v1h-1zM13,22h1v1h-1zM16,22h1v1h-1zM18,22h1v1h-1zM19,22h1v1h-1zM4,23h1v1h-1zM10,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM17,23h1v1h-1zM18,23h1v1h-1zM21,23h1v1h-1zM23,23h1v1h-1zM24,23h1v1h-1zM4,24h1v1h-1zM5,24h1v1h-1zM6,24h1v1h-1zM7,24h1v1h-1zM8,24h1v1h-1zM9,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM13,24h1v1h-1zM16,24h1v1h-1zM19,24h1v1h-1zM22,24h1v1h-1zM23,24h1v1h-1z" fill="#111"/>
+  </svg>
+  <text x="370" y="65" font-size="26" font-weight="700">固定输入：A</text>
+  <text x="370" y="108" font-size="22">UTF-8：0x41 · ECI：26 · 字节模式</text>
+  <text x="370" y="151" font-size="22">版本 1 · 21 × 21 模块 · 纠错等级 M</text>
+  <text x="370" y="194" font-size="22">自动选择掩模 2 · 四周静区宽 4 模块</text>
+  <path d="M370 220H916" fill="none" stroke="#ccc"/>
+  <text x="370" y="258" font-size="21">编码：声明字符集 → 字节段 → 纠错与交织</text>
+  <text x="370" y="296" font-size="21">成图：填充矩阵 → 选择掩模 → 写格式信息</text>
+  <text x="480" y="352" text-anchor="middle" font-size="19">此图为固定教学示例；交互输入变化时，打印仍使用本示例。</text>
+</svg>
+</details>
 
 [单独打开生成器](assets/qr-code/generator.html)
 

@@ -73,7 +73,40 @@ $$
 
 这里 $F/P$ 和 $D/B$ 是同时约束性能的下界，不应无条件相加。launch、依赖、同步和低 occupancy 会让实测高于该理想界。$D$ 应尽量来自 profiler 的真实流量；逻辑张量大小忽略了重复加载、cache 和 padding。
 
-<iframe src="../assets/inference/roofline.html" title="GPU Roofline 与 launch 开销交互模型" loading="lazy" style="display:block;width:100%;height:560px;border:0;margin:1rem 0;border-radius:16px;"></iframe>
+<iframe data-print-fallback="roofline-static" src="../assets/inference/roofline.html" title="GPU Roofline 与 launch 开销交互模型" loading="lazy" style="display:block;width:100%;height:560px;border:0;margin:1rem 0;border-radius:16px;"></iframe>
+
+<details class="notebook-interactive-fallback" id="roofline-static">
+<summary>静态图：Roofline 与 launch 成本对照</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 510" role="img" aria-label="带宽型、计算型和小算子在一次与十次 launch 下的教学成本比较" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+<text x="24" y="34" font-size="23" text-anchor="start" fill="#374151" font-weight="600">教学平台：20 TFLOP/s，200 GB/s，每次 launch 为 5 μs</text>
+  <text x="24" y="74" font-size="21" text-anchor="start" fill="#6b7280">总时间 = max(计算下界, 内存下界) + launch 附加时间</text>
+  <text x="25" y="128" font-size="20" text-anchor="start" fill="#374151" font-weight="600">算子类型</text>
+  <text x="210" y="128" font-size="20" text-anchor="start" fill="#374151" font-weight="600">计算下界</text>
+  <text x="390" y="128" font-size="20" text-anchor="start" fill="#374151" font-weight="600">内存下界</text>
+  <text x="565" y="128" font-size="20" text-anchor="start" fill="#374151" font-weight="600">1 次 launch</text>
+  <text x="750" y="128" font-size="20" text-anchor="start" fill="#374151" font-weight="600">10 次 launch</text>
+  <text x="25" y="187" font-size="21" text-anchor="start" fill="#374151">带宽型</text>
+  <text x="210" y="187" font-size="21" text-anchor="start" fill="#374151">50 μs</text>
+  <text x="390" y="187" font-size="21" text-anchor="start" fill="#374151">5 ms</text>
+  <text x="565" y="187" font-size="21" text-anchor="start" fill="#374151">5.005 ms</text>
+  <text x="750" y="187" font-size="21" text-anchor="start" fill="#374151">5.050 ms</text>
+  <text x="25" y="254" font-size="21" text-anchor="start" fill="#374151">计算型</text>
+  <text x="210" y="254" font-size="21" text-anchor="start" fill="#374151">50 ms</text>
+  <text x="390" y="254" font-size="21" text-anchor="start" fill="#374151">5 ms</text>
+  <text x="565" y="254" font-size="21" text-anchor="start" fill="#374151">50.005 ms</text>
+  <text x="750" y="254" font-size="21" text-anchor="start" fill="#374151">50.050 ms</text>
+  <rect x="15" y="288" width="930" height="54" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="25" y="321" font-size="21" text-anchor="start" fill="#374151">小算子</text>
+  <text x="210" y="321" font-size="21" text-anchor="start" fill="#374151">0.1 μs</text>
+  <text x="390" y="321" font-size="21" text-anchor="start" fill="#374151">1 μs</text>
+  <text x="565" y="321" font-size="21" text-anchor="start" fill="#374151">6 μs</text>
+  <text x="750" y="321" font-size="21" text-anchor="start" fill="#374151">51 μs</text>
+  <line x1="24" y1="362" x2="936" y2="362" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="24" y="404" font-size="20" text-anchor="start" fill="#374151">带宽型：减少真实读写量；计算型：关注有效矩阵计算吞吐。</text>
+  <text x="24" y="444" font-size="20" text-anchor="start" fill="#374151">小算子：launch 开销可超过计算与访存，减少提交次数收益更明显。</text>
+  <text x="24" y="485" font-size="19" text-anchor="start" fill="#6b7280">固定教学数据，忽略重叠与其他依赖；不能作为设备真实延迟预测。</text>
+</svg>
+</details>
 
 [单独打开 Roofline 模型](assets/inference/roofline.html)
 

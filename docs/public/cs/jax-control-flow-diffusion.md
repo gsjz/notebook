@@ -144,7 +144,59 @@ print(result.evaluated_rows.tolist())
 
 预期输出为 `4`、`[[2, 2, 2], [4, 4, 4]]`、`[True, True]`、`[4, 4]`。第一个样本的画布停在 $2$，但两个样本都参与了四轮教学更新；真实执行成本需另行测量。将上限改成 `3`，最终 `done` 为 `[True, False]`，说明预算耗尽也能结束循环。
 
-<iframe src="../assets/jax/denoising-carry.html" title="整批循环中的 canvas 冻结与 carry 更新" loading="lazy" style="display:block;width:100%;height:580px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="jax-denoising-carry-static" src="../assets/jax/denoising-carry.html" title="整批循环中的 canvas 冻结与 carry 更新" loading="lazy" style="display:block;width:100%;height:580px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="jax-denoising-carry-static">
+<summary>静态对照：canvas 冻结与整批循环</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 518" role="img" aria-label="两样本循环状态：完成项 canvas 冻结，批次继续直到全完成" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+  <text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="700">固定教学例：样本 A 第 2 轮完成，样本 B 第 4 轮完成</text>
+  <text x="24" y="77" font-size="20" text-anchor="start" fill="#374151">每个 canvas 含 3 个相同值；预算为 6，整批在第 4 轮停止。</text>
+  <text x="24" y="125" font-size="21" text-anchor="start" fill="#374151" font-weight="700">轮次</text>
+  <text x="350" y="125" font-size="21" text-anchor="middle" fill="#374151" font-weight="700">0</text>
+  <text x="470" y="125" font-size="21" text-anchor="middle" fill="#374151" font-weight="700">1</text>
+  <text x="590" y="125" font-size="21" text-anchor="middle" fill="#374151" font-weight="700">2</text>
+  <text x="710" y="125" font-size="21" text-anchor="middle" fill="#374151" font-weight="700">3</text>
+  <text x="830" y="125" font-size="21" text-anchor="middle" fill="#374151" font-weight="700">4</text>
+  <rect x="20" y="141" width="920" height="43" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="32" y="169" font-size="20" text-anchor="start" fill="#374151">A：canvas 值</text>
+  <text x="350" y="169" font-size="20" text-anchor="middle" fill="#374151">0</text>
+  <text x="470" y="169" font-size="20" text-anchor="middle" fill="#374151">1</text>
+  <text x="590" y="169" font-size="20" text-anchor="middle" fill="#374151">2</text>
+  <text x="710" y="169" font-size="20" text-anchor="middle" fill="#374151">2</text>
+  <text x="830" y="169" font-size="20" text-anchor="middle" fill="#374151">2</text>
+  <rect x="20" y="189" width="920" height="43" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="32" y="217" font-size="20" text-anchor="start" fill="#374151">A：done</text>
+  <text x="350" y="217" font-size="20" text-anchor="middle" fill="#374151">False</text>
+  <text x="470" y="217" font-size="20" text-anchor="middle" fill="#374151">False</text>
+  <text x="590" y="217" font-size="20" text-anchor="middle" fill="#374151">True</text>
+  <text x="710" y="217" font-size="20" text-anchor="middle" fill="#374151">True</text>
+  <text x="830" y="217" font-size="20" text-anchor="middle" fill="#374151">True</text>
+  <rect x="20" y="237" width="920" height="43" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="32" y="265" font-size="20" text-anchor="start" fill="#374151">B：canvas 值</text>
+  <text x="350" y="265" font-size="20" text-anchor="middle" fill="#374151">0</text>
+  <text x="470" y="265" font-size="20" text-anchor="middle" fill="#374151">1</text>
+  <text x="590" y="265" font-size="20" text-anchor="middle" fill="#374151">2</text>
+  <text x="710" y="265" font-size="20" text-anchor="middle" fill="#374151">3</text>
+  <text x="830" y="265" font-size="20" text-anchor="middle" fill="#374151">4</text>
+  <rect x="20" y="285" width="920" height="43" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="32" y="313" font-size="20" text-anchor="start" fill="#374151">B：done</text>
+  <text x="350" y="313" font-size="20" text-anchor="middle" fill="#374151">False</text>
+  <text x="470" y="313" font-size="20" text-anchor="middle" fill="#374151">False</text>
+  <text x="590" y="313" font-size="20" text-anchor="middle" fill="#374151">False</text>
+  <text x="710" y="313" font-size="20" text-anchor="middle" fill="#374151">False</text>
+  <text x="830" y="313" font-size="20" text-anchor="middle" fill="#374151">True</text>
+  <rect x="20" y="333" width="920" height="43" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="32" y="361" font-size="20" text-anchor="start" fill="#374151">累计教学更新次数</text>
+  <text x="350" y="361" font-size="20" text-anchor="middle" fill="#374151">0</text>
+  <text x="470" y="361" font-size="20" text-anchor="middle" fill="#374151">1</text>
+  <text x="590" y="361" font-size="20" text-anchor="middle" fill="#374151">2</text>
+  <text x="710" y="361" font-size="20" text-anchor="middle" fill="#374151">3</text>
+  <text x="830" y="361" font-size="20" text-anchor="middle" fill="#374151">4</text>
+  <text x="24" y="416" font-size="20" text-anchor="start" fill="#374151" font-weight="700">第 3、4 轮：A 的 canvas 冻结；批次继续，rng 与教学自条件仍更新。</text>
+  <text x="24" y="456" font-size="20" text-anchor="start" fill="#374151">两行都经历 4 次循环体更新；冻结输出本身不保证省去该行计算。</text>
+  <text x="24" y="494" font-size="19" text-anchor="start" fill="#374151">循环条件：仍有未完成样本，且尚未达到预算；预算也可独立结束循环。</text>
+</svg>
+</details>
 
 [单独打开状态演示](assets/jax/denoising-carry.html)
 

@@ -122,7 +122,45 @@ $$
 
 例如目标部分占 $20\%$，即使完全消除，也最多使整体加速到 $1.25\times$。若端到端收益超过这个对照，应检查是否同时减少了 host gap、前向次数、输出长度或其他阶段。
 
-<iframe src="../assets/inference/profiling-timeline.html" title="局部算子加速与请求总时间交互时间线" loading="lazy" style="display:block;width:100%;height:520px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="profiling-timeline-static" src="../assets/inference/profiling-timeline.html" title="局部算子加速与请求总时间交互时间线" loading="lazy" style="display:block;width:100%;height:520px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="profiling-timeline-static">
+<summary>静态图：局部算子加速与请求总时间</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-label="基线与三种优化情形的串行时间条，区分目标算子加速与 host 等待消除的收益" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+<text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="600">局部加速与端到端收益：合成的 100 ms 基线</text>
+  <text x="24" y="116" font-size="19" text-anchor="start" fill="#374151">基线</text>
+  <rect x="242" y="88" width="354.0" height="43" fill="#ececf0" stroke="#d1d5db"/>
+  <text x="419.0" y="116" font-size="19" text-anchor="middle" fill="#374151">60</text>
+  <rect x="596.0" y="88" width="118.0" height="43" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="655.0" y="116" font-size="19" text-anchor="middle" fill="#374151">20</text>
+  <rect x="714.0" y="88" width="118.0" height="43" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="773.0" y="116" font-size="19" text-anchor="middle" fill="#374151">20</text>
+  <text x="932" y="116" font-size="20" text-anchor="end" fill="#374151" font-weight="600">100 ms</text>
+  <text x="24" y="186" font-size="19" text-anchor="start" fill="#374151">算子加速 2×</text>
+  <rect x="242" y="158" width="354.0" height="43" fill="#ececf0" stroke="#d1d5db"/>
+  <text x="419.0" y="186" font-size="19" text-anchor="middle" fill="#374151">60</text>
+  <rect x="596.0" y="158" width="59.0" height="43" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="625.5" y="186" font-size="19" text-anchor="middle" fill="#374151">10</text>
+  <rect x="655.0" y="158" width="118.0" height="43" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="714.0" y="186" font-size="19" text-anchor="middle" fill="#374151">20</text>
+  <text x="932" y="186" font-size="20" text-anchor="end" fill="#374151" font-weight="600">90 ms</text>
+  <text x="24" y="256" font-size="19" text-anchor="start" fill="#374151">2× + 消除等待</text>
+  <rect x="242" y="228" width="354.0" height="43" fill="#ececf0" stroke="#d1d5db"/>
+  <text x="419.0" y="256" font-size="19" text-anchor="middle" fill="#374151">60</text>
+  <rect x="596.0" y="228" width="59.0" height="43" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="625.5" y="256" font-size="19" text-anchor="middle" fill="#374151">10</text>
+  <text x="932" y="256" font-size="20" text-anchor="end" fill="#374151" font-weight="600">70 ms</text>
+  <text x="24" y="326" font-size="19" text-anchor="start" fill="#374151">只令算子耗时为零</text>
+  <rect x="242" y="298" width="354.0" height="43" fill="#ececf0" stroke="#d1d5db"/>
+  <text x="419.0" y="326" font-size="19" text-anchor="middle" fill="#374151">60</text>
+  <rect x="596.0" y="298" width="118.0" height="43" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="655.0" y="326" font-size="19" text-anchor="middle" fill="#374151">20</text>
+  <text x="932" y="326" font-size="20" text-anchor="end" fill="#374151" font-weight="600">80 ms</text>
+  <text x="244" y="395" font-size="19" text-anchor="start" fill="#6b7280">其他 GPU 工作    /    目标算子    /    host 等待</text>
+  <text x="24" y="440" font-size="20" text-anchor="start" fill="#374151">目标算子占基线 20%：只优化它的整体加速上限为 1.25×。</text>
+  <text x="24" y="476" font-size="19" text-anchor="start" fill="#6b7280">消除等待是另一项理想对照；各项按串行相加，未模拟重叠或设备实测。</text>
+</svg>
+</details>
 
 [单独打开时间线](assets/inference/profiling-timeline.html)
 

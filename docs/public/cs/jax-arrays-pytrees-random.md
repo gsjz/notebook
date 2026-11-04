@@ -114,7 +114,29 @@ print(sample, following)
 
 `jax.random.key` 返回带随机实现类型的 key 数组。旧接口 `PRNGKey` 返回普通整数数组表示，两者不应仅凭打印形状混用。不要将跨后端、跨版本、向量化前后完全相同的随机轨迹视为默认保证。
 
-<iframe src="../assets/jax/random-state.html" title="JAX 随机 key 与循环状态交互" loading="lazy" style="display:block;width:100%;height:600px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="jax-random-state-static" src="../assets/jax/random-state.html" title="JAX 随机 key 与循环状态交互" loading="lazy" style="display:block;width:100%;height:600px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="jax-random-state-static">
+<summary>静态对照：拆分 key 与重复使用 key</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 497" role="img" aria-label="PRNG 状态：split 后传递新 key，与复用旧 key 的结果对照" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+  <text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="700">随机 key 是显式输入，随机调用不会自动推进它</text>
+  <text x="24" y="77" font-size="20" text-anchor="start" fill="#374151">符号教学示例：key 的名称表示状态关系，不展示真实随机数。</text>
+  <rect x="20" y="103" width="920" height="160" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="40" y="139" font-size="22" text-anchor="start" fill="#374151" font-weight="700">正确：把新 key 写回 carry</text>
+  <text x="42" y="185" font-size="22" text-anchor="start" fill="#374151">k0 → split → (k1, s0)</text>
+  <text x="510" y="185" font-size="22" text-anchor="start" fill="#374151">k1 → split → (k2, s1)</text>
+  <text x="42" y="231" font-size="21" text-anchor="start" fill="#374151">本轮：random(s0)</text>
+  <text x="510" y="231" font-size="21" text-anchor="start" fill="#374151">下轮：random(s1)</text>
+  <path d="M380 179H469" fill="none" stroke="#9ca3af" stroke-width="2"/>
+  <text x="420" y="159" font-size="18" text-anchor="middle" fill="#374151">carry</text>
+  <rect x="20" y="284" width="920" height="143" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="40" y="322" font-size="22" text-anchor="start" fill="#374151" font-weight="700">误用：同一 key 用于相同随机操作与参数</text>
+  <text x="42" y="365" font-size="22" text-anchor="start" fill="#374151">random(s0) → 结果 A</text>
+  <text x="510" y="365" font-size="22" text-anchor="start" fill="#374151">random(s0) → 仍为 A</text>
+  <text x="42" y="403" font-size="20" text-anchor="start" fill="#374151">在相同实现与后端条件下，同 key 会重现该随机结果。</text>
+  <text x="24" y="470" font-size="21" text-anchor="start" fill="#374151">不同 key 允许新的随机抽样，但不保证两次离散结果必然不同。</text>
+</svg>
+</details>
 
 [单独打开随机状态演示](assets/jax/random-state.html)
 

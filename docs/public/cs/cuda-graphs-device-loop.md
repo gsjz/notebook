@@ -100,7 +100,59 @@ __global__ void update_condition(State* state, cudaGraphConditionalHandle handle
 
 条件 handle 的 default 与应用数据是两类状态。使用 `cudaGraphCondAssignDefault` 可在每次图启动时初始化 handle；它不会自动清空 `State`、自条件结果或 KV cache 的有效长度。不设置 default 时，程序应在上游节点显式写入本轮 condition，不能依赖上一次执行留下的值。默认 condition 为 1 会至少执行一轮；若预算为零或请求已完成，应在进入 WHILE 前将 condition 设为零。
 
-<iframe src="../assets/inference/graph-loop.html" title="Host 循环与设备条件循环交互示意" loading="lazy" style="display:block;width:100%;height:600px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="graph-loop-static" src="../assets/inference/graph-loop.html" title="Host 循环与设备条件循环交互示意" loading="lazy" style="display:block;width:100%;height:600px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="graph-loop-static">
+<summary>静态图：Host 循环与设备条件循环</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-label="四轮收敛时 Host 每轮读取标志，设备 WHILE 在 GPU 更新条件并在输出边界同步" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+<text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="600">示例：第 4 轮收敛，最多执行 8 轮</text>
+  <text x="25" y="99" font-size="22" text-anchor="start" fill="#374151" font-weight="600">Host 循环</text>
+  <rect x="209" y="72" width="164" height="65" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="291.0" y="97.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 1 轮</text>
+  <text x="291.0" y="126.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="382" y="109" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="291" y="171" font-size="19" text-anchor="middle" fill="#374151">CPU 读标志</text>
+  <rect x="391" y="72" width="164" height="65" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="473.0" y="97.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 2 轮</text>
+  <text x="473.0" y="126.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="564" y="109" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="473" y="171" font-size="19" text-anchor="middle" fill="#374151">CPU 读标志</text>
+  <rect x="573" y="72" width="164" height="65" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="655.0" y="97.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 3 轮</text>
+  <text x="655.0" y="126.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="746" y="109" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="655" y="171" font-size="19" text-anchor="middle" fill="#374151">CPU 读标志</text>
+  <rect x="755" y="72" width="164" height="65" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="837.0" y="97.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 4 轮</text>
+  <text x="837.0" y="126.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="837" y="171" font-size="19" text-anchor="middle" fill="#374151">CPU 读标志</text>
+  <text x="209" y="203" font-size="20" text-anchor="start" fill="#6b7280">轮中 host 读取 4 次，CPU 决定继续或退出</text>
+  <text x="25" y="252" font-size="22" text-anchor="start" fill="#374151" font-weight="600">设备 WHILE</text>
+  <rect x="209" y="225" width="164" height="65" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="291.0" y="250.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 1 轮</text>
+  <text x="291.0" y="279.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="382" y="262" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="291" y="324" font-size="19" text-anchor="middle" fill="#374151">condition = 1</text>
+  <rect x="391" y="225" width="164" height="65" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="473.0" y="250.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 2 轮</text>
+  <text x="473.0" y="279.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="564" y="262" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="473" y="324" font-size="19" text-anchor="middle" fill="#374151">condition = 1</text>
+  <rect x="573" y="225" width="164" height="65" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="655.0" y="250.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 3 轮</text>
+  <text x="655.0" y="279.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="746" y="262" font-size="26" text-anchor="middle" fill="#6b7280">→</text>
+  <text x="655" y="324" font-size="19" text-anchor="middle" fill="#374151">condition = 1</text>
+  <rect x="755" y="225" width="164" height="65" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="837.0" y="250.0" font-size="20" text-anchor="middle" fill="#374151">GPU 第 4 轮</text>
+  <text x="837.0" y="279.0" font-size="20" text-anchor="middle" fill="#374151">前向 / 停止判断</text>
+  <text x="837" y="324" font-size="19" text-anchor="middle" fill="#374151">condition = 0</text>
+  <text x="209" y="356" font-size="20" text-anchor="start" fill="#6b7280">轮中 host 读取 0 次，图内检查决定继续或退出</text>
+  <line x1="24" y1="371" x2="936" y2="371" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="24" y="408" font-size="20" text-anchor="start" fill="#374151">图执行前重置状态；图结束后消费输出时仍需建立依赖同步。</text>
+  <text x="24" y="444" font-size="20" text-anchor="start" fill="#6b7280">设备循环保留模型与停止语义，不自动减少每轮 GPU 的计算量。</text>
+</svg>
+</details>
 
 [单独打开循环演示](assets/inference/graph-loop.html)
 

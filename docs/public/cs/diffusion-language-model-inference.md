@@ -58,7 +58,36 @@ $$
 
 **固定时间网格与输入相关的实际步数可以同时存在。** 减少主机循环开销、减少每轮张量读写、降低实际去噪步数，是三个不同的加速来源。
 
-<iframe src="../assets/inference/denoising-state.html" title="块式扩散推理状态动画" loading="lazy" style="display:block;width:100%;height:660px;border:0;margin:1rem 0;border-radius:16px;"></iframe>
+<iframe data-print-fallback="denoising-state-static" src="../assets/inference/denoising-state.html" title="块式扩散推理状态动画" loading="lazy" style="display:block;width:100%;height:660px;border:0;margin:1rem 0;border-radius:16px;"></iframe>
+
+<details class="notebook-interactive-fallback" id="denoising-state-static">
+<summary>静态图：块式去噪的状态生命周期</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 530" role="img" aria-label="去噪中复用只读 prefix cache，迭代更新 canvas 和自条件，完成后编码干净块追加缓存" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+<text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="600">prefix 只读复用；当前 canvas 每轮更新</text>
+  <rect x="25" y="70" width="232" height="271" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="141.0" y="183.5" font-size="20" text-anchor="middle" fill="#374151">prefix KV cache</text>
+  <text x="141.0" y="212.5" font-size="20" text-anchor="middle" fill="#374151">prompt + 已完成块</text>
+  <text x="141.0" y="241.5" font-size="20" text-anchor="middle" fill="#374151">去噪期间只读</text>
+  <text x="292" y="95" font-size="20" text-anchor="start" fill="#374151" font-weight="600">初始化</text>
+  <text x="500" y="95" font-size="23" text-anchor="start" fill="#374151" font-weight="600">□  □  □  □</text>
+  <text x="292" y="127" font-size="19" text-anchor="start" fill="#6b7280">首轮自条件为零</text>
+  <text x="907" y="137" font-size="24" text-anchor="middle" fill="#374151">↓</text>
+  <text x="292" y="181" font-size="20" text-anchor="start" fill="#374151" font-weight="600">第 1 轮</text>
+  <text x="500" y="181" font-size="23" text-anchor="start" fill="#374151" font-weight="600">云  7  流  ∿</text>
+  <text x="292" y="213" font-size="19" text-anchor="start" fill="#6b7280">当前预测供下一轮使用</text>
+  <text x="907" y="223" font-size="24" text-anchor="middle" fill="#374151">↓</text>
+  <text x="292" y="267" font-size="20" text-anchor="start" fill="#374151" font-weight="600">第 2～4 轮</text>
+  <text x="500" y="267" font-size="23" text-anchor="start" fill="#374151" font-weight="600">云  在  流  动</text>
+  <text x="292" y="299" font-size="19" text-anchor="start" fill="#6b7280">重算 canvas attention / FFN</text>
+  <text x="907" y="309" font-size="24" text-anchor="middle" fill="#374151">↓</text>
+  <text x="292" y="353" font-size="20" text-anchor="start" fill="#374151" font-weight="600">停止并提交</text>
+  <text x="500" y="353" font-size="23" text-anchor="start" fill="#374151" font-weight="600">云  在  流  动</text>
+  <text x="292" y="385" font-size="19" text-anchor="start" fill="#6b7280">干净块重新编码，追加 K / V</text>
+  <line x1="24" y1="429" x2="936" y2="429" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="24" y="467" font-size="20" text-anchor="start" fill="#374151">上轮分布 → soft embedding → MLP → 本轮 self-conditioning。</text>
+  <text x="24" y="504" font-size="19" text-anchor="start" fill="#6b7280">示意收敛过程；实际退出依据完整停止判据，不由示意文字决定。</text>
+</svg>
+</details>
 
 [单独打开状态动画](assets/inference/denoising-state.html)
 

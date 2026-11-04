@@ -88,7 +88,40 @@ for values, mode in calls:
 
 下面只模拟三种签名，便于观察命中与未命中的路径。初始缓存为空；选择同一场景再次执行可以复用刚建立的模拟版本。
 
-<iframe src="../assets/jax/jit-cache.html" title="JAX JIT 特化与缓存教学动画" loading="lazy" style="display:block;width:100%;height:540px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+<iframe data-print-fallback="jax-jit-cache-static" src="../assets/jax/jit-cache.html" title="JAX JIT 特化与缓存教学动画" loading="lazy" style="display:block;width:100%;height:540px;border:0;border-radius:16px;margin:1rem 0;"></iframe>
+
+<details class="notebook-interactive-fallback" id="jax-jit-cache-static">
+<summary>静态对照：缓存命中与新特化</summary>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 510" role="img" aria-label="JIT 五次调用：三种特化与两次缓存命中" data-print-monochrome="" style="display:block;width:100%;height:auto;margin:1rem 0;background:#fff" font-family="Noto Serif CJK SC,serif">
+  <text x="24" y="34" font-size="24" text-anchor="start" fill="#374151" font-weight="700">固定示例：同一个 aggregate 函数的五次调用</text>
+  <text x="32" y="82" font-size="21" text-anchor="start" fill="#374151" font-weight="700">调用输入</text>
+  <text x="350" y="82" font-size="21" text-anchor="start" fill="#374151" font-weight="700">缓存路径</text>
+  <text x="720" y="82" font-size="21" text-anchor="start" fill="#374151" font-weight="700">执行结果</text>
+  <rect x="22" y="100" width="916" height="46" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="36" y="130" font-size="20" text-anchor="start" fill="#374151">(4,), float32, sum</text>
+  <text x="350" y="130" font-size="20" text-anchor="start" fill="#374151">未命中 → trace / lower / compile</text>
+  <text x="775" y="130" font-size="20" text-anchor="middle" fill="#374151">6.0</text>
+  <rect x="22" y="154" width="916" height="46" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="36" y="184" font-size="20" text-anchor="start" fill="#374151">同规格，仅数值 +10</text>
+  <text x="350" y="184" font-size="20" text-anchor="start" fill="#374151">命中已有版本 → 执行</text>
+  <text x="775" y="184" font-size="20" text-anchor="middle" fill="#374151">46.0</text>
+  <rect x="22" y="208" width="916" height="46" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="36" y="238" font-size="20" text-anchor="start" fill="#374151">(8,), float32, sum</text>
+  <text x="350" y="238" font-size="20" text-anchor="start" fill="#374151">新 shape → 新特化</text>
+  <text x="775" y="238" font-size="20" text-anchor="middle" fill="#374151">28.0</text>
+  <rect x="22" y="262" width="916" height="46" rx="8" fill="#fafafa" stroke="#d1d5db"/>
+  <text x="36" y="292" font-size="20" text-anchor="start" fill="#374151">(8,), float32, mean</text>
+  <text x="350" y="292" font-size="20" text-anchor="start" fill="#374151">新静态 mode → 新特化</text>
+  <text x="775" y="292" font-size="20" text-anchor="middle" fill="#374151">3.5</text>
+  <rect x="22" y="316" width="916" height="46" rx="8" fill="#f0eef8" stroke="#d1d5db"/>
+  <text x="36" y="346" font-size="20" text-anchor="start" fill="#374151">回到 (4,), float32, sum</text>
+  <text x="350" y="346" font-size="20" text-anchor="start" fill="#374151">命中最初版本 → 执行</text>
+  <text x="775" y="346" font-size="20" text-anchor="middle" fill="#374151">6.0</text>
+  <text x="24" y="406" font-size="21" text-anchor="start" fill="#374151" font-weight="700">缓存保存可执行程序；命中后仍用本次动态数据执行计算。</text>
+  <text x="24" y="449" font-size="19" text-anchor="start" fill="#374151">教学签名仅展示 shape、dtype、静态 mode；真实复用条件还包括后端等配置。</text>
+  <text x="24" y="484" font-size="19" text-anchor="start" fill="#374151">首次未命中按无持久缓存示意；重新 tracing 不等于每次都完成全部后端编译。</text>
+</svg>
+</details>
 
 [单独打开缓存动画](assets/jax/jit-cache.html)
 

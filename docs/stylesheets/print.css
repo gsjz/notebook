@@ -1,0 +1,611 @@
+/* The TeX text face is bundled for consistent output on readers' devices. */
+@font-face {
+  font-family: "Notebook Print Roman";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/latin-modern/lmroman10-regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Notebook Print Roman";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/latin-modern/lmroman10-bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Notebook Print Roman";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/latin-modern/lmroman10-italic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Notebook Print Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Noto Serif CJK SC"), local("Source Han Serif SC"), local("Songti SC"), local("SimSun"), url("../assets/fonts/notoserif/fonts/noto-serif-sc-v35-chinese-simplified_cyrillic_latin_latin-ext-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Notebook Print Serif";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Noto Serif CJK SC Bold"), local("Source Han Serif SC Bold"), url("../assets/fonts/notoserif/fonts/noto-serif-sc-v35-chinese-simplified_cyrillic_latin_latin-ext-700.woff2") format("woff2");
+}
+
+.notebook-print-embed,
+.notebook-print-title,
+.notebook-print-caption,
+.notebook-print-panel {
+  display: none;
+}
+
+.md-typeset .notebook-print-button {
+  display: inline-flex;
+  float: right;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0 0 0.6em 1em;
+  padding: 0.55em 0.85em;
+  border: 0;
+  border-radius: 0.65rem;
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color--light);
+  font: inherit;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 200ms, color 200ms, transform 200ms;
+}
+
+.md-typeset .notebook-print-button:hover {
+  background: var(--md-accent-fg-color--transparent);
+  color: var(--md-accent-fg-color);
+  transform: translateY(-1px);
+}
+
+.md-typeset .notebook-print-button:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 3px;
+}
+
+.md-typeset .notebook-print-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.notebook-print-button svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-typeset .notebook-print-button {
+    transition: none;
+    transform: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 22mm 25mm 21mm;
+
+  @top-center {
+    content: none;
+  }
+
+  @bottom-center {
+    content: counter(page);
+    color: #444;
+    font-family: "Notebook Print Roman", serif;
+    font-size: 9pt;
+  }
+}
+
+@media print {
+  :root,
+  body[data-md-color-scheme] {
+    color-scheme: light;
+    --md-default-fg-color: #202124;
+    --md-default-fg-color--light: #50545a;
+    --md-default-fg-color--lighter: #72767d;
+    --md-default-fg-color--lightest: #e4e5e7;
+    --md-default-bg-color: #fff;
+    --md-code-fg-color: #202124;
+    --md-code-bg-color: #f4f5f6;
+    --md-typeset-color: #202124;
+    --md-typeset-a-color: #202124;
+  }
+
+  html,
+  body {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #202124 !important;
+  }
+
+  html {
+    font-size: 20px;
+  }
+
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer,
+  .md-top,
+  .md-dialog,
+  .md-search,
+  .md-overlay,
+  .md-banner,
+  .md-content__button,
+  .md-clipboard,
+  .md-code__button,
+  .tabbed-button,
+  .headerlink,
+  .footnote-backref,
+  .notebook-print-button,
+  .image-viewer,
+  .md-typeset [data-print-fallback],
+  .md-typeset iframe,
+  .notebook-print-embed-source,
+  [data-notebook-print-title-source],
+  [data-tts-tool],
+  .no-print {
+    display: none !important;
+  }
+
+  .md-container,
+  .md-main,
+  .md-main__inner,
+  .md-content,
+  .md-content__inner {
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .md-content__inner::before,
+  .md-content__inner::after {
+    display: none;
+  }
+
+  .md-typeset {
+    font-family: "Notebook Print Roman", "Notebook Print Serif", serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    letter-spacing: normal;
+    line-break: strict;
+    overflow-wrap: break-word;
+    print-color-adjust: economy;
+    -webkit-print-color-adjust: economy;
+  }
+
+  .md-typeset :is(h1, h2, h3, h4, h5, h6) {
+    color: #202124;
+    font-family: inherit;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: normal;
+    break-after: avoid;
+    break-inside: avoid;
+  }
+
+  .md-typeset h1,
+  .md-typeset .notebook-print-title {
+    margin: 1mm 0 8mm;
+    padding: 0;
+    border: 0;
+    font-size: 23pt;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    letter-spacing: normal;
+    break-after: avoid;
+    break-inside: avoid;
+  }
+
+  .md-typeset .notebook-print-title {
+    display: block;
+  }
+
+  .notebook-print-title .notebook-print-source {
+    display: block;
+    margin-top: 3mm;
+    color: #666;
+    font-size: 8.5pt;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .md-typeset h2 {
+    margin: 5mm 0 2mm;
+    font-size: 13pt;
+  }
+
+  .md-typeset h3 {
+    margin: 4mm 0 1.5mm;
+    font-size: 11pt;
+  }
+
+  .md-typeset h4 {
+    margin: 3mm 0 1.5mm;
+    font-size: 10.5pt;
+  }
+
+  .md-typeset [data-notebook-section]::before {
+    content: attr(data-notebook-section) "\2002";
+    font-family: "Notebook Print Roman", serif;
+  }
+
+  .md-typeset :is(p, li) {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .md-typeset p {
+    margin: 1.7mm 0;
+  }
+
+  .md-typeset > p {
+    text-align: justify;
+    text-align-last: start;
+    text-indent: 2em;
+  }
+
+  .md-typeset > p:has(code) {
+    text-align: start;
+  }
+
+  .md-typeset :is(h1, h2, h3, h4, .notebook-print-title) + p {
+    text-indent: 0;
+  }
+
+  .md-typeset div.arithmatex + p {
+    text-indent: 0;
+  }
+
+  .md-typeset div.arithmatex + div.arithmatex {
+    break-before: avoid;
+  }
+
+  .md-typeset p:has(+ div.arithmatex) {
+    break-after: avoid;
+  }
+
+  .md-typeset :is(ol, ul) {
+    margin-top: 2mm;
+    margin-bottom: 2mm;
+    padding-left: 1.65em;
+  }
+
+  .md-typeset li {
+    margin: 0.8mm 0;
+    padding-left: 0.3em;
+  }
+
+  .md-typeset li > p {
+    text-align: left;
+  }
+
+  .md-typeset a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .md-typeset .notebook-print-embed {
+    display: block;
+    margin: 3mm 0;
+    padding: 0;
+    color: #555;
+    font-size: 8pt;
+    line-height: 1.5;
+    text-align: left;
+    text-indent: 0;
+    break-inside: avoid;
+  }
+
+  .notebook-print-embed a {
+    display: block;
+    font-size: 7.5pt;
+    overflow-wrap: anywhere;
+  }
+
+  .md-typeset blockquote {
+    padding-left: 4mm;
+    border-left: 0.6pt solid #aaa;
+    color: #50545a;
+  }
+
+  .md-typeset :is(.admonition, details) {
+    display: block;
+    margin: 3mm 0;
+    padding: 1mm 0 1mm 3mm;
+    border: 0 !important;
+    border-left: 0.6pt solid #aaa !important;
+    border-radius: 0;
+    background: #fff !important;
+    box-shadow: none;
+    color: #202124;
+    font-size: inherit;
+    break-inside: auto;
+  }
+
+  .md-typeset :is(.admonition-title, summary) {
+    margin: 0 0 1.5mm !important;
+    padding: 0 !important;
+    border: 0;
+    background: transparent !important;
+    box-shadow: none;
+    color: #202124;
+    font-weight: 700;
+    break-after: avoid;
+  }
+
+  .md-typeset :is(.admonition-title, summary)::before,
+  .md-typeset summary::after {
+    display: none;
+  }
+
+  .md-typeset details[open] > summary {
+    border-radius: 0;
+  }
+
+  .md-typeset details.notebook-print-figure-details {
+    padding: 0;
+    border: 0 !important;
+  }
+
+  .notebook-print-figure-details > summary {
+    display: none;
+  }
+
+  .md-typeset details.notebook-interactive-fallback {
+    padding: 0;
+    border: 0 !important;
+  }
+
+  /* Also expose the source fallback if printing starts before JS initializes. */
+  .notebook-interactive-fallback::details-content {
+    display: block;
+    content-visibility: visible;
+  }
+
+  .notebook-interactive-fallback:not(.notebook-print-figure-details) > summary {
+    font-size: 9pt;
+  }
+
+  .md-typeset :is(pre, .highlight, .highlighttable, .md-typeset__scrollwrap, .md-typeset__table) {
+    max-height: none;
+    margin: 3mm 0;
+    overflow: visible !important;
+    break-inside: auto;
+  }
+
+  .md-typeset :is(pre, code, .highlight .filename) {
+    font-size: 8.5pt;
+    line-height: 1.5;
+  }
+
+  .md-typeset :not(pre) > code {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    overflow-wrap: anywhere;
+  }
+
+  .md-typeset pre > code {
+    padding: 2.5mm 3mm;
+    border: 0;
+    border-left: 0.7pt solid #aaa;
+    border-radius: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    overflow: visible;
+  }
+
+  .md-typeset .highlight :is(code, code *, .filename) {
+    color: #202124 !important;
+    text-shadow: none;
+  }
+
+  .md-typeset .highlight .linenos {
+    width: 8mm;
+    min-width: 0;
+    background: #f4f5f6;
+    color: #50545a;
+  }
+
+  .md-typeset .highlighttable {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .md-typeset .highlighttable td.code {
+    width: auto;
+  }
+
+  .md-typeset .md-typeset__table {
+    display: block;
+    padding: 0;
+  }
+
+  .md-typeset table:not(.highlighttable) {
+    display: table;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    margin-inline: auto;
+    table-layout: auto;
+    border-collapse: collapse;
+    border: 0;
+    border-top: 0.8pt solid #333;
+    border-bottom: 0.8pt solid #333;
+    border-radius: 0;
+    font-size: 9pt;
+    line-height: 1.5;
+    overflow: visible !important;
+  }
+
+  /* Short comparison tables read as one unit. Long tables can still flow
+     across pages with a repeated header. */
+  .md-typeset table:not(.highlighttable):not(:has(tbody > tr:nth-child(9))) {
+    break-inside: avoid;
+  }
+
+  .md-typeset table:not(.highlighttable) :is(th, td) {
+    min-width: 0;
+    padding: 1.35mm 2mm;
+    border: 0;
+    background: transparent;
+    color: #202124;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .md-typeset table:not(.highlighttable) thead th {
+    border-bottom: 0.5pt solid #555;
+    font-weight: 700;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  .md-typeset table:not(.highlighttable) th[style*="text-align: right"] {
+    padding-inline: 1.5mm;
+  }
+
+  .md-typeset thead {
+    display: table-header-group;
+  }
+
+  .md-typeset table:not(.highlighttable) tr {
+    break-inside: avoid;
+  }
+
+  .md-typeset :is(img, svg, canvas) {
+    max-width: 100%;
+  }
+
+  .md-typeset svg:not(svg svg) {
+    max-height: 205mm;
+    break-inside: avoid;
+  }
+
+  .md-typeset img {
+    max-height: 220mm;
+    object-fit: contain;
+  }
+
+  .md-typeset .notebook-print-figure {
+    margin: 4mm 0;
+    break-inside: avoid;
+  }
+
+  .notebook-print-figure > svg {
+    max-height: 160mm !important;
+    margin: 0 auto !important;
+  }
+
+  .md-typeset .notebook-print-split-figure > :is(svg, .notebook-print-caption) {
+    display: none !important;
+  }
+
+  .md-typeset .notebook-print-split-figure {
+    break-inside: auto;
+  }
+
+  .notebook-print-panel {
+    display: block;
+    margin: 4mm 0;
+    break-inside: avoid;
+  }
+
+  .notebook-print-panel > svg {
+    height: auto !important;
+    margin: 0 !important;
+    overflow: hidden;
+    border-radius: 0 !important;
+  }
+
+  .md-typeset .notebook-print-caption {
+    display: block;
+    margin: 2mm 0 0;
+    font-size: 8.5pt;
+    line-height: 1.5;
+    text-align: center;
+    text-indent: 0;
+  }
+
+  .md-typeset svg[data-print-monochrome] text {
+    fill: #222;
+  }
+
+  .md-typeset svg[data-print-monochrome] :is(path, line, polyline, g)[stroke] {
+    stroke: #555;
+  }
+
+  .md-typeset svg[data-print-monochrome] marker path {
+    fill: #555;
+  }
+
+  .md-typeset svg[data-print-monochrome] rect[stroke] {
+    stroke: #999;
+    rx: 0;
+  }
+
+  .md-typeset svg[data-print-monochrome] [fill="#f0eef8"] {
+    fill: #f1f1f1;
+  }
+
+  .md-typeset :is(figure, img, .mermaid, div.arithmatex) {
+    break-inside: avoid;
+  }
+
+  .md-typeset :is(div.arithmatex, .katex-display) {
+    overflow: visible;
+  }
+
+  .md-typeset div.arithmatex {
+    container-type: inline-size;
+  }
+
+  .md-typeset .katex-display {
+    margin: 3mm 0;
+    font-size: min(1em, calc(100cqi * 14 / var(--notebook-math-width, 14)));
+  }
+
+  .md-typeset div.arithmatex > * {
+    padding: 0;
+  }
+
+  .md-typeset .tabbed-set {
+    break-inside: auto;
+  }
+
+  .md-typeset .tabbed-labels > label {
+    border-bottom: 0.7pt solid #dfe2e6;
+    color: #202124;
+    font-size: 10pt;
+    break-after: avoid;
+  }
+}

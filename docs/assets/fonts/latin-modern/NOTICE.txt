@@ -1,0 +1,10 @@
+Latin Modern Roman 10, version 2.004 (OpenType files, unmodified).
+
+These three faces provide regular, bold and italic Latin text for printed
+notes. Chinese text uses the separate Noto Serif print face.
+
+Source: https://www.gust.org.pl/projects/e-foundry/latin-modern/
+
+Copyright 2003–2009 by B. Jackowski and J. M. Nowacki, on behalf of TeX
+Users Groups. Distributed under the GUST Font License; see the accompanying
+license, upstream README and manifest.
