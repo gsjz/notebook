@@ -76,6 +76,22 @@
 ???+ warning "默认展开"
     这是一个默认展开的 callout。
 
+### 留白解答区
+
+题目下方的空白区域可点击展开参考解答，也可用 Tab 聚焦后按 Enter 或空格；再次点击可收起。打印时自动显示解答。
+
+!!! question "示例：点击空白区显示解答"
+    计算 $3 \times 4$。
+
+    <details class="exercise-answer notebook-interactive-fallback" id="exercise-answer-demo" markdown="block">
+    <summary aria-label="显示示例题参考解答" data-print-fallback="exercise-answer-demo"><span class="exercise-answer-hint">点击显示参考解答</span></summary>
+    <div class="exercise-answer-content" markdown="1">
+
+    **参考解答：**$3 \times 4=12$。
+
+    </div>
+    </details>
+
 ## Markdown List
 
 ### 有序列表续段

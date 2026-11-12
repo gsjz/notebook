@@ -2,50 +2,25 @@
 
 ## 数学 { #mathematics }
 
-### 微积分与应用
-
-- [高数基础](/public/general/calc/)
-- [复变函数在积分计算中的应用](/public/general/complex-integral-applications/)
-- [拉普拉斯变换在微分方程中的应用](/public/general/laplace-transform-applications/)
-
-### 线性代数
-
-- [线代基础](/public/general/linear/)
-
-### 概率论与数理统计
-
-- [概统基础](/public/general/stats/)
+- [数学笔记](math/index.md)
 
 ## 英语 { #english }
 
-### 口语
-
-- [CS Interview Spoken Expressions](/public/general/cs-interview-spoken-expressions/)
-- [Postgraduate Interview Opening and Self-Introduction](/public/general/postgraduate-interview-opening-self-introduction/)
-- [Postgraduate Interview Motivation and Research Plans](/public/general/postgraduate-interview-motivation-research-plan/)
-- [Spoken Expressions by Situation](/public/general/spoken-expressions-by-situation/)
-- [Campus Teacher-Student Conversation](/public/general/campus-teacher-student-conversation/)
-- [Presentation and Group Discussion Speaking](/public/general/presentation-group-discussion-speaking/)
-
-### 写作与阅读
-
-- [CET-6 Part I Writing](/public/general/cet6-writing-part-i/)
-- [IELTS Writing Notes](/public/general/ielts-writing/)
-- [Literary Analysis Expressions](/public/general/literary-analysis-expressions/)
-
-### 翻译
-
-- [CET-6 Translation Notes](/public/general/cet6-translation-note/)
-
-### 文化与历史
-
-- [American Prohibition: A Social Experiment](/public/general/american-prohibition-history/)
-
-### 杂谈
-
-- [Games and Mood Regulation](/public/general/game-mood-regulation/)
+- [英语笔记](eng/index.md)
 
 ## 政治 { #politics }
+
+- [政治笔记](zz/index.md)
+
+### 马原 { #marxism }
+
+- [2026-11-17 每日练习：导论与辩证唯物论](zz/2026-11-17.md)
+- [2026-11-18 每日练习：唯物辩证法](zz/2026-11-18.md)
+- [2026-11-19 每日练习：实践与认识](zz/2026-11-19.md)
+- [2026-11-20 每日练习：唯物史观](zz/2026-11-20.md)
+- [2026-11-21 每日练习：商品价值与剩余价值](zz/2026-11-21.md)
+- [2026-11-22 每日练习：资本运行与当代资本主义](zz/2026-11-22.md)
+- [2026-11-23 每日练习：科学社会主义与综合辨析](zz/2026-11-23.md)
 
 !!! warning "政治复习资料免责声明"
 

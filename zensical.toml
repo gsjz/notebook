@@ -7,12 +7,17 @@ repo_url = "https://github.com/gsjz/notebook"
 repo_name = "gsjz/notebook"
 docs_dir = "docs"
 site_dir = "site-public"
-extra_css = ["stylesheets/no-footer.css", "stylesheets/callouts.css", "stylesheets/distribution-explorer.css", "stylesheets/image-viewer.css", "stylesheets/print.css"]
-extra_javascript = ["javascripts/katex.js", "javascripts/hot-reload-state.js", "javascripts/image-viewer.js", "javascripts/print.js"]
+extra_css = ["stylesheets/no-footer.css", "stylesheets/callouts.css", "stylesheets/distribution-explorer.css", "stylesheets/image-viewer.css", "stylesheets/print.css", "stylesheets/exercises.css"]
+extra_javascript = ["javascripts/katex.js", "javascripts/hot-reload-state.js", "javascripts/image-viewer.js", "javascripts/print.js", "javascripts/exercises.js"]
 nav = [
     { "首页" = "index.md" },
-    { "CS & AI" = "public/cs/" },
-    { "General" = "public/general/" },
+    { "Computing" = "public/computing/" },
+    { "General" = [
+        { "总览" = "public/general/index.md" },
+        { "英语" = "public/general/eng/" },
+        { "数学" = "public/general/math/" },
+        { "政治" = "public/general/zz/" },
+    ]},
 ]
 
 [project.markdown_extensions]

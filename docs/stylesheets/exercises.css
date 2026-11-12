@@ -1,0 +1,112 @@
+.md-typeset details.exercise-answer {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0.6rem;
+  background: var(--md-code-bg-color);
+  box-shadow: none;
+  color: var(--md-default-fg-color);
+  font-size: inherit;
+  overflow: hidden;
+}
+
+.md-typeset details.exercise-answer > summary {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  margin: 0;
+  padding: 0.6rem 0.85rem;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.5;
+  list-style: none;
+  cursor: pointer;
+  transition: background-color 200ms, color 200ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.md-typeset details.exercise-answer > summary::before,
+.md-typeset details.exercise-answer > summary::after,
+.md-typeset details.exercise-answer > summary::-webkit-details-marker {
+  display: none;
+}
+
+.md-typeset details.exercise-answer > summary::marker {
+  content: "";
+}
+
+.md-typeset details.exercise-answer > summary:hover {
+  background: var(--md-accent-fg-color--transparent);
+}
+
+.md-typeset details.exercise-answer > summary:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: -3px;
+}
+
+/* Keep the closed region visually blank while retaining its accessible name. */
+.md-typeset .exercise-answer:not([open]) > summary .exercise-answer-hint {
+  visibility: hidden;
+}
+
+.md-typeset details.exercise-answer[open] > summary {
+  min-height: 0;
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+.md-typeset .exercise-answer[open] > summary .exercise-answer-hint {
+  font-size: 0;
+}
+
+.md-typeset .exercise-answer[open] > summary .exercise-answer-hint::after {
+  content: "收起参考解答";
+  font-size: 0.7rem;
+}
+
+.md-typeset .exercise-answer > .exercise-answer-content {
+  padding: 0 0.85rem 0.7rem;
+}
+
+.md-typeset .exercise-answer-content > :first-child {
+  margin-top: 0;
+}
+
+.md-typeset .exercise-answer-content > :last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-typeset details.exercise-answer > summary {
+    transition: none;
+  }
+}
+
+@media print {
+  .md-typeset details.exercise-answer {
+    margin: 2mm 0 0;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0;
+    background: transparent !important;
+    color: inherit;
+    overflow: visible;
+  }
+
+  .md-typeset details.exercise-answer > summary {
+    display: none !important;
+  }
+
+  /* Native closed details also print their answers before scripts initialize. */
+  .md-typeset details.exercise-answer::details-content {
+    display: block;
+    content-visibility: visible;
+  }
+
+  .md-typeset .exercise-answer > .exercise-answer-content {
+    padding: 0;
+  }
+}
