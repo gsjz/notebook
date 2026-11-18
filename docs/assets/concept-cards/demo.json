@@ -1,0 +1,27 @@
+{
+  "title": "概念辨析卡示例",
+  "cards": [
+    {
+      "id": "square-and-rectangle",
+      "title": "正方形与长方形",
+      "statements": [
+        {
+          "segments": ["正方形", { "highlight": "一定" }, "是四个角都是直角的四边形。"],
+          "correct": true,
+          "explanation": "四个角都是直角是正方形的必要性质。"
+        },
+        {
+          "segments": ["四个角都是直角的四边形", { "highlight": "一定" }, "是正方形。"],
+          "correct": false,
+          "explanation": "还需要四条边长度相等。四个直角不能单独保证它是正方形。"
+        }
+      ],
+      "principle": "交换判断的方向时，成立的原命题不保证逆命题也成立。",
+      "transfer": {
+        "prompt": "一张卡片有四个直角，长与宽不同，因此它是正方形。",
+        "correct": false,
+        "explanation": "四条边长度不相等，不满足正方形的条件。"
+      }
+    }
+  ]
+}

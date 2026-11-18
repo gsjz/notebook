@@ -1,0 +1,22 @@
+:root {
+  --md-text-font: "Noto Serif Math", "Noto Serif SC", serif;
+  --md-code-font: "JetBrains Mono", "Noto Serif SC", monospace;
+}
+
+body {
+  --md-text-font-family: var(--md-text-font);
+  --md-code-font-family: var(--md-code-font);
+}
+
+@media screen {
+  body {
+    font-variant-numeric: tabular-nums;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-family: var(--md-text-font-family);
+  }
+}

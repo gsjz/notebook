@@ -14,13 +14,13 @@
 
 ### 马原 { #marxism }
 
-- [2026-11-17 每日练习：导论与辩证唯物论](zz/2026-11-17.md)
-- [2026-11-18 每日练习：唯物辩证法](zz/2026-11-18.md)
-- [2026-11-19 每日练习：实践与认识](zz/2026-11-19.md)
-- [2026-11-20 每日练习：唯物史观](zz/2026-11-20.md)
-- [2026-11-21 每日练习：商品价值与剩余价值](zz/2026-11-21.md)
-- [2026-11-22 每日练习：资本运行与当代资本主义](zz/2026-11-22.md)
-- [2026-11-23 每日练习：科学社会主义与综合辨析](zz/2026-11-23.md)
+- [马原精讲：导论与八章](zz/index.md){ target="_blank" rel="noopener noreferrer" title="新标签页打开" }
+- [马原总体概念树](zz/marxism-concept-tree.md)
+- [矛盾的普遍性与特殊性](zz/mks/contradiction-universality-particularity.md)
+- [社会存在与社会意识](zz/mks/social-existence-and-consciousness.md)
+- [科学技术推动生产力发展](zz/mks/science-technology-and-productive-forces.md)
+- [人民群众是历史的创造者](zz/mks/people-as-creators-of-history.md)
+- [实践是认识的基础](zz/mks/practice-as-basis-of-knowledge.md)
 
 !!! warning "政治复习资料免责声明"
 

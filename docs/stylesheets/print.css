@@ -162,7 +162,6 @@
   .md-typeset iframe,
   .notebook-print-embed-source,
   [data-notebook-print-title-source],
-  [data-tts-tool],
   .no-print {
     display: none !important;
   }

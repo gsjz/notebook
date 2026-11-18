@@ -14,22 +14,14 @@
     // that client's listener rather than intercepting application sockets.
     const NativeWebSocket = window.WebSocket;
     const guard = {
-      busy: false,
       pendingReload: null,
-      onDeferredReload: null,
-      isBusy() { return this.busy; },
       defer(callback) {
         this.pendingReload = callback;
-        this.onDeferredReload?.();
       },
       flush() {
         const callback = this.pendingReload;
         this.pendingReload = null;
         if (callback) window.setTimeout(callback, 0);
-      },
-      setBusy(value) {
-        this.busy = Boolean(value);
-        if (!this.busy) this.flush();
       },
     };
     window.__notebookHotReloadGuard = guard;
@@ -135,8 +127,8 @@
         if (changed) {
           const reload = () => {
             if (baseline !== previous || stopped) return;
-            // Verify once more when a print dialog or speech delayed delivery.
-            if (guard.isBusy() || document.documentElement.hasAttribute("data-notebook-printing")) {
+            // Verify once more when a print dialog delayed delivery.
+            if (document.documentElement.hasAttribute("data-notebook-printing")) {
               guard.defer(() => schedule());
               return;
             }
@@ -248,7 +240,7 @@
         schedule();
       }
     });
-    window.addEventListener("afterprint", () => { if (!guard.isBusy()) guard.flush(); });
+    window.addEventListener("afterprint", () => guard.flush());
     if (typeof document$ !== "undefined" && document$.subscribe) {
       document$.subscribe(() => {
         const url = location.href.split("#")[0];

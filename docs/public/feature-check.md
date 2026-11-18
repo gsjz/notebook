@@ -92,6 +92,130 @@
     </div>
     </details>
 
+## 概念辨析卡 { #concept-cards }
+
+分别判断两句话，作答后查看解释；完成两句后显示关系提示与情境题。支持切换卡片、重做本卡和键盘操作，回答只保留在当前页面。
+
+<div class="concept-cards" data-concept-src="../../assets/concept-cards/demo.json" data-print-fallback="concept-cards-demo-static" aria-label="概念辨析卡示例">
+<p class="concept-cards__fallback">互动卡片暂不可用时，可阅读下方的静态辨析。</p>
+</div>
+
+<details class="notebook-interactive-fallback" id="concept-cards-demo-static" markdown="block">
+<summary>静态辨析与打印内容</summary>
+
+| 表述 | 判断与理由 |
+| --- | --- |
+| 正方形一定是四个角都是直角的四边形 | 成立，这是正方形的必要性质 |
+| 四个角都是直角的四边形一定是正方形 | 不成立，还需要四边相等 |
+
+情境题：一张卡片有四个直角，长与宽不同，因此它是正方形。该判断不成立，因为四边不相等。
+
+</details>
+
+复用时配置独立的 JSON 数据，在正文放置容器，并提供静态内容供加载失败时阅读与打印。数据地址相对于页面 URL 解析。
+
+```html
+<div class="concept-cards" data-concept-src="../assets/example.json" aria-label="概念辨析">
+  <p class="concept-cards__fallback">互动卡片暂不可用时，可阅读静态辨析。</p>
+</div>
+```
+
+数据使用以下结构；每张卡包含两句话与一道情境题，关键词使用 `highlight` 标记。
+
+```json
+{
+  "title": "概念辨析",
+  "cards": [{
+    "id": "example",
+    "title": "判断方向",
+    "statements": [
+      {"segments": ["原句", {"highlight": "关键词"}], "correct": true, "explanation": "理由"},
+      {"segments": ["变式", {"highlight": "关键词"}], "correct": false, "explanation": "理由"}
+    ],
+    "principle": "两句话的关系",
+    "transfer": {"prompt": "情境判断", "correct": false, "explanation": "理由"}
+  }]
+}
+```
+
+## 概念树 { #concept-tree }
+
+展开分支查看概念层次，点击名称查看说明。树枝表示内容归属或包含关系，交叉联系单独列在说明中。
+
+<div class="concept-tree" data-concept-src="../../assets/concept-tree/demo.json" data-concept-focus="rectangle" data-print-fallback="concept-tree-demo-static" aria-label="几何概念树示例">
+<p class="concept-tree__fallback">交互未加载时，可展开下方的文字层次。</p>
+</div>
+
+<details class="notebook-interactive-fallback" id="concept-tree-demo-static" markdown="block">
+<summary>文字层次与打印内容</summary>
+
+- 四边形
+    - 平行四边形
+        - 长方形
+            - 正方形
+        - 菱形
+
+此树省略其他四边形。正方形同时满足长方形与菱形的定义，这一交叉联系在节点说明中单独呈现。
+
+</details>
+
+复用时更换数据地址和定位节点，并提供文字层次供加载失败时阅读及打印。数据地址相对于页面 URL，数据内的笔记链接相对于 JSON 文件；两者均限于本站。
+
+```html
+<div class="concept-tree" data-concept-src="../assets/concepts.json"
+     data-concept-focus="example" data-print-fallback="example-static"
+     aria-label="概念树">
+  <p class="concept-tree__fallback">可阅读下方的文字层次。</p>
+</div>
+```
+
+数据由 `title` 和 `root` 组成；节点使用唯一的 `id`，`children` 表示下级分支，`href` 可链接已有笔记，`relations` 指向树内的其他节点。`noteType` 可设为 `outline`（框架）、`index`（目录）或 `explanation`（精讲，默认），入口显示对应的内容类型。
+
+```json
+{
+  "title": "概念树",
+  "root": {
+    "id": "system", "label": "理论体系", "summary": "体系说明",
+    "children": [
+      {"id": "example", "label": "当前概念", "summary": "概念说明",
+       "href": "../example/",
+       "relations": [{"target": "related", "text": "两者的联系"}]},
+      {"id": "related", "label": "相关概念", "summary": "相关说明"}
+    ]
+  }
+}
+```
+
+### 总览与笔记定位
+
+总览模式提供搜索和带有笔记入口的概念树，URL 参数 `?concept=节点ID` 可直接定位；`data-concept-expanded` 可指定初始展开的节点 ID，以空格分隔。笔记模式使用 `data-concept-focus` 标记本文，并通过 `data-concept-overview` 返回总览中的同一节点；总览地址相对于页面 URL。
+
+“完整概念树”和笔记链接均在新标签页打开，保留当前页面的阅读位置。文字版入口使用相同方式，例如：[马原总体概念树 ↗](general/zz/marxism-concept-tree.md){ target="_blank" rel="noopener noreferrer" title="新标签页打开" }。
+
+<div class="concept-tree" data-concept-mode="overview" data-concept-src="../../assets/concept-tree/demo.json" data-print-fallback="concept-tree-overview-demo-static" aria-label="概念树总览示例">
+<p class="concept-tree__fallback">交互未加载时，可展开下方的文字层次。</p>
+</div>
+
+<details class="notebook-interactive-fallback" id="concept-tree-overview-demo-static" markdown="block">
+<summary>总览示例的文字层次与打印内容</summary>
+
+四边形 → 平行四边形 → 长方形 → 正方形；平行四边形也包含菱形，正方形同时具有菱形的性质。
+
+</details>
+
+```html
+<!-- 独立总览 -->
+<div class="concept-tree" data-concept-mode="overview"
+     data-concept-src="../assets/concepts.json" aria-label="总体概念树"></div>
+
+<!-- 单篇笔记开头的定位 -->
+<div class="concept-tree" data-concept-title="体系位置"
+     data-concept-src="../assets/concepts.json" data-concept-focus="example"
+     data-concept-overview="../concept-tree/" aria-label="本文在体系中的位置"></div>
+```
+
+两种模式共用同一份数据。新增笔记时，在对应节点补充 `href`，并在笔记入口填写相同的节点 ID。实际使用时均需提供 `data-print-fallback` 对应的文字内容。
+
 ## Markdown List
 
 ### 有序列表续段

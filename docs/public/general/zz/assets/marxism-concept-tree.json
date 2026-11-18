@@ -1,0 +1,1416 @@
+{
+  "title": "马原概念树",
+  "root": {
+    "id": "marxism",
+    "label": "马克思主义基本原理",
+    "summary": "以导论和哲学、政治经济学、科学社会主义三个组成部分组织课程。各章目录与考点框架已经建立，部分知识点已有精讲；树枝表示内容归属，交叉联系在说明中呈现。",
+    "children": [
+      {
+        "id": "introduction",
+        "label": "导论",
+        "summary": "导论从形成发展、立场观点方法和理论特征认识马克思主义整体，是三个组成部分的共同导引。",
+        "children": [
+          {
+            "id": "marxism-meaning-components",
+            "label": "马克思主义的内涵及构成",
+            "summary": "从研究对象、解放目标与实践指导作用理解马克思主义，联系哲学、政治经济学和科学社会主义三个组成部分。",
+            "href": "../mks/marxism-meaning-components/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "marxism-formation",
+            "label": "马克思主义的创立",
+            "summary": "从资本主义发展、工人运动和思想资源把握创立条件，理解马克思、恩格斯对既有理论的批判继承。",
+            "href": "../mks/marxism-formation/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "marxism-development",
+            "label": "马克思主义的发展",
+            "summary": "把握理论与工人运动、社会主义实践相结合的发展过程，以及马克思主义中国化时代化的持续推进。",
+            "href": "../mks/marxism-development/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "standpoint-method",
+            "label": "基本立场、观点和方法",
+            "summary": "以人民立场把握价值指向，以科学观点认识对象，以辩证唯物主义和历史唯物主义的方法分析具体问题。",
+            "href": "../mks/marxism-standpoint-viewpoint-method/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "marxism-features",
+            "label": "基本特征",
+            "summary": "从科学性、人民性、实践性和发展性把握理论特征，理解科学性与革命性的统一，以及实践观点与开放发展的联系。",
+            "href": "../mks/marxism-basic-features/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "contemporary-value",
+            "label": "当代价值与学习方法",
+            "summary": "联系认识世界、改造世界和指导实践的需要理解理论价值，在原理学习与现实分析之间建立联系。",
+            "href": "../mks/marxism-contemporary-value/",
+            "noteType": "explanation"
+          }
+        ],
+        "href": "../mks/introduction/",
+        "noteType": "explanation"
+      },
+      {
+        "id": "philosophy",
+        "label": "马克思主义哲学",
+        "summary": "研究自然、社会和人类思维发展的一般规律。这里按辩证唯物论、唯物辩证法、认识论和唯物史观组织学习内容。",
+        "children": [
+          {
+            "id": "materialism",
+            "label": "辩证唯物论",
+            "summary": "讨论世界的物质性、物质与意识的关系，以及客观规律性与主观能动性的统一。",
+            "children": [
+              {
+                "id": "philosophy-basic-question",
+                "label": "哲学基本问题与派别",
+                "summary": "从思维与存在何者为第一性、二者是否具有同一性两方面把握哲学基本问题，区分唯物主义与唯心主义、可知论与不可知论。",
+                "href": "../mks/philosophy-basic-question/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "matter-category",
+                "label": "物质范畴",
+                "summary": "物质范畴概括客观实在性。具体物质形态不断变化，不能把某一种形态等同于全部物质。",
+                "href": "../mks/matter-category/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "motion-rest-space-time",
+                "label": "物质、运动与时空",
+                "summary": "运动是物质的存在方式；静止是一定条件下的相对稳定。时间与空间是物质运动的存在形式。",
+                "children": [
+                  {
+                    "id": "matter-motion",
+                    "label": "物质和运动",
+                    "summary": "运动是物质的根本属性和存在方式，物质与运动不可分割。",
+                    "href": "../mks/matter-and-motion/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "motion-rest",
+                    "label": "运动和静止",
+                    "summary": "在绝对运动中把握相对静止，分析相对稳定的条件和意义。",
+                    "href": "../mks/motion-and-rest/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "motion-space-time",
+                    "label": "物质运动和时空",
+                    "summary": "时间和空间是物质运动的存在形式，联系客观性、绝对性与相对性分析具体时空。",
+                    "href": "../mks/motion-space-and-time/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/motion-rest-space-time/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "natural-human-world",
+                "label": "自然界与人类社会",
+                "summary": "人类通过实践改造自然，形成社会生活及人化自然；人的活动仍以物质世界为基础。",
+                "href": "../mks/material-world-differentiation/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "matter-consciousness",
+                "label": "物质与意识",
+                "summary": "物质决定意识，意识对物质具有能动作用。意识的作用通过人的实践实现，并受到客观条件制约。",
+                "children": [
+                  {
+                    "id": "consciousness-origin",
+                    "label": "意识的起源与本质",
+                    "summary": "意识是自然界长期发展和社会历史发展的产物，是人脑对客观世界的主观映象。",
+                    "href": "../mks/consciousness-origin/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "consciousness-ai",
+                    "label": "意识与人工智能",
+                    "summary": "人工智能能够模拟和扩展部分认识能力。分析这种能力，需要区分技术系统的功能与人的社会实践、主体意识。",
+                    "href": "../mks/consciousness-and-ai/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/matter-and-consciousness/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "regularity-initiative",
+                "label": "客观规律与主观能动性",
+                "summary": "发挥主观能动性，需要以尊重客观规律为前提。认识规律和利用规律都离不开实践。",
+                "href": "../mks/regularity-and-initiative/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "material-unity",
+                "label": "世界的物质统一性",
+                "summary": "自然界和人类社会统一于物质世界，意识也依赖物质条件。坚持从实际出发需要把握具体的客观条件。",
+                "href": "../mks/material-unity-of-world/",
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/materialism/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "dialectics",
+            "label": "唯物辩证法",
+            "summary": "从普遍联系和变化发展把握世界，对立统一规律是其实质和核心。各条规律与基本范畴从不同方面展开对联系和发展的认识。",
+            "children": [
+              {
+                "id": "connection-development",
+                "label": "普遍联系与变化发展",
+                "summary": "联系和发展的观点体现唯物辩证法的总特征。联系具有客观性、普遍性、多样性和条件性；发展体现事物前进、上升的变化。",
+                "children": [
+                  {
+                    "id": "universal-connection",
+                    "label": "普遍联系",
+                    "summary": "联系包括事物内部要素之间及事物之间的相互作用。把握具体联系，需要分析客观根据、条件和中介。",
+                    "href": "../mks/universal-connection/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "development-process",
+                    "label": "发展与过程",
+                    "summary": "发展表现为前进和上升的变化，新事物的判断依据在于其与发展趋势的关系；事物发展具有过程性。",
+                    "href": "../mks/development-process/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/connection-and-development/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "unity-opposites",
+                "label": "对立统一规律",
+                "summary": "以矛盾分析事物发展的内在动力。基本属性、普遍性与特殊性、不平衡发展分别提供不同的分析角度。",
+                "children": [
+                  {
+                    "id": "identity-struggle",
+                    "label": "同一性与斗争性",
+                    "summary": "同一性体现矛盾双方的相互依存、相互贯通，斗争性体现相互排斥、相互分离。两种属性共同作用于事物发展。",
+                    "href": "../mks/identity-struggle/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "universality-particularity",
+                    "label": "普遍性与特殊性",
+                    "summary": "讨论矛盾的共同性质与具体特点。共性寓于个性之中，个性包含共性；运用一般认识时，需要分析具体条件。",
+                    "href": "../mks/contradiction-universality-particularity/",
+                    "relations": [
+                      {
+                        "target": "imbalance",
+                        "text": "与不平衡发展的区别：此处侧重共性与个性；后者侧重矛盾及其方面的不同地位。"
+                      },
+                      {
+                        "target": "practice-basis",
+                        "text": "认识联系：从具体实践概括共同认识，再回到新的具体实践中检验和运用。"
+                      }
+                    ],
+                    "children": [
+                      {
+                        "id": "universality",
+                        "label": "矛盾的普遍性",
+                        "summary": "矛盾存在于一切事物中，并贯穿事物发展过程的始终。具体矛盾能够得到解决，矛盾运动仍会继续。",
+                        "href": "../mks/universality/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "particularity",
+                        "label": "矛盾的特殊性",
+                        "summary": "不同事物、不同发展阶段，以及矛盾的不同方面各有特点。处理问题需要调查条件，做到具体问题具体分析。",
+                        "href": "../mks/particularity/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "common-individual",
+                        "label": "共性与个性的关系",
+                        "summary": "共性通过个性表现，个性中包含共性。借鉴经验时，需要分清共同认识与依赖当地条件的具体措施。",
+                        "href": "../mks/common-individual/",
+                        "noteType": "explanation"
+                      }
+                    ],
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "imbalance",
+                    "label": "矛盾的不平衡发展",
+                    "summary": "分析多种矛盾以及同一矛盾双方的不同地位，形成两点论与重点论相统一的分析方法。",
+                    "relations": [
+                      {
+                        "target": "universality-particularity",
+                        "text": "联系：辨明主要和次要地位，需要具体分析矛盾的特殊性；这与一般和个别的区分属于不同角度。"
+                      }
+                    ],
+                    "children": [
+                      {
+                        "id": "principal-contradiction",
+                        "label": "主要矛盾与次要矛盾",
+                        "summary": "比较多种矛盾在矛盾体系中的地位。主要矛盾处于支配地位，对事物发展起决定作用，同时需要兼顾次要矛盾。",
+                        "href": "../mks/principal-contradiction/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "principal-aspect",
+                        "label": "矛盾的主要方面与次要方面",
+                        "summary": "比较同一矛盾双方的地位。判断事物性质，需要把握主要矛盾的主要方面，并注意双方在一定条件下的转化。",
+                        "href": "../mks/principal-aspect/",
+                        "noteType": "explanation"
+                      }
+                    ],
+                    "href": "../mks/imbalance/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/unity-of-opposites/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "quantity-quality",
+                "label": "量变质变规律",
+                "summary": "讨论量的积累与质的变化的关系。量变为质变作准备，质变又为新的量变开辟条件。",
+                "href": "../mks/quantity-quality-change/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "negation",
+                "label": "否定之否定规律",
+                "summary": "从事物的自我否定和扬弃，把握发展中前进性与曲折性的统一。",
+                "href": "../mks/negation-of-negation/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "categories",
+                "label": "基本范畴",
+                "summary": "以成对范畴分析事物的联系和发展。每一对范畴都有特定的分析对象和条件。",
+                "children": [
+                  {
+                    "id": "content-form",
+                    "label": "内容与形式",
+                    "summary": "分析事物的内在要素及其结构、表现方式之间的关系。",
+                    "href": "../mks/content-and-form/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "phenomenon-essence",
+                    "label": "现象与本质",
+                    "summary": "通过现象认识事物的根本性质和内在联系，并辨别真象与假象。",
+                    "href": "../mks/phenomenon-and-essence/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "cause-effect",
+                    "label": "原因与结果",
+                    "summary": "分析引起某种现象的作用与由此产生的变化，注意因果联系的具体条件。",
+                    "href": "../mks/cause-and-effect/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "necessity-chance",
+                    "label": "必然与偶然",
+                    "summary": "分析事物发展中的确定趋势及其具体实现形式，不能将二者割裂。",
+                    "href": "../mks/necessity-and-chance/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "possibility-reality",
+                    "label": "可能与现实",
+                    "summary": "区分已经存在的现实与具备一定根据的可能，并分析可能转化为现实的条件。",
+                    "href": "../mks/possibility-and-reality/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/categories/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "dialectical-thinking",
+                "label": "唯物辩证法与思维方法",
+                "summary": "联系批判性和革命性、客观与主观辩证法的统一，理解辩证法的方法意义。",
+                "children": [
+                  {
+                    "id": "dialectics-critical-revolutionary",
+                    "label": "唯物辩证法的批判性和革命性",
+                    "summary": "从联系、运动和暂时性理解既成形式，把握辩证法对现实的肯定理解和否定理解。",
+                    "href": "../mks/dialectics-critical-revolutionary/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "objective-subjective-dialectics",
+                    "label": "客观辩证法与主观辩证法",
+                    "summary": "客观事物的辩证运动是思维辩证运动的基础；思维通过正确反映对象，形成辩证认识。",
+                    "href": "../mks/objective-subjective-dialectics/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "thinking-methods",
+                    "label": "辩证思维方法",
+                    "summary": "在实践中增强辩证、历史、系统、战略、底线与创新思维能力，结合对象和条件运用。",
+                    "href": "../mks/dialectical-thinking-methods/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/dialectical-thinking/",
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/dialectics/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "epistemology",
+            "label": "认识论",
+            "summary": "研究认识的本质、过程与发展规律，以及真理和价值。实践与认识的关系是贯穿这些内容的基本线索。",
+            "children": [
+              {
+                "id": "practice-knowledge",
+                "label": "实践与认识",
+                "summary": "把握实践对认识的决定作用，以及认识对实践的能动反作用。",
+                "children": [
+                  {
+                    "id": "practice-nature-structure",
+                    "label": "实践的本质和基本特征",
+                    "summary": "实践是人类能动地改造世界的社会性的物质活动，具有客观实在性、自觉能动性和社会历史性。",
+                    "href": "../mks/practice-nature-features/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "practice-structure-forms",
+                    "label": "实践的基本结构和形式",
+                    "summary": "联系主体、客体和中介理解实践结构，区分物质生产、社会政治和科学文化等实践形式。",
+                    "href": "../mks/practice-structure-and-forms/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "practice-forms",
+                    "label": "实践的基本形式",
+                    "summary": "物质生产、社会政治实践和科学文化实践具有不同任务，其中物质生产实践为社会生活提供基础。",
+                    "href": "../mks/practice-forms/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "practice-basis",
+                    "label": "实践是认识的基础",
+                    "summary": "从来源、动力、目的和检验标准四个方面理解实践对认识的决定作用。要区分知识的本源与个人取得知识的途径。",
+                    "href": "../mks/practice-as-basis-of-knowledge/",
+                    "relations": [
+                      {
+                        "target": "truth-value",
+                        "text": "检验联系：认识是否具有真理性，最终需要在实践中检验；检验仍受具体实践条件制约。"
+                      }
+                    ],
+                    "children": [
+                      {
+                        "id": "knowledge-source",
+                        "label": "认识的来源",
+                        "summary": "认识在实践中产生。间接经验对接受者来自学习，在本源上仍以他人的实践为基础。",
+                        "href": "../mks/knowledge-source/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "knowledge-drive",
+                        "label": "认识发展的动力",
+                        "summary": "实践提出新的问题，也提供研究条件，并发展主体认识事物的能力。",
+                        "href": "../mks/knowledge-drive/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "knowledge-purpose",
+                        "label": "认识的目的",
+                        "summary": "认识用于指导实践，其意义不限于眼前收益或立即产生应用。",
+                        "href": "../mks/knowledge-purpose/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "knowledge-test",
+                        "label": "检验真理性的唯一标准",
+                        "summary": "实践把主观认识与客观对象联系起来，使预期结果接受实际检验。逻辑一致或意见多数不能代替实践检验。",
+                        "href": "../mks/knowledge-test/",
+                        "noteType": "explanation"
+                      }
+                    ],
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "knowledge-process",
+                    "label": "认识的过程与规律",
+                    "summary": "把握从感性认识到理性认识、从理性认识到实践的飞跃，以及认识发展的反复性和无限性。",
+                    "children": [
+                      {
+                        "id": "knowledge-essence",
+                        "label": "认识的本质",
+                        "summary": "认识是主体在实践基础上对客体的能动反映，既受对象制约，也包含主体的选择、加工和创造。",
+                        "href": "../mks/essence-of-knowledge/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "sensory-rational",
+                        "label": "感性认识与理性认识",
+                        "summary": "感性认识以感觉、知觉和表象把握现象，理性认识以概念、判断和推理把握本质与规律，二者相互联系。",
+                        "href": "../mks/sensory-rational/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "two-leaps",
+                        "label": "认识的两次飞跃",
+                        "summary": "在实践基础上由感性认识上升到理性认识，再由理性认识回到实践中接受检验并指导行动。",
+                        "href": "../mks/two-leaps-of-knowledge/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "knowledge-influences",
+                        "label": "认识过程的影响因素",
+                        "summary": "理性因素组织认识活动，情感、意志、直觉等非理性因素也会影响认识；作用需要结合具体过程评价。",
+                        "href": "../mks/rational-nonrational-factors/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "knowledge-repetition",
+                        "label": "认识的反复性与无限性",
+                        "summary": "认识受主客观条件制约而经历反复，又随着实践和对象的发展不断深化，呈现前进上升的过程。",
+                        "href": "../mks/knowledge-repetition-infinity/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "practice-knowledge-unity",
+                        "label": "实践和认识的具体的历史的统一",
+                        "summary": "认识与实践的统一受到具体条件和历史阶段制约，需要随实践的发展调整主观认识。",
+                        "href": "../mks/practice-knowledge-historical-unity/",
+                        "noteType": "explanation"
+                      }
+                    ],
+                    "href": "../mks/knowledge-process/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/practice-knowledge/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "truth-value",
+                "label": "真理与价值",
+                "summary": "真理涉及认识与客观实际相符合，价值涉及客体对主体需要的满足。成功的实践需要把二者结合起来。",
+                "children": [
+                  {
+                    "id": "truth-properties",
+                    "label": "真理的客观性、绝对性与相对性",
+                    "summary": "真理内容具有客观性；正确认识包含确定内容，同时受对象范围、条件和认识程度限制。",
+                    "href": "../mks/truth-and-properties/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "truth-error",
+                    "label": "真理与谬误",
+                    "summary": "真理与谬误有确定界限，也在一定条件下相互转化；适用条件变化时，需要重新检验原有认识。",
+                    "href": "../mks/truth-and-error/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "truth-test",
+                    "label": "真理的检验标准",
+                    "summary": "实践是检验真理的唯一标准。其标准作用具有确定性，具体实践的条件和发展程度又使检验具有局限。",
+                    "href": "../mks/criterion-of-truth/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "value-evaluation",
+                    "label": "价值、价值评价与真理价值统一",
+                    "summary": "价值体现客体对主体需要的满足，价值评价须以真实认识为基础，实践活动需要兼顾规律性与目的性。",
+                    "href": "../mks/truth-and-value/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/truth-value/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "understand-transform",
+                "label": "认识世界与改造世界",
+                "summary": "认识与改造在实践中相互联系。主体既改造客观世界，也在实践中改造自身的主观世界。",
+                "children": [
+                  {
+                    "id": "innovation-understanding-transformation",
+                    "label": "认识世界和改造世界中的创新",
+                    "summary": "在实践基础上推进理论创新，分析理论创新与实践发展、社会变革的联系。",
+                    "href": "../mks/innovation-understanding-transformation/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "objective-subjective-transformation",
+                    "label": "改造客观世界与主观世界",
+                    "summary": "人在改造自然和社会关系时，也发展自身的认识能力、思想观念和精神世界，二者在实践中相互促进。",
+                    "href": "../mks/objective-subjective-transformation/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "necessity-freedom",
+                    "label": "必然与自由",
+                    "summary": "自由以认识必然为前提，以改造世界为条件；人的自由程度随着认识和实践的发展而提高。",
+                    "href": "../mks/necessity-and-freedom/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/understand-transform/",
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/epistemology/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "historical-materialism",
+            "label": "唯物史观",
+            "summary": "研究社会发展的客观基础、基本规律、动力和主体。需要把社会条件与人的实践活动结合起来分析。",
+            "children": [
+              {
+                "id": "historical-outlooks",
+                "label": "唯物史观与唯心史观",
+                "summary": "分析历史活动需要追溯思想动机背后的物质动因，并把握人民群众的实践作用；社会存在与社会意识的关系是社会历史观的基本问题。",
+                "href": "../mks/historical-outlooks/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "social-existence-consciousness",
+                "label": "社会存在与社会意识",
+                "summary": "社会存在决定社会意识，社会意识具有相对独立性，并通过实践反作用于社会存在。",
+                "href": "../mks/social-existence-and-consciousness/",
+                "relations": [
+                  {
+                    "target": "matter-consciousness",
+                    "text": "理论联系：在社会历史领域具体分析物质生活条件与思想意识的关系；社会存在与社会意识有各自的特定内涵。"
+                  }
+                ],
+                "children": [
+                  {
+                    "id": "social-existence",
+                    "label": "社会存在",
+                    "summary": "社会物质生活条件，包括地理环境、人口因素和物质生产方式，其中物质生产方式起决定作用。",
+                    "href": "../mks/social-existence/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "social-consciousness",
+                    "label": "社会意识",
+                    "summary": "社会精神生活及其过程，是社会存在的反映。其相对独立性包括发展不完全同步、历史继承性与能动反作用等。",
+                    "href": "../mks/social-consciousness/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "noteType": "explanation"
+              },
+              {
+                "id": "forces-relations",
+                "label": "生产力与生产关系",
+                "summary": "生产力决定生产关系，生产关系反作用于生产力。分析具体制度和技术变化时，需要区分两个层次。",
+                "children": [
+                  {
+                    "id": "productive-forces",
+                    "label": "生产力及其要素",
+                    "summary": "生产力体现改造自然的现实能力，由劳动者、劳动资料和劳动对象等基本要素构成，科学技术能够渗透其要素及结合方式。",
+                    "href": "../mks/productive-forces/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "production-relations",
+                    "label": "生产关系及其内容",
+                    "summary": "生产关系是物质生产中形成的经济关系，包括生产资料所有制、生产中的地位和相互关系以及产品分配关系。",
+                    "href": "../mks/production-relations/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "forces-relations-law",
+                    "label": "生产关系适合生产力状况的规律",
+                    "summary": "生产力的发展要求相应调整生产关系；生产关系的反作用，需要结合它是否适合生产力状况分析。",
+                    "href": "../mks/forces-relations-law/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/productive-forces-and-production-relations/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "base-superstructure",
+                "label": "经济基础与上层建筑",
+                "summary": "经济基础决定上层建筑，上层建筑反作用于经济基础；其作用的性质和效果需要结合具体社会条件分析。",
+                "children": [
+                  {
+                    "id": "economic-base",
+                    "label": "经济基础",
+                    "summary": "经济基础是在一定生产力发展阶段形成的生产关系的总和，不能将其等同于物质设施或生产力本身。",
+                    "href": "../mks/economic-base/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "superstructure",
+                    "label": "上层建筑",
+                    "summary": "上层建筑包括相应的意识形态和政治法律制度、组织及设施；不同部分相互联系。",
+                    "href": "../mks/superstructure/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "base-superstructure-law",
+                    "label": "上层建筑适合经济基础状况的规律",
+                    "summary": "经济基础的变化要求上层建筑作出调整，上层建筑通过维护或变革经济关系影响社会发展。",
+                    "href": "../mks/base-superstructure-law/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/economic-base-and-superstructure/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "communication-world-history",
+                "label": "普遍交往与世界历史",
+                "summary": "生产方式的发展推动交往扩大，各民族、国家逐渐进入相互联系的整体；普遍交往也反过来影响生产和社会关系。",
+                "href": "../mks/communication-and-world-history/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "social-progress-forms",
+                "label": "社会进步与社会形态更替",
+                "summary": "把握社会结构、生产方式与人的发展的联系，理解社会形态更替中的统一性与多样性、必然性与历史选择性。",
+                "href": "../mks/social-progress-and-social-formations/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "historical-drivers",
+                "label": "社会历史发展的动力",
+                "summary": "区分社会基本矛盾的根本动力作用，以及阶级斗争、改革、科学技术等在具体条件下的作用。",
+                "children": [
+                  {
+                    "id": "social-contradictions",
+                    "label": "社会基本矛盾",
+                    "summary": "生产力与生产关系、经济基础与上层建筑的矛盾运动，构成社会发展的根本动力。",
+                    "href": "../mks/social-basic-contradictions/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "class-revolution-reform",
+                    "label": "阶级斗争、革命与改革",
+                    "summary": "分别分析它们在阶级社会和不同历史条件中的作用，区分社会变革的不同方式及其适用范围。",
+                    "children": [
+                      {
+                        "id": "class-struggle-revolution",
+                        "label": "阶级斗争与社会革命",
+                        "summary": "区分阶级斗争的根源、社会革命的实质，以及二者在不同历史条件下的作用。",
+                        "href": "../mks/class-struggle-and-social-revolution/",
+                        "noteType": "explanation"
+                      },
+                      {
+                        "id": "social-reform",
+                        "label": "改革在社会发展中的作用",
+                        "summary": "从社会制度的自我调整理解改革，分析改革与社会基本矛盾运动的联系。",
+                        "href": "../mks/reform-and-social-development/",
+                        "noteType": "explanation"
+                      }
+                    ],
+                    "href": "../mks/class-revolution-reform/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "science-technology",
+                    "label": "科学技术推动生产力发展",
+                    "summary": "科技通过渗透生产要素及其结合方式转化为现实生产能力。科技的社会作用受到应用目的、制度安排和其他条件影响。",
+                    "href": "../mks/science-technology-and-productive-forces/",
+                    "relations": [
+                      {
+                        "target": "forces-relations",
+                        "text": "作用联系：科技推动生产力发展，生产力变化会对生产关系提出调整要求；一次技术更新不足以直接证明制度性质改变。"
+                      }
+                    ],
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "culture-development",
+                    "label": "文化的社会作用",
+                    "summary": "文化通过思想指引、精神动力和凝聚作用影响社会发展，其作用的实现需要相应的社会条件和实践活动。",
+                    "href": "../mks/culture-and-social-development/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/historical-drivers/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "history-creators",
+                "label": "历史创造者与现实的人",
+                "summary": "从现实的人及其社会关系出发理解历史活动，比较群众史观与英雄史观的解释方式。",
+                "href": "../mks/creators-of-history-and-real-people/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "people-history",
+                "label": "人民群众是历史的创造者",
+                "summary": "人民群众创造物质财富、精神财富，并推动社会变革。其创造活动在具体历史条件下展开。",
+                "href": "../mks/people-as-creators-of-history/",
+                "relations": [
+                  {
+                    "target": "social-contradictions",
+                    "text": "主体与动力的联系：群众的实践推动社会基本矛盾的解决；分析客观动力和分析实践主体需要相互结合。"
+                  }
+                ],
+                "children": [
+                  {
+                    "id": "material-wealth",
+                    "label": "物质财富的创造",
+                    "summary": "劳动群众的生产活动提供社会生存和发展的物质基础。",
+                    "href": "../mks/material-wealth/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "spiritual-wealth",
+                    "label": "精神财富的创造",
+                    "summary": "群众的实践提供精神创造的源泉，群众也直接参与精神成果的生产和传播。",
+                    "href": "../mks/spiritual-wealth/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "social-change",
+                    "label": "社会变革的决定力量",
+                    "summary": "人民群众通过实践推动社会变革，作用的发挥受到社会经济、政治和精神文化等条件制约。",
+                    "href": "../mks/social-change/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "mass-line",
+                    "label": "群众观点与群众路线",
+                    "summary": "坚持人民群众的主体地位，在实践中联系群众、向群众学习，将群众经验加以集中并回到群众实践中。",
+                    "href": "../mks/mass-line/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "individual-history",
+                    "label": "个人在历史中的作用",
+                    "summary": "历史人物能够影响具体历史进程，其作用受到社会条件和发展规律制约；评价时需要结合历史背景和阶级关系。",
+                    "href": "../mks/individuals-in-history/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/historical-materialism/",
+            "noteType": "explanation"
+          }
+        ],
+        "href": "../mks/philosophy/",
+        "noteType": "explanation"
+      },
+      {
+        "id": "political-economy",
+        "label": "马克思主义政治经济学",
+        "summary": "研究社会生产关系及其发展规律，重点把握商品经济、资本主义经济运行及其发展趋势。",
+        "children": [
+          {
+            "id": "capitalism-essence",
+            "label": "资本主义的本质及规律",
+            "summary": "以劳动价值论和剩余价值理论为基础，分析资本主义生产、分配及其基本矛盾。",
+            "children": [
+              {
+                "id": "commodity-economy",
+                "label": "商品经济与价值规律",
+                "summary": "从商品和劳动的双重属性出发，分析价值的形成、衡量、表现及价值规律。",
+                "children": [
+                  {
+                    "id": "commodity-conditions",
+                    "label": "商品经济的产生条件",
+                    "summary": "社会分工与生产资料、劳动产品属于不同所有者，为以交换为目的的商品生产提供条件。",
+                    "href": "../mks/commodity-conditions/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "commodity-two-factors",
+                    "label": "商品的使用价值与价值",
+                    "summary": "使用价值体现有用性，价值体现商品中凝结的一般人类劳动。商品是二者的统一体，交换价值是价值的表现形式。",
+                    "href": "../mks/commodity-and-labor-duality/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "labor-duality",
+                    "label": "具体劳动与抽象劳动",
+                    "summary": "同一商品生产劳动具有两种规定：具体劳动创造使用价值，抽象劳动形成价值。",
+                    "href": "../mks/labor-duality/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "value-quantity",
+                    "label": "价值量与劳动生产率",
+                    "summary": "社会必要劳动时间决定商品价值量。分析劳动生产率变化时，要区分单位商品价值、产品数量与价值总量。",
+                    "href": "../mks/commodity-value-and-productivity/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "money-functions",
+                    "label": "价值形式与货币职能",
+                    "summary": "货币从价值形式的发展中产生，固定充当一般等价物；价值尺度与流通手段是其基本职能。",
+                    "href": "../mks/value-forms-and-money/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "law-of-value",
+                    "label": "价值规律及其作用",
+                    "summary": "交换以价值量为基础，价格受供求等因素影响而波动；价值规律自发调节资源、生产和收入，也会产生消极后果。",
+                    "href": "../mks/law-of-value/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "private-social-labor",
+                    "label": "私人劳动与社会劳动",
+                    "summary": "私有制商品经济中，劳动的私人性质与社会性质之间的矛盾，需要通过商品交换得到解决。",
+                    "href": "../mks/private-and-social-labor/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "labor-value-significance",
+                    "label": "劳动价值论的意义",
+                    "summary": "劳动价值论揭示商品经济关系，为剩余价值理论提供基础；研究新生产形式时仍需辨明劳动、财富与价值的关系。",
+                    "href": "../mks/labor-theory-of-value/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/commodity-economy/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capitalist-system",
+                "label": "资本主义经济制度的形成",
+                "summary": "从生产关系的产生、资本原始积累和雇佣劳动关系理解资本主义制度的形成。",
+                "children": [
+                  {
+                    "id": "primitive-accumulation",
+                    "label": "资本原始积累",
+                    "summary": "原始积累使劳动者同生产资料分离，并使财富向少数人集中，为资本主义生产关系扩展创造条件。",
+                    "href": "../mks/origins-of-capitalist-system/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "labor-power-commodity",
+                    "label": "劳动力商品与货币转化为资本",
+                    "summary": "劳动力成为商品以劳动者具有人身自由且缺乏生产资料为条件；其使用能够创造超过自身价值的新价值。",
+                    "href": "../mks/labor-power-and-capital/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "capitalist-ownership",
+                    "label": "资本主义所有制",
+                    "summary": "生产资料由资本家占有，劳动者通过出卖劳动力进入生产，形成资本对雇佣劳动的支配关系。",
+                    "href": "../mks/capitalist-ownership/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/capitalist-system/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "surplus-value-production",
+                "label": "剩余价值的生产",
+                "summary": "从劳动过程和价值增殖过程的统一，揭示剩余价值产生的条件及其来源。",
+                "children": [
+                  {
+                    "id": "surplus-value-essence",
+                    "label": "剩余价值与资本的本质",
+                    "summary": "雇佣劳动创造的新价值超过劳动力价值的部分形成剩余价值；资本体现以价值增殖为目的的社会关系。",
+                    "href": "../mks/surplus-value-essence/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "constant-variable-capital",
+                    "label": "不变资本与可变资本",
+                    "summary": "按在价值增殖中的作用区分资本：生产资料价值转移到产品中，购买劳动力的资本通过劳动实现价值增殖。",
+                    "href": "../mks/constant-variable-capital/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "absolute-relative-surplus",
+                    "label": "绝对、相对与超额剩余价值",
+                    "summary": "分别分析延长剩余劳动、缩短必要劳动和个别生产率优势的作用，区分它们的条件与相互联系。",
+                    "href": "../mks/absolute-relative-surplus/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "automation-surplus",
+                    "label": "自动化与价值源泉",
+                    "summary": "自动化改变劳动方式和生产效率，机器转移自身价值；新增价值仍需从劳动及其社会条件分析。",
+                    "href": "../mks/automation-surplus/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "surplus-value-theory-significance",
+                    "label": "剩余价值理论的意义",
+                    "summary": "剩余价值理论揭示资本主义经济关系及其运行规律，并与唯物史观共同为科学社会主义提供理论基础。",
+                    "href": "../mks/surplus-value-theory/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/surplus-value-production/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capital-accumulation",
+                "label": "资本积累",
+                "summary": "将剩余价值转化为资本，扩大生产规模，并引起资本构成和劳动就业状况的变化。",
+                "children": [
+                  {
+                    "id": "simple-expanded-reproduction",
+                    "label": "简单再生产与扩大再生产",
+                    "summary": "简单再生产维持原有生产规模，扩大再生产将一部分剩余价值用于追加投入。",
+                    "href": "../mks/simple-expanded-reproduction/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "organic-composition",
+                    "label": "资本有机构成",
+                    "summary": "由资本技术构成决定并反映其变化的资本价值构成。分析变化时，需要区分物质要素比例与价值比例。",
+                    "href": "../mks/organic-composition/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "relative-surplus-population",
+                    "label": "相对过剩人口与积累趋势",
+                    "summary": "资本积累改变对劳动力的相对需求，形成相对于资本需要的过剩人口，同时加深生产社会化与私人占有的矛盾。",
+                    "href": "../mks/relative-surplus-population/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/capital-accumulation/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capital-movement",
+                "label": "资本循环、周转与社会再生产",
+                "summary": "从单个资本的运动扩展到社会总资本的再生产，区分运动形式、速度和总产品实现条件。",
+                "children": [
+                  {
+                    "id": "capital-circuit",
+                    "label": "产业资本循环",
+                    "summary": "产业资本经历购买、生产和销售阶段，采取货币资本、生产资本和商品资本三种职能形式。",
+                    "href": "../mks/capital-circuit/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "capital-turnover",
+                    "label": "资本周转",
+                    "summary": "资本循环不断重复形成周转；周转时间及固定资本、流动资本的构成影响周转速度。",
+                    "href": "../mks/capital-turnover/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "social-reproduction",
+                    "label": "社会总资本再生产",
+                    "summary": "社会总产品的价值补偿与实物替换是核心问题，生产资料和消费资料两大部类需要保持相应比例。",
+                    "href": "../mks/social-reproduction/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/capital-circulation-and-reproduction/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "wages-profit-distribution",
+                "label": "工资与剩余价值的分配",
+                "summary": "区分劳动力价值的表现与剩余价值的转化、分割形式。",
+                "children": [
+                  {
+                    "id": "wages",
+                    "label": "工资的本质与形式",
+                    "summary": "工资表现为劳动的价格，其本质是劳动力的价值或价格；计时和计件是常见形式。",
+                    "href": "../mks/wages/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "profit-production-price",
+                    "label": "利润、平均利润与生产价格",
+                    "summary": "剩余价值表现为全部预付资本的产物时转化为利润，部门间竞争推动利润平均化并形成生产价格。",
+                    "href": "../mks/profit-production-price/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "surplus-distribution",
+                    "label": "利息、商业利润与地租",
+                    "summary": "不同资本和土地所有者以不同形式参与剩余价值分配，形式差异不改变对剩余价值来源的分析。",
+                    "href": "../mks/surplus-distribution/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/wages-and-surplus-value-distribution/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capitalist-contradiction-crisis",
+                "label": "资本主义基本矛盾与经济危机",
+                "summary": "生产社会化与生产资料资本主义私人占有之间的矛盾，表现为生产相对过剩及经济运行的周期性危机。",
+                "href": "../mks/capitalist-contradiction-and-crisis/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capitalist-superstructure",
+                "label": "资本主义上层建筑",
+                "summary": "从国家制度和意识形态分析资本主义经济关系的政治、思想表现。",
+                "children": [
+                  {
+                    "id": "capitalist-state",
+                    "label": "国家、民主制度及其本质",
+                    "summary": "结合经济基础和阶级关系分析国家职能与民主制度，区分制度形式及其实际社会内容。",
+                    "href": "../mks/capitalist-state-and-democracy/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "capitalist-ideology",
+                    "label": "意识形态及其本质",
+                    "summary": "资本主义意识形态形成于相应社会关系，既包含可作具体分析的思想成果，也维护既有经济政治秩序。",
+                    "href": "../mks/capitalist-ideology/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/capitalist-superstructure/",
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/capitalism-essence/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "capitalism-development",
+            "label": "资本主义的发展及趋势",
+            "summary": "分析垄断、经济全球化和当代资本主义的变化，以及资本主义发展的历史趋势。",
+            "children": [
+              {
+                "id": "monopoly-capitalism",
+                "label": "垄断资本主义",
+                "summary": "生产集中和资本集中发展到一定程度形成垄断，垄断与竞争相互交织。",
+                "children": [
+                  {
+                    "id": "monopoly-competition",
+                    "label": "垄断、竞争与垄断利润",
+                    "summary": "垄断能够影响价格和利润分配，同时仍受到竞争和价值规律的制约。",
+                    "href": "../mks/competition-to-monopoly/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "monopoly-development",
+                    "label": "垄断资本主义的发展",
+                    "summary": "联系国家垄断、金融垄断和国际扩展，把握垄断资本主义的不同发展形式。",
+                    "href": "../mks/monopoly-capitalism-development/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "finance-capital",
+                    "label": "金融资本与金融寡头",
+                    "summary": "垄断的银行资本与垄断的工业资本融合形成金融资本，金融寡头通过经济和政治方式扩大控制。",
+                    "href": "../mks/finance-capital/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "state-monopoly",
+                    "label": "国家垄断资本主义",
+                    "summary": "国家力量与私人垄断资本相结合，以多种形式参与经济活动，缓和矛盾的同时保留资本主义基本关系。",
+                    "href": "../mks/state-monopoly/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "international-monopoly",
+                    "label": "垄断资本的国际扩展",
+                    "summary": "资本输出、跨国经营和国际垄断组织推动资本跨国运动，对输出国和输入国形成不同影响。",
+                    "href": "../mks/international-monopoly/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/monopoly-capitalism/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "economic-globalization",
+                "label": "经济全球化",
+                "summary": "生产、贸易和金融活动跨越国界，各国经济的联系与依存加深。",
+                "children": [
+                  {
+                    "id": "globalization-drivers",
+                    "label": "全球化的动因与表现",
+                    "summary": "科技与生产力发展构成物质基础，跨国公司和相应制度安排促进国际分工与要素流动。",
+                    "href": "../mks/globalization-drivers/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "globalization-effects",
+                    "label": "全球化的影响",
+                    "summary": "全球化提供技术、市场和就业机会，也会扩大风险传导和不平衡影响，需要结合各国条件分析。",
+                    "href": "../mks/globalization-effects/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/economic-globalization/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "contemporary-capitalism",
+                "label": "当代资本主义的新变化",
+                "summary": "考察所有制形式、劳资分配关系、阶层结构、经济调节和政治制度的变化。",
+                "children": [
+                  {
+                    "id": "postwar-changes",
+                    "label": "战后变化的表现",
+                    "summary": "国家干预、社会保障、企业组织及劳动关系等发生调整，不能仅凭形式变化判断制度性质。",
+                    "href": "../mks/postwar-capitalism-changes/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "changes-causes-essence",
+                    "label": "变化的原因与实质",
+                    "summary": "生产力发展、社会斗争和制度调节等促成变化；调整仍在资本主义基本制度范围内展开。",
+                    "href": "../mks/causes-and-essence-of-capitalist-changes/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "contemporary-capitalism-features",
+                    "label": "当代资本主义变化的新特征",
+                    "summary": "考察科技、金融、阶层结构和国际关系中的新变化，联系其制度条件分析。",
+                    "href": "../mks/contemporary-capitalism-features/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "new-contradictions",
+                    "label": "新特征与矛盾冲突",
+                    "summary": "结合经济虚拟化、社会分化及国际关系等新变化，分析资本主义基本矛盾在当代的具体表现。",
+                    "href": "../mks/contemporary-capitalism-contradictions/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/contemporary-capitalism/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capitalism-historical-place",
+                "label": "资本主义的历史地位",
+                "summary": "把握其推动生产力和社会化生产的历史作用，同时分析资本主义关系对进一步发展的限制。",
+                "href": "../mks/capitalism-historical-role/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capitalism-replacement",
+                "label": "资本主义发展的历史趋势",
+                "summary": "资本主义基本矛盾提供分析其历史趋势的依据；制度更替需要相应条件，并经历长期复杂的历史过程。",
+                "href": "../mks/socialism-replacing-capitalism/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "capitalism-transition-long-term",
+                "label": "社会主义代替资本主义的长期性",
+                "summary": "联系社会形态的相对稳定性、各国发展不平衡和生产力容纳空间，分析制度过渡的长期过程。",
+                "href": "../mks/capitalism-transition-long-term/",
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/capitalism-development/",
+            "noteType": "explanation"
+          }
+        ],
+        "href": "../mks/political-economy/",
+        "noteType": "explanation"
+      },
+      {
+        "id": "scientific-socialism",
+        "label": "科学社会主义",
+        "summary": "研究社会主义的发展规律、基本原则和共产主义理想的实现。",
+        "children": [
+          {
+            "id": "socialism-development",
+            "label": "社会主义的发展及规律",
+            "summary": "把握社会主义的历史进程、基本原则，以及建设道路的探索与发展。",
+            "children": [
+              {
+                "id": "socialism-history",
+                "label": "社会主义的历史进程",
+                "summary": "把握从思想探索到科学理论、从革命实践到制度建设、从一国到多国的发展。",
+                "children": [
+                  {
+                    "id": "utopian-scientific",
+                    "label": "从空想到科学",
+                    "summary": "唯物史观和剩余价值学说为科学社会主义提供理论基础，使理想社会的分析同现实条件和实践力量相联系。",
+                    "href": "../mks/utopian-to-scientific-socialism/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "first-international-commune",
+                    "label": "第一国际与巴黎公社",
+                    "summary": "国际工人运动推进组织和理论实践，巴黎公社提供无产阶级政权建设的早期经验。",
+                    "href": "../mks/first-international-and-paris-commune/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "october-revolution",
+                    "label": "十月革命与第一个社会主义国家",
+                    "summary": "十月革命使科学社会主义由理论进入建立社会主义国家的实践，开辟新的历史阶段。",
+                    "href": "../mks/october-revolution-and-socialist-state/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "socialism-soviet-practice",
+                    "label": "苏联社会主义实践",
+                    "summary": "从具体历史条件分析建设成就、制度模式及其问题，区分社会主义基本制度与特定建设模式。",
+                    "href": "../mks/socialism-in-the-soviet-union/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "socialism-multiple-countries",
+                    "label": "社会主义发展到多个国家",
+                    "summary": "社会主义从一国实践发展为多国实践，各国结合自身条件探索发展道路。",
+                    "href": "../mks/socialism-in-multiple-countries/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "socialism-historical-contributions",
+                    "label": "20世纪社会主义制度的历史贡献",
+                    "summary": "从新制度实践、世界政治格局、民族解放和社会进步等方面整理其历史作用。",
+                    "href": "../mks/socialism-historical-contributions/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/socialism-history/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "socialism-basic-principles",
+                "label": "科学社会主义基本原则",
+                "summary": "从历史趋势、实践主体、政党领导、社会制度和人的发展等方面把握基本原则，理解原则与具体道路的关系。",
+                "children": [
+                  {
+                    "id": "socialist-practical-subject",
+                    "label": "实践主体与政党领导",
+                    "summary": "从无产阶级的历史使命、群众实践和政党领导的联系，理解社会主义变革的实践力量与组织条件。",
+                    "href": "../mks/socialist-practical-subject/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "socialist-production-distribution",
+                    "label": "生产、分配与共同发展",
+                    "summary": "在生产资料公有制基础上发展生产，实行相应的分配原则，推动共同富裕和社会全面进步。",
+                    "href": "../mks/socialist-production-distribution/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "principles-concrete-paths",
+                    "label": "基本原则与各国实际",
+                    "summary": "坚持基本原则与结合国情、时代条件相统一，各国实践也为理论的丰富发展提供经验。",
+                    "href": "../mks/principles-concrete-paths/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/scientific-socialism-basic-principles/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "socialism-construction",
+                "label": "社会主义建设与发展",
+                "summary": "结合客观条件和实践探索理解社会主义发展的长期性、多样性和曲折性。",
+                "children": [
+                  {
+                    "id": "socialism-long-term",
+                    "label": "建设的艰巨性与长期性",
+                    "summary": "生产力水平、社会结构、国际环境和规律认识程度等条件，使社会主义建设需要长期探索。",
+                    "href": "../mks/socialism-long-term/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "socialism-diverse-paths",
+                    "label": "发展道路的多样性",
+                    "summary": "各国的生产发展阶段、历史文化和现实条件不同，需要探索符合自身条件的发展道路。",
+                    "href": "../mks/socialism-diverse-paths/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "socialism-reform-progress",
+                    "label": "改革与曲折前进",
+                    "summary": "通过改革调整不适应发展的环节，实现制度的自我完善；具体挫折需要放在长期发展过程中分析。",
+                    "href": "../mks/socialism-reform-progress/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/socialist-construction-and-development/",
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/socialism-development/",
+            "noteType": "explanation"
+          },
+          {
+            "id": "communism",
+            "label": "共产主义理想及其实现",
+            "summary": "把握共产主义社会的基本特征、实现的历史条件，以及远大理想与共同理想的联系。",
+            "children": [
+              {
+                "id": "future-society-method",
+                "label": "预见未来社会的方法",
+                "summary": "依据社会发展规律和现实矛盾把握未来社会的一般特征，避免脱离条件描绘各种细节。",
+                "href": "../mks/foreseeing-future-society/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "communism-features",
+                "label": "共产主义社会的基本特征",
+                "summary": "从物质生产、社会关系和人的发展三个相互联系的方面把握基本特征。",
+                "children": [
+                  {
+                    "id": "abundance-distribution",
+                    "label": "物质丰富与按需分配",
+                    "summary": "高度发展的生产力和丰富的社会财富，为消费资料按需分配提供必要条件。",
+                    "href": "../mks/abundance-distribution/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "harmonious-relations",
+                    "label": "社会关系与精神境界",
+                    "summary": "在相应的物质和社会条件下，阶级对立消除，社会关系趋于和谐，公共精神和自觉程度提高。",
+                    "href": "../mks/harmonious-relations/",
+                    "noteType": "explanation"
+                  },
+                  {
+                    "id": "free-comprehensive-development",
+                    "label": "人的自由而全面的发展",
+                    "summary": "每个人的能力与个性得到发展，社会发展同个人发展相互促进，这是马克思主义的根本价值目标。",
+                    "href": "../mks/free-comprehensive-development/",
+                    "noteType": "explanation"
+                  }
+                ],
+                "href": "../mks/communist-society-basic-features/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "communism-necessity",
+                "label": "实现的历史依据",
+                "summary": "从社会发展规律和资本主义基本矛盾把握共产主义理想的现实依据，区分历史趋势与具体实现条件。",
+                "href": "../mks/communism-historical-necessity/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "communism-long-process",
+                "label": "实现的长期历史过程",
+                "summary": "资本主义向社会主义的转变、社会主义的充分发展及向共产主义过渡，都需要长期积累相应条件。",
+                "href": "../mks/communism-long-historical-process/",
+                "noteType": "explanation"
+              },
+              {
+                "id": "common-ultimate-ideals",
+                "label": "远大理想与共同理想",
+                "summary": "把握最终目标与阶段性目标的联系，在具体历史条件下将长远理想落实为现实实践。",
+                "href": "../mks/ultimate-and-common-ideals/",
+                "noteType": "explanation"
+              }
+            ],
+            "href": "../mks/communism/",
+            "noteType": "explanation"
+          }
+        ],
+        "href": "../mks/scientific-socialism/",
+        "noteType": "explanation"
+      }
+    ],
+    "href": "../mks/marxism-basic-principles/",
+    "noteType": "explanation"
+  }
+}

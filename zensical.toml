@@ -7,8 +7,8 @@ repo_url = "https://github.com/gsjz/notebook"
 repo_name = "gsjz/notebook"
 docs_dir = "docs"
 site_dir = "site-public"
-extra_css = ["stylesheets/no-footer.css", "stylesheets/callouts.css", "stylesheets/distribution-explorer.css", "stylesheets/image-viewer.css", "stylesheets/print.css", "stylesheets/exercises.css"]
-extra_javascript = ["javascripts/katex.js", "javascripts/hot-reload-state.js", "javascripts/image-viewer.js", "javascripts/print.js", "javascripts/exercises.js"]
+extra_css = ["assets/fonts/notoserif-math/setting.css", "assets/fonts/notoserif/setting.css", "assets/fonts/jbmono/setting.css", "stylesheets/typography.css", "stylesheets/no-footer.css", "stylesheets/callouts.css", "stylesheets/distribution-explorer.css", "stylesheets/image-viewer.css", "stylesheets/print.css", "stylesheets/exercises.css", "stylesheets/concept-cards.css", "stylesheets/concept-tree.css"]
+extra_javascript = ["javascripts/katex.js", "javascripts/hot-reload-state.js", "javascripts/image-viewer.js", "javascripts/print.js", "javascripts/exercises.js", "javascripts/concept-cards.js", "javascripts/concept-tree.js"]
 nav = [
     { "首页" = "index.md" },
     { "Computing" = "public/computing/" },
@@ -52,6 +52,7 @@ generator = false
 
 [project.theme]
 language = "zh"
+font = false
 favicon = "assets/images/site-logo.svg"
 logo = "assets/images/site-logo.svg"
 
@@ -62,10 +63,6 @@ features = [
     "navigation.instant",
     "navigation.top",
 ]
-
-[project.theme.font]
-text = "Inter"
-code = "Jetbrains Mono"
 
 [[project.theme.palette]]
 scheme = "default"

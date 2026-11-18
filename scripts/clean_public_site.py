@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 
-PRIVATE_OUTPUT_PATHS = ("private",)
+PRIVATE_OUTPUT_PATHS = ("private", "daily")
 
 
 def main() -> int:

@@ -1,0 +1,26 @@
+{
+  "title": "几何概念树",
+  "root": {
+    "id": "quadrilateral",
+    "label": "四边形",
+    "summary": "由四条线段围成的平面图形。此处按包含关系组织几个常见概念，省略其他分支。",
+    "children": [
+      {
+        "id": "parallelogram",
+        "label": "平行四边形",
+        "summary": "两组对边分别平行的四边形。长方形是其中的特殊情形。",
+        "children": [
+          {
+            "id": "rectangle",
+            "label": "长方形",
+            "summary": "四个角都是直角的四边形。并非每个长方形的四条边都相等。",
+            "children": [
+              {"id": "square", "label": "正方形", "summary": "四个角都是直角、四条边相等的四边形。它同时满足长方形和菱形的定义。", "relations": [{"target": "rhombus", "text": "交叉联系：正方形也具有菱形的性质。树中只选择一条路径归类，这条联系单独说明。"}]}
+            ]
+          },
+          {"id": "rhombus", "label": "菱形", "summary": "四条边相等的四边形。满足四个角都是直角这一条件时，也是正方形。", "relations": [{"target": "square", "text": "特殊情形：正方形既是菱形，也是长方形。"}]}
+        ]
+      }
+    ]
+  }
+}
